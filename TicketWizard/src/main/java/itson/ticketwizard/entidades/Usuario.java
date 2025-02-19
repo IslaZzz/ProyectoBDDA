@@ -7,5 +7,4 @@ public class Usuario{
     private String correoElectronico;
     private double saldo;
     private Domicilio domicilio;
-    private String 
 }
