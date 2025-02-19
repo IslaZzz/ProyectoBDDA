@@ -26,64 +26,111 @@ public class FrmPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        pnlMenu = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lblEventos = new javax.swing.JLabel();
+        lblBoletos = new javax.swing.JLabel();
+        lblEventos1 = new javax.swing.JLabel();
+        lblEventos2 = new javax.swing.JLabel();
+        pnlCardLayout = new javax.swing.JPanel();
+        pnlPrincipal = new javax.swing.JPanel();
+        lblBienvenido = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("TicketWizard");
 
-        jPanel1.setBackground(new java.awt.Color(233, 233, 233));
+        pnlMenu.setBackground(new java.awt.Color(233, 233, 233));
 
         lblTitulo.setFont(new java.awt.Font("SansSerif", 1, 36)); // NOI18N
         lblTitulo.setForeground(new java.awt.Color(30, 30, 30));
         lblTitulo.setText("TicketWizard");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(30, 30, 30));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Boletos");
-        jLabel2.setAlignmentX(0.5F);
-        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lblEventos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblEventos.setForeground(new java.awt.Color(30, 30, 30));
+        lblEventos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblEventos.setText("Movimientos");
+        lblEventos.setAlignmentX(0.5F);
+        lblEventos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblEventos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(30, 30, 30));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Eventos");
-        jLabel3.setAlignmentX(0.5F);
-        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lblBoletos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblBoletos.setForeground(new java.awt.Color(30, 30, 30));
+        lblBoletos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblBoletos.setText("Eventos");
+        lblBoletos.setAlignmentX(0.5F);
+        lblBoletos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblBoletos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+        lblEventos1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblEventos1.setForeground(new java.awt.Color(30, 30, 30));
+        lblEventos1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblEventos1.setText("Boletos");
+        lblEventos1.setAlignmentX(0.5F);
+        lblEventos1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblEventos1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        lblEventos2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblEventos2.setForeground(new java.awt.Color(30, 30, 30));
+        lblEventos2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblEventos2.setText("Saldo");
+        lblEventos2.setAlignmentX(0.5F);
+        lblEventos2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblEventos2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout pnlMenuLayout = new javax.swing.GroupLayout(pnlMenu);
+        pnlMenu.setLayout(pnlMenuLayout);
+        pnlMenuLayout.setHorizontalGroup(
+            pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlMenuLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
                 .addComponent(lblTitulo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 372, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(237, 237, 237))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                    .addContainerGap(468, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(384, 384, 384)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE)
+                .addComponent(lblBoletos, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblEventos1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblEventos2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addComponent(lblTitulo)
-                .addContainerGap(18, Short.MAX_VALUE))
-            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE))
+        pnlMenuLayout.setVerticalGroup(
+            pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblEventos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblEventos2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblBoletos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblEventos1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblTitulo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
+        getContentPane().add(pnlMenu, java.awt.BorderLayout.PAGE_START);
+
+        pnlCardLayout.setBackground(new java.awt.Color(233, 233, 233));
+        pnlCardLayout.setLayout(new java.awt.CardLayout());
+
+        pnlPrincipal.setBackground(new java.awt.Color(233, 233, 233));
+
+        lblBienvenido.setFont(new java.awt.Font("SansSerif", 0, 36)); // NOI18N
+        lblBienvenido.setForeground(new java.awt.Color(30, 30, 30));
+        lblBienvenido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblBienvenido.setText("Bienvenido al Sistema de TicketWizard!");
+
+        javax.swing.GroupLayout pnlPrincipalLayout = new javax.swing.GroupLayout(pnlPrincipal);
+        pnlPrincipal.setLayout(pnlPrincipalLayout);
+        pnlPrincipalLayout.setHorizontalGroup(
+            pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblBienvenido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 886, Short.MAX_VALUE)
+        );
+        pnlPrincipalLayout.setVerticalGroup(
+            pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrincipalLayout.createSequentialGroup()
+                .addContainerGap(290, Short.MAX_VALUE)
+                .addComponent(lblBienvenido, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(105, 105, 105))
+        );
+
+        pnlCardLayout.add(pnlPrincipal, "card4");
+
+        getContentPane().add(pnlCardLayout, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -124,9 +171,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblBienvenido;
+    private javax.swing.JLabel lblBoletos;
+    private javax.swing.JLabel lblEventos;
+    private javax.swing.JLabel lblEventos1;
+    private javax.swing.JLabel lblEventos2;
     private javax.swing.JLabel lblTitulo;
+    private javax.swing.JPanel pnlCardLayout;
+    private javax.swing.JPanel pnlMenu;
+    private javax.swing.JPanel pnlPrincipal;
     // End of variables declaration//GEN-END:variables
 }
