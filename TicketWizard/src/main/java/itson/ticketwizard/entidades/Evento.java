@@ -1,11 +1,13 @@
 package itson.ticketwizard.entidades;
 
+import java.util.Date;
 import java.util.Objects;
 
 public class Evento {
-    // Atributis de la clase Evento
+    // Atributos de la clase Evento
     private int id;
     private String nombre;
+    private Date fecha;
     private String ciudad;
     private String estado;
     private String descripcion;

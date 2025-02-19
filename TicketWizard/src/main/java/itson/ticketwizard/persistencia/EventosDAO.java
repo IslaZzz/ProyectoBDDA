@@ -1,38 +1,41 @@
 package itson.ticketwizard.persistencia;
 
+import itson.ticketwizard.dto.EventosDTO;
 import itson.ticketwizard.excepciones.EventoException;
 import itson.ticketwizard.persistencia.IEventosDAO;
+
+import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class EventosDAO implements IEventosDAO {
     // public Connection(Connection ManejadorConexiones);
 
-    public void crearEvento(Evento eventoDTO){
+    @Override
+    public void crearEvento(EventosDTO eventoDTO){
         String crearEventoSQL = "INSERT INTO EVENTOS(NOMBRE,FECHA,CIUDAD,ESTADO,DESCRIPCION,RECINTO) VALUES('?','?','?','?','?','?')";
         try{
             Connection conexion = Connection.crearConexion();
             PreparedStatement comando = conexion.prepareStatement(crearEventoSQL);
 
-           /* comando.setString(2, eventoDTO.);
-            comando.setString(3);
-            comando.setString(4);
-            comando.setString(5);
-            comando.setString(6);
-            comando.setString(7);*/
+            comando.setString(2, eventoDTO.getNombre());
+            comando.setString(3, eventoDTO.getFecha());
+            comando.setString(4, eventoDTO.getCiudad());
+            comando.setString(5, eventoDTO.getEstado());
+            comando.setString(6, eventoDTO.getDescripcion());
+            comando.setString(7, eventoDTO.getRecinto());
 
+            int rows  = comando.executeUpdate();
+            System.out.println("Se  generaron "+rows+" eventos");
 
-        }catch(EventoException ex){
-            ex.getMessage();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     };
 
-    @Override
-    public void crearEvento() {
-
-    }
-
-    public void consultarEvento(){
-
+    public void consultarEvento(EventosDTO eventoDTO){
+        String crearEventoSQL = "INSERT INTO EVENTOS(NOMBRE,FECHA,CIUDAD,ESTADO,DESCRIPCION,RECINTO) VALUES('?','?','?','?','?','?')";
+        try{
 
     };
     public void eliminarEvento(){
