@@ -4,6 +4,8 @@
 
 package itson.ticketwizard;
 
+import presentacion.FrmInicioSesion;
+
 /**
  *
  * @author Peter
@@ -11,6 +13,7 @@ package itson.ticketwizard;
 public class TicketWizard {
 
     public static void main(String[] args) {
-        
+        FrmInicioSesion frame = new FrmInicioSesion();
+        frame.setVisible(true);
     }
 }
