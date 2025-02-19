@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Evento {
     // Atributis de la clase Evento
-    private String id;
+    private int id;
     private String nombre;
     private String ciudad;
     private String estado;
@@ -21,7 +21,7 @@ public class Evento {
      * @param descripcion
      * @param recinto
      */
-    public Evento(String id, String nombre, String ciudad, String estado, String descripcion, String recinto) {
+    public Evento(int id, String nombre, String ciudad, String estado, String descripcion, String recinto) {
         this.id = id;
         this.nombre = nombre;
         this.ciudad = ciudad;
