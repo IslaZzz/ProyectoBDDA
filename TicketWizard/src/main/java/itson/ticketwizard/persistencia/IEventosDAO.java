@@ -1,3 +1,5 @@
+package itson.ticketwizard.persistencia;
+
 public interface IEventosDAO {
 
     //CREAR, CONSULTAR, ELIMINAR
