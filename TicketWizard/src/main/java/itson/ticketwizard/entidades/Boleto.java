@@ -53,6 +53,7 @@ public class Boleto {
      * @param disponible
      * @param fila
      * @param asiento
+     * @param idEvento
      */
     public Boleto(String numeroControl, String numeroSerie, double precio, boolean disponible, String fila, int asiento, Integer idEvento) {
         this.numeroControl = numeroControl;
@@ -71,7 +72,15 @@ public class Boleto {
 
     }
 
+    public Integer getIdEvento() {
+        return idEvento;
+    }
+
     //Métodos Get y Set
+    public void setIdEvento(Integer idEvento) {
+        this.idEvento = idEvento;
+    }
+
     /**
      * @return retorna el numero de serie del boleto
      */

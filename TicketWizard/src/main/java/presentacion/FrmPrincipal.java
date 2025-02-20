@@ -4,7 +4,9 @@
  */
 package presentacion;
 
+import itson.ticketwizard.control.ControlCompraBoletos;
 import itson.ticketwizard.control.ControlMostrarEventos;
+import itson.ticketwizard.persistencia.BoletosDAO;
 import itson.ticketwizard.persistencia.EventosDAO;
 import itson.ticketwizard.persistencia.ManejadorConexiones;
 import java.awt.Color;
@@ -425,6 +427,16 @@ public class FrmPrincipal extends javax.swing.JFrame {
         lblEventos.setBackground(new Color(16, 23, 66));
     }//GEN-LAST:event_lblTituloMouseClicked
     
+    public void mostrarBoletosEvento(Integer idEvento){
+        pnlCardLayout.removeAll();
+        ManejadorConexiones conexionBD = new ManejadorConexiones();
+        BoletosDAO boletosDAO = new BoletosDAO(conexionBD);
+        ControlCompraBoletos control = new ControlCompraBoletos(boletosDAO);
+        PnlComprarBoletos pnlCompraBoletos = new PnlComprarBoletos(control, this, idEvento);
+        pnlCardLayout.add(pnlCompraBoletos);
+        pnlCardLayout.repaint();
+        pnlCardLayout.revalidate();
+    }
     
     /**
      * @param args the command line arguments

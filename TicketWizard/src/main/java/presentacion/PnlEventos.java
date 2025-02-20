@@ -19,11 +19,13 @@ public class PnlEventos extends javax.swing.JPanel {
 
     private List<PnlEvento> listaEventos = new LinkedList<>();
     private ControlMostrarEventos control;
+    private FrmPrincipal parent;
     /**
      * Creates new form pnlEventos
      */
     public PnlEventos(ControlMostrarEventos control, FrmPrincipal parent) {
         this.control = control;
+        this.parent = parent;
         initComponents();
         this.cargarEventos();
     }
@@ -38,6 +40,10 @@ public class PnlEventos extends javax.swing.JPanel {
         }
         
     }
+    
+    public void mostrarBoletos(Integer idEvento){
+        parent.mostrarBoletosEvento(idEvento);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,8 +56,6 @@ public class PnlEventos extends javax.swing.JPanel {
         pnlEventos = new javax.swing.JPanel();
         panelEventos = new javax.swing.JScrollPane();
         boxPanelEventos = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
 
         pnlEventos.setBackground(new java.awt.Color(233, 233, 233));
@@ -60,30 +64,6 @@ public class PnlEventos extends javax.swing.JPanel {
         panelEventos.setBackground(new java.awt.Color(233, 233, 233));
 
         boxPanelEventos.setLayout(new javax.swing.BoxLayout(boxPanelEventos, javax.swing.BoxLayout.Y_AXIS));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Evento", "Fila", "Asiento", "Precio", "Seleccionar"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Object.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(jTable1);
-
-        boxPanelEventos.add(jScrollPane1);
-
         panelEventos.setViewportView(boxPanelEventos);
 
         jLabel2.setFont(new java.awt.Font("SansSerif", 1, 48)); // NOI18N
@@ -133,13 +113,11 @@ public class PnlEventos extends javax.swing.JPanel {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel boxPanelEventos;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JScrollPane panelEventos;
     private javax.swing.JPanel pnlEventos;
     // End of variables declaration//GEN-END:variables

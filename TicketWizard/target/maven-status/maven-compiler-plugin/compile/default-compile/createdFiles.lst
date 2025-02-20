@@ -1,6 +1,5 @@
 presentacion\FrmInicioSesion$4.class
 itson\ticketwizard\dto\MostrarEventoDTO.class
-presentacion\pnlComprarBoletos.class
 itson\ticketwizard\excepciones\TransaccionException.class
 itson\ticketwizard\entidades\Transaccion.class
 presentacion\FrmInicioSesion.class
@@ -18,6 +17,8 @@ itson\ticketwizard\control\ControlCompraBoletos.class
 presentacion\FrmPrincipal$2.class
 itson\ticketwizard\dto\BoletosDTO.class
 itson\ticketwizard\excepciones\EventoException.class
+presentacion\PnlComprarBoletos$1.class
+presentacion\PnlComprarBoletos.class
 presentacion\PnlEvento$1.class
 presentacion\FrmInicioSesion$3.class
 itson\ticketwizard\dto\EventosDTO.class

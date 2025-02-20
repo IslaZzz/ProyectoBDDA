@@ -13,12 +13,13 @@ import itson.ticketwizard.dto.MostrarEventoDTO;
 public class PnlEvento extends javax.swing.JPanel {
 
     private MostrarEventoDTO evento;
-    
+    private PnlEventos parent;
     /**
      * Creates new form pnlEvento
      */
     public PnlEvento(MostrarEventoDTO evento, PnlEventos parent) {
         this.evento = evento;
+        this.parent = parent;
         initComponents();
         cargarInfoEvento();
     }
@@ -121,7 +122,7 @@ public class PnlEvento extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        // TODO add your handling code here:
+        parent.mostrarBoletos(evento.getCodigo());
     }//GEN-LAST:event_btnConsultarActionPerformed
 
 
