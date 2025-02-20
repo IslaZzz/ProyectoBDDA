@@ -4,19 +4,31 @@
  */
 package presentacion;
 
+import itson.ticketwizard.dto.MostrarEventoDTO;
+
 /**
  *
  * @author pc
  */
-public class pnlEvento extends javax.swing.JPanel {
+public class PnlEvento extends javax.swing.JPanel {
 
+    private MostrarEventoDTO evento;
+    
     /**
      * Creates new form pnlEvento
      */
-    public pnlEvento() {
+    public PnlEvento(MostrarEventoDTO evento) {
+        this.evento = evento;
         initComponents();
+        cargarInfoEvento();
     }
 
+    public void cargarInfoEvento(){
+        this.lblNombre.setText(evento.getNombre());
+        this.lblCiudad.setText(evento.getCiudad());
+        this.lblEstado.setText(evento.getEstado());
+        this.lblFecha.setText("Fecha: "+evento.getFecha().toString());
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,7 +43,7 @@ public class pnlEvento extends javax.swing.JPanel {
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(2, 0), new java.awt.Dimension(2, 0), new java.awt.Dimension(2, 32767));
         lblCiudad = new javax.swing.JLabel();
         lblEstado = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lblFecha = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -41,6 +53,7 @@ public class pnlEvento extends javax.swing.JPanel {
 
         btnConsultar.setBackground(new java.awt.Color(0, 0, 0));
         btnConsultar.setFont(new java.awt.Font("SansSerif", 0, 20)); // NOI18N
+        btnConsultar.setForeground(new java.awt.Color(255, 255, 255));
         btnConsultar.setText("Consultar");
         btnConsultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -58,9 +71,9 @@ public class pnlEvento extends javax.swing.JPanel {
         lblEstado.setForeground(new java.awt.Color(30, 30, 30));
         lblEstado.setText("Estado");
 
-        jLabel1.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(30, 30, 30));
-        jLabel1.setText("Fecha: ");
+        lblFecha.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        lblFecha.setForeground(new java.awt.Color(30, 30, 30));
+        lblFecha.setText("Fecha: ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -70,7 +83,7 @@ public class pnlEvento extends javax.swing.JPanel {
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(lblFecha)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -99,7 +112,7 @@ public class pnlEvento extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblEstado)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addComponent(lblFecha)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
@@ -114,9 +127,9 @@ public class pnlEvento extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConsultar;
     private javax.swing.Box.Filler filler1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblCiudad;
     private javax.swing.JLabel lblEstado;
+    private javax.swing.JLabel lblFecha;
     private javax.swing.JLabel lblNombre;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,6 +1,7 @@
 package itson.ticketwizard.persistencia;
 
 import itson.ticketwizard.dto.EventosDTO;
+import itson.ticketwizard.dto.MostrarEventoDTO;
 import itson.ticketwizard.entidades.Evento;
 import itson.ticketwizard.excepciones.EventoException;
 import itson.ticketwizard.persistencia.IEventosDAO;
@@ -22,10 +23,10 @@ public class EventosDAO implements IEventosDAO {
     }
 
     @Override
-    public List<Evento> consultarEvento(EventosDTO eventoDTO) {
+    public List<MostrarEventoDTO> consultarEventos() {
         String consultarEventoSQL = """
                 SELECT idEvento, nombre, fecha, ciudad, Estado,descripcion, recinto FROM Eventos;""";
-        List<Evento> listaEventos = new LinkedList<>();
+        List<MostrarEventoDTO> listaEventos = new LinkedList<>();
 
         try {
             Connection conexion = this.manejadorConexiones.crearConexion();
@@ -41,7 +42,7 @@ public class EventosDAO implements IEventosDAO {
                 String recinto = resultadoConsulta.getString("recinto");
 
                 //Evento evento = new Evento(idEvento, nombre, fecha, ciudad, estado, descripcion, recinto);
-                Evento evento = new Evento(idEvento,nombre, fecha, ciudad, estado, descripcion, recinto);
+                MostrarEventoDTO evento = new MostrarEventoDTO(idEvento,nombre, fecha, ciudad, estado);
                 listaEventos.add(evento);
             }
         } catch (Exception e) {

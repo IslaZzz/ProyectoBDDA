@@ -4,6 +4,9 @@
  */
 package presentacion;
 
+import itson.ticketwizard.control.ControlMostrarEventos;
+import itson.ticketwizard.persistencia.EventosDAO;
+import itson.ticketwizard.persistencia.ManejadorConexiones;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.font.TextAttribute;
@@ -47,9 +50,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pnlPrincipal = new javax.swing.JPanel();
         lblBienvenido = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        pnlEventos = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jLabel2 = new javax.swing.JLabel();
         pnlBoletos = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         pnlMovimientos = new javax.swing.JPanel();
@@ -195,54 +195,21 @@ public class FrmPrincipal extends javax.swing.JFrame {
             .addGroup(pnlPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblBienvenido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 874, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 874, Short.MAX_VALUE)
+                    .addComponent(lblBienvenido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 874, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnlPrincipalLayout.setVerticalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrincipalLayout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addGap(31, 31, 31)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblBienvenido, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addContainerGap(106, Short.MAX_VALUE))
         );
 
         pnlCardLayout.add(pnlPrincipal, "card4");
-
-        pnlEventos.setBackground(new java.awt.Color(233, 233, 233));
-        pnlEventos.setForeground(new java.awt.Color(30, 30, 30));
-
-        jScrollPane1.setBackground(new java.awt.Color(233, 233, 233));
-
-        jLabel2.setFont(new java.awt.Font("SansSerif", 1, 48)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Eventos Disponibles");
-
-        javax.swing.GroupLayout pnlEventosLayout = new javax.swing.GroupLayout(pnlEventos);
-        pnlEventos.setLayout(pnlEventosLayout);
-        pnlEventosLayout.setHorizontalGroup(
-            pnlEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEventosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 874, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEventosLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(200, 200, 200))
-        );
-        pnlEventosLayout.setVerticalGroup(
-            pnlEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlEventosLayout.createSequentialGroup()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        pnlCardLayout.add(pnlEventos, "card4");
 
         jLabel3.setText("Boletos");
 
@@ -260,7 +227,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             .addGroup(pnlBoletosLayout.createSequentialGroup()
                 .addGap(162, 162, 162)
                 .addComponent(jLabel3)
-                .addContainerGap(310, Short.MAX_VALUE))
+                .addContainerGap(286, Short.MAX_VALUE))
         );
 
         pnlCardLayout.add(pnlBoletos, "card3");
@@ -281,7 +248,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             .addGroup(pnlMovimientosLayout.createSequentialGroup()
                 .addGap(201, 201, 201)
                 .addComponent(jLabel4)
-                .addContainerGap(271, Short.MAX_VALUE))
+                .addContainerGap(247, Short.MAX_VALUE))
         );
 
         pnlCardLayout.add(pnlMovimientos, "card5");
@@ -302,7 +269,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             .addGroup(pnlSaldoLayout.createSequentialGroup()
                 .addGap(235, 235, 235)
                 .addComponent(jLabel5)
-                .addContainerGap(237, Short.MAX_VALUE))
+                .addContainerGap(213, Short.MAX_VALUE))
         );
 
         pnlCardLayout.add(pnlSaldo, "card6");
@@ -370,6 +337,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
         attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
         lblEventos.setFont(font.deriveFont(attributes));
         pnlCardLayout.removeAll();
+        ManejadorConexiones conexionBD = new ManejadorConexiones();
+        EventosDAO eventosDAO = new EventosDAO(conexionBD);
+        ControlMostrarEventos control = new ControlMostrarEventos(eventosDAO);
+        PnlEventos pnlEventos = new PnlEventos(control);
         pnlCardLayout.add(pnlEventos);
         pnlCardLayout.repaint();
         pnlCardLayout.revalidate();
@@ -492,11 +463,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblBienvenido;
     private javax.swing.JLabel lblBoletos;
     private javax.swing.JLabel lblEventos;
@@ -505,7 +474,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel pnlBoletos;
     private javax.swing.JPanel pnlCardLayout;
-    private javax.swing.JPanel pnlEventos;
     private javax.swing.JPanel pnlMenu;
     private javax.swing.JPanel pnlMovimientos;
     private javax.swing.JPanel pnlPrincipal;
