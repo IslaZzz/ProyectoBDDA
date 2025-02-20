@@ -22,7 +22,7 @@ public class EventosDAO implements IEventosDAO {
     }
 
     @Override
-    public List<Evento> consultarEvento(EventosDTO eventoDTO) {
+    public List<Evento> consultarEvento() {
         String consultarEventoSQL = """
                 SELECT idEvento, nombre, fecha, ciudad, Estado,descripcion, recinto FROM Eventos;""";
         List<Evento> listaEventos = new LinkedList<>();

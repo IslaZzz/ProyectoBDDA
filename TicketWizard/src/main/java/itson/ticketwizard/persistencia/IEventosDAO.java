@@ -9,7 +9,7 @@ public interface IEventosDAO {
 
     //CREAR, CONSULTAR, ELIMINAR
 
-    public List<Evento> consultarEvento(EventosDTO eventoDTO);
+    public List<Evento> consultarEvento();
 
 
 
