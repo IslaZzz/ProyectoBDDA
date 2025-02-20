@@ -10,7 +10,7 @@ package itson.ticketwizard.entidades;
  */
 public class Domicilio {
     // Atributos de la clase
-    private int id;
+    private Integer id;
     private String calle;
     private String colonia;
     private String ciudad;
@@ -27,7 +27,7 @@ public class Domicilio {
      * @param codigoPostal
      * @param estado
      */
-    public Domicilio(int id, String calle, String colonia, String ciudad, String codigoPostal, String estado) {
+    public Domicilio(Integer id, String calle, String colonia, String ciudad, String codigoPostal, String estado) {
         this.calle = calle;
         this.colonia = colonia;
         this.ciudad = ciudad;
@@ -44,7 +44,7 @@ public class Domicilio {
  * 
  * @return string que representa al id de la clase
  */
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

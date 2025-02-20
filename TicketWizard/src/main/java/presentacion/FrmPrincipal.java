@@ -117,7 +117,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         lblBienvenido.setFont(new java.awt.Font("SansSerif", 0, 36)); // NOI18N
         lblBienvenido.setForeground(new java.awt.Color(30, 30, 30));
         lblBienvenido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblBienvenido.setText("Bienvenido al Sistema de TicketWizard!");
+        lblBienvenido.setText(" ¡Bienvenido al Sistema de TicketWizard!");
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logo.png"))); // NOI18N

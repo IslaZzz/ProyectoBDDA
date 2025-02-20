@@ -8,13 +8,13 @@ import java.util.Objects;
  * @author abrilislas
  */
 public class Transaccion {
-    private int numeroControl;
+    private Integer numeroControl;
     private Date fechaHora;
     private String tipoCompra;
     private double monto;
     //considerar agregar foreign keys
 
-    public Transaccion(int numeroControl, Date fechaHora, String tipoCompra, double monto) throws TransaccionException{
+    public Transaccion(Integer numeroControl, Date fechaHora, String tipoCompra, double monto) throws TransaccionException{
 
         this.numeroControl=numeroControl;
         this.fechaHora=fechaHora;
@@ -32,7 +32,7 @@ public class Transaccion {
         }
     }
 
-    public int getNumeroControl() {
+    public Integer getNumeroControl() {
         return numeroControl;
     }
 

@@ -15,18 +15,19 @@ import java.util.List;
 public class BoletosDAO implements IBoletosDAO {
 
     private ManejadorConexiones manejadorConexiones;
-    
-    public BoletosDAO(ManejadorConexiones manejadorConexiones){
+
+    public BoletosDAO(ManejadorConexiones manejadorConexiones) {
         this.manejadorConexiones = manejadorConexiones;
-    }
-    
-    @Override
-    public List<Boleto> consultarBoleto() {
-        return List.of();
     }
 
     @Override
-    public void crearBoleto() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public List<Boleto> consultarBoleto() {
+        String consultarBoletoSQL = """
+                                    Select idBoleto, 
+                                    """;
+                String consultarEventoSQL = """
+                SELECT idEvento, nombre, fecha, ciudad, Estado,descripcion, recinto FROM Eventos;""";
+       // List<Evento> listaEventos = new LinkedList<>();
+       return null;
     }
 }
