@@ -29,7 +29,7 @@ public class BoletosDAO implements IBoletosDAO {
     @Override
     public List<Boleto> consultarBoletosEvento(Integer idEv) {
         String consultarBoletoSQL = """
-                                    Select idEvento, numSerie, fila, asiento, Disponible, precio, idBoleto
+                                    Select idEvento, numSerie, fila, asiento, Disponible, precio, idBoleto, idUsuario
                                     From Boletos WHERE Disponible AND idEvento = ?;
                                     """;
         List<Boleto> listaBoletos = new LinkedList<>();
@@ -47,7 +47,8 @@ public class BoletosDAO implements IBoletosDAO {
                 boolean disponible = resultadoConsulta.getBoolean("Disponible");
                 double precio = resultadoConsulta.getDouble("precio");
                 String numControl = resultadoConsulta.getString("idBoleto");
-                Boleto boleto = new Boleto(numControl, numSerie, precio, disponible, fila, asiento, idEvento);
+                Integer idUsuario = resultadoConsulta.getInt("idUsuario");
+                Boleto boleto = new Boleto(numControl, numSerie, precio, disponible, fila, asiento, idEvento, idUsuario);
                 listaBoletos.add(boleto);
             }
 

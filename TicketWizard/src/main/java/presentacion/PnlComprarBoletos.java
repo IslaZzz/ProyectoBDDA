@@ -38,7 +38,7 @@ public class PnlComprarBoletos extends javax.swing.JPanel {
                 boleto.getFila(),
                 boleto.getAsiento(),
                 boleto.getPrecio(),
-                null
+                control.determinarTipoVenta(boleto)
             };
             modelo.addRow(filaTabla);
         }
@@ -66,14 +66,14 @@ public class PnlComprarBoletos extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Evento", "Fila", "Asiento", "Precio", "Seleccionar"
+                "Evento", "Fila", "Asiento", "Precio", "Tipo Venta", "Seleccionar"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Boolean.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true
+                false, false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -91,6 +91,7 @@ public class PnlComprarBoletos extends javax.swing.JPanel {
             tblBoletos.getColumnModel().getColumn(2).setResizable(false);
             tblBoletos.getColumnModel().getColumn(3).setResizable(false);
             tblBoletos.getColumnModel().getColumn(4).setResizable(false);
+            tblBoletos.getColumnModel().getColumn(5).setResizable(false);
         }
 
         btnVolver.setBackground(new java.awt.Color(0, 0, 0));
@@ -127,9 +128,9 @@ public class PnlComprarBoletos extends javax.swing.JPanel {
                 .addContainerGap(216, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(214, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(215, Short.MAX_VALUE)))
+                    .addContainerGap(162, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(154, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
