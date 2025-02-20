@@ -6,6 +6,7 @@ C:\Users\Peter\OneDrive\Documentos\GitHub\ProyectoBDDA_1.1\TicketWizard\src\main
 C:\Users\Peter\OneDrive\Documentos\GitHub\ProyectoBDDA_1.1\TicketWizard\src\main\java\itson\ticketwizard\entidades\Seguridad.java
 C:\Users\Peter\OneDrive\Documentos\GitHub\ProyectoBDDA_1.1\TicketWizard\src\main\java\itson\ticketwizard\entidades\Transaccion.java
 C:\Users\Peter\OneDrive\Documentos\GitHub\ProyectoBDDA_1.1\TicketWizard\src\main\java\itson\ticketwizard\persistencia\EventosDAO.java
+C:\Users\Peter\OneDrive\Documentos\GitHub\ProyectoBDDA_1.1\TicketWizard\src\main\java\itson\ticketwizard\control\ControlInicioSesion.java
 C:\Users\Peter\OneDrive\Documentos\GitHub\ProyectoBDDA_1.1\TicketWizard\src\main\java\itson\ticketwizard\dto\EventosDTO.java
 C:\Users\Peter\OneDrive\Documentos\GitHub\ProyectoBDDA_1.1\TicketWizard\src\main\java\itson\ticketwizard\persistencia\ManejadorConexiones.java
 C:\Users\Peter\OneDrive\Documentos\GitHub\ProyectoBDDA_1.1\TicketWizard\src\main\java\presentacion\FrmInicioSesion.java
@@ -17,9 +18,12 @@ C:\Users\Peter\OneDrive\Documentos\GitHub\ProyectoBDDA_1.1\TicketWizard\src\main
 C:\Users\Peter\OneDrive\Documentos\GitHub\ProyectoBDDA_1.1\TicketWizard\src\main\java\itson\ticketwizard\entidades\Boleto.java
 C:\Users\Peter\OneDrive\Documentos\GitHub\ProyectoBDDA_1.1\TicketWizard\src\main\java\presentacion\PnlEvento.java
 C:\Users\Peter\OneDrive\Documentos\GitHub\ProyectoBDDA_1.1\TicketWizard\src\main\java\itson\ticketwizard\entidades\Usuario.java
+C:\Users\Peter\OneDrive\Documentos\GitHub\ProyectoBDDA_1.1\TicketWizard\src\main\java\presentacion\FrmRegistroUsuario.java
+C:\Users\Peter\OneDrive\Documentos\GitHub\ProyectoBDDA_1.1\TicketWizard\src\main\java\itson\ticketwizard\dto\UsuarioDTO.java
 C:\Users\Peter\OneDrive\Documentos\GitHub\ProyectoBDDA_1.1\TicketWizard\src\main\java\itson\ticketwizard\persistencia\IBoletosDAO.java
 C:\Users\Peter\OneDrive\Documentos\GitHub\ProyectoBDDA_1.1\TicketWizard\src\main\java\presentacion\PnlComprarBoletos.java
 C:\Users\Peter\OneDrive\Documentos\GitHub\ProyectoBDDA_1.1\TicketWizard\src\main\java\itson\ticketwizard\excepciones\EventoException.java
 C:\Users\Peter\OneDrive\Documentos\GitHub\ProyectoBDDA_1.1\TicketWizard\src\main\java\presentacion\PnlConfirmarCompra.java
 C:\Users\Peter\OneDrive\Documentos\GitHub\ProyectoBDDA_1.1\TicketWizard\src\main\java\itson\ticketwizard\entidades\Evento.java
 C:\Users\Peter\OneDrive\Documentos\GitHub\ProyectoBDDA_1.1\TicketWizard\src\main\java\presentacion\PnlEventos.java
+C:\Users\Peter\OneDrive\Documentos\GitHub\ProyectoBDDA_1.1\TicketWizard\src\main\java\itson\ticketwizard\persistencia\IUsuarios.java

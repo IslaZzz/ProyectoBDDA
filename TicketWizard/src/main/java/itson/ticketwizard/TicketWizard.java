@@ -4,6 +4,7 @@
 
 package itson.ticketwizard;
 
+import itson.ticketwizard.control.ControlInicioSesion;
 import presentacion.FrmInicioSesion;
 import presentacion.FrmPrincipal;
 
@@ -14,9 +15,7 @@ import presentacion.FrmPrincipal;
 public class TicketWizard {
 
     public static void main(String[] args) {
-        FrmPrincipal frame = new FrmPrincipal();
-        frame.setVisible(true);
-        frame.setLocationRelativeTo(null);
-        frame.setResizable(false);
+        ControlInicioSesion control = new ControlInicioSesion();
+        control.IniciarFlujo();
     }
 }   

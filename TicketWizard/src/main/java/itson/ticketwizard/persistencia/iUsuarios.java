@@ -8,6 +8,7 @@ package itson.ticketwizard.persistencia;
  *
  * @author 52644
  */
-public interface iUsuarios {
-    public void registrarUsuario(UsuarioDTO);
+public interface IUsuarios {
+    
+    //public void registrarUsuario(UsuarioDTO);
 }

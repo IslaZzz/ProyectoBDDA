@@ -4,6 +4,7 @@
  */
 package presentacion;
 
+import itson.ticketwizard.control.ControlInicioSesion;
 import java.awt.Font;
 import java.awt.font.TextAttribute;
 import java.util.Map;
@@ -14,11 +15,13 @@ import java.util.Map;
  */
 public class FrmInicioSesion extends javax.swing.JFrame {
 
+    private ControlInicioSesion control;
     /**
      * Creates new form FrmInicioSesion
      */
-    public FrmInicioSesion() {
-        this.setName("TicketWizard");
+    public FrmInicioSesion(ControlInicioSesion control) {
+        this.setTitle("TicketWizard");
+        this.control = control;
         initComponents();
     }
 
@@ -59,6 +62,9 @@ public class FrmInicioSesion extends javax.swing.JFrame {
         lblRegistro.setText("* ¿No tienes una cuenta? Regístrate");
         lblRegistro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblRegistroMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblRegistroMouseEntered(evt);
             }
@@ -135,7 +141,7 @@ public class FrmInicioSesion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInicioSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioSesionActionPerformed
-        // TODO add your handling code here:
+        control.mostrarFramePrincipal();
     }//GEN-LAST:event_btnInicioSesionActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -155,40 +161,9 @@ public class FrmInicioSesion extends javax.swing.JFrame {
         lblRegistro.setFont(font);
     }//GEN-LAST:event_lblRegistroMouseExited
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmInicioSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmInicioSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmInicioSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmInicioSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FrmInicioSesion().setVisible(true);
-            }
-        });
-    }
+    private void lblRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegistroMouseClicked
+        control.mostrarRegistro();
+    }//GEN-LAST:event_lblRegistroMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnInicioSesion;

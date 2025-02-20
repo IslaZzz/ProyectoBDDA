@@ -5,6 +5,7 @@
 package presentacion;
 
 import itson.ticketwizard.control.ControlCompraBoletos;
+import itson.ticketwizard.control.ControlInicioSesion;
 import itson.ticketwizard.control.ControlMostrarEventos;
 import itson.ticketwizard.persistencia.BoletosDAO;
 import itson.ticketwizard.persistencia.EventosDAO;
@@ -26,10 +27,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private int MOVIMIENTOS = 3;
     private int SALDO = 4;
 
+    private ControlInicioSesion controlInicioSesion;
     /**
      * Creates new form FrmPrincipal
      */
-    public FrmPrincipal() {
+    public FrmPrincipal(ControlInicioSesion controlInicioSesion) {
+        this.controlInicioSesion = controlInicioSesion;
         initComponents();
     }
 
@@ -443,40 +446,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pnlCardLayout.revalidate();
     }
     
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FrmPrincipal().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
