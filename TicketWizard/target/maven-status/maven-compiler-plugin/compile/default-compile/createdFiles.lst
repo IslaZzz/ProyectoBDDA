@@ -4,10 +4,15 @@ itson\ticketwizard\entidades\Transaccion.class
 presentacion\FrmInicioSesion.class
 itson\ticketwizard\persistencia\IBoletosDAO.class
 presentacion\FrmInicioSesion$1.class
+presentacion\FrmPrincipal$3.class
 itson\ticketwizard\persistencia\EventosDAO.class
 presentacion\FrmInicioSesion$2.class
 itson\ticketwizard\persistencia\IEventosDAO.class
+presentacion\FrmPrincipal$6.class
+presentacion\FrmPrincipal$4.class
+presentacion\FrmPrincipal$2.class
 itson\ticketwizard\dto\BoletosDTO.class
 itson\ticketwizard\excepciones\EventoException.class
 presentacion\FrmInicioSesion$3.class
 itson\ticketwizard\dto\EventosDTO.class
+presentacion\FrmPrincipal$5.class

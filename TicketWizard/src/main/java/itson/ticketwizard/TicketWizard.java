@@ -17,4 +17,4 @@ public class TicketWizard {
         FrmPrincipal frame = new FrmPrincipal();
         frame.setVisible(true);
     }
-}
+}   
