@@ -18,6 +18,7 @@ public class Boleto {
     private boolean disponible;
     private String fila;
     private int asiento;
+    private Integer idEvento;
 
     /**
      * Constructor que recibe los atributos de un boleto y lo crea a partir de
@@ -30,7 +31,7 @@ public class Boleto {
      * @param fila
      * @param asiento
      */
-    public Boleto(String numeroSerie, double precio, boolean disponible, String fila, int asiento) {
+    public Boleto(String numeroSerie, double precio, boolean disponible, String fila, int asiento, Integer idEvento) {
         //Numero de serie se genera al momento de cada venta, imagino sera un metodo que 
         //pertenece al momento de vender un boleto 
         this.numeroSerie = numeroSerie;
@@ -39,6 +40,7 @@ public class Boleto {
         this.fila = fila;
         this.asiento = asiento;
         this.numeroControl = generarNumeroControl(fila, precio);
+        
     }
 
     /**
@@ -52,13 +54,14 @@ public class Boleto {
      * @param fila
      * @param asiento
      */
-    public Boleto(String numeroControl, String numeroSerie, double precio, boolean disponible, String fila, int asiento) {
+    public Boleto(String numeroControl, String numeroSerie, double precio, boolean disponible, String fila, int asiento, Integer idEvento) {
         this.numeroControl = numeroControl;
         this.numeroSerie = numeroSerie;
         this.precio = precio;
         this.disponible = disponible;
         this.fila = fila;
         this.asiento = asiento;
+        this.idEvento = idEvento;
     }
 
     /**
