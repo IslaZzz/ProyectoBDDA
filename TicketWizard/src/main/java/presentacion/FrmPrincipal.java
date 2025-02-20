@@ -340,7 +340,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         ManejadorConexiones conexionBD = new ManejadorConexiones();
         EventosDAO eventosDAO = new EventosDAO(conexionBD);
         ControlMostrarEventos control = new ControlMostrarEventos(eventosDAO);
-        PnlEventos pnlEventos = new PnlEventos(control);
+        PnlEventos pnlEventos = new PnlEventos(control, this);
         pnlCardLayout.add(pnlEventos);
         pnlCardLayout.repaint();
         pnlCardLayout.revalidate();

@@ -17,7 +17,7 @@ public class PnlEvento extends javax.swing.JPanel {
     /**
      * Creates new form pnlEvento
      */
-    public PnlEvento(MostrarEventoDTO evento) {
+    public PnlEvento(MostrarEventoDTO evento, PnlEventos parent) {
         this.evento = evento;
         initComponents();
         cargarInfoEvento();
@@ -55,6 +55,7 @@ public class PnlEvento extends javax.swing.JPanel {
         btnConsultar.setFont(new java.awt.Font("SansSerif", 0, 20)); // NOI18N
         btnConsultar.setForeground(new java.awt.Color(255, 255, 255));
         btnConsultar.setText("Consultar");
+        btnConsultar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnConsultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConsultarActionPerformed(evt);
