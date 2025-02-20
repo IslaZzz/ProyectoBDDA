@@ -27,31 +27,33 @@ public class BoletosDAO implements IBoletosDAO {
     }
 
     @Override
-    public List<Boleto> consultarBoleto() {
+    public List<Boleto> consultarBoletos(Integer idEv) {
         String consultarBoletoSQL = """
                                     Select idEvento, numSerie, fila, asiento, Disponible, precio, numControl
                                     From Boletos;
                                     """;
         List<Boleto> listaBoletos = new LinkedList<>();
-        try{
+        try {
             Connection conexion = this.manejadorConexiones.crearConexion();
             PreparedStatement comando = conexion.prepareStatement(consultarBoletoSQL);
             ResultSet resultadoConsulta = comando.executeQuery();
-            
-            while(resultadoConsulta.next()){
+
+            while (resultadoConsulta.next()) {
                 Integer idEvento = resultadoConsulta.getInt("idEvento");
                 String numSerie = resultadoConsulta.getString("numSerie");
                 String fila = resultadoConsulta.getString("fila");
                 Integer asiento = resultadoConsulta.getInt("asiento");
                 boolean disponible = resultadoConsulta.getBoolean("Disponible");
                 double precio = resultadoConsulta.getDouble("precio");
-                String numControl = resultadoConsulta .getString("numControl");
+                String numControl = resultadoConsulta.getString("numControl");
                 Boleto boleto = new Boleto(numControl, numSerie, precio, disponible, fila, asiento, idEvento);
-                listaBoletos.add(boleto);
+                if (boleto.isDisponible() && idEvento == idEv) {
+                    listaBoletos.add(boleto);
+                }
             }
-            
-        }catch(SQLException e){
-            System.err.println("Error al consultar boletos"+e.getMessage());
+
+        } catch (SQLException e) {
+            System.err.println("Error al consultar boletos" + e.getMessage());
         }
         return listaBoletos;
     }
