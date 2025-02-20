@@ -23,9 +23,10 @@ public class Evento {
      * @param descripcion
      * @param recinto
      */
-    public Evento(int id, String nombre, String ciudad, String estado, String descripcion, String recinto) {
+    public Evento(int id, String nombre, Date fecha,String ciudad, String estado, String descripcion, String recinto) {
         this.id = id;
         this.nombre = nombre;
+        this.fecha = fecha;
         this.ciudad = ciudad;
         this.estado = estado;
         this.descripcion = descripcion;
