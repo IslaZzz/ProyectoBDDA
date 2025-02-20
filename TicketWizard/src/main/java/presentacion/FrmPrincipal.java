@@ -281,6 +281,25 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void mostrarEventos(){
+        currentSection = EVENTOS;
+        Font font = new Font("Sans Serif", Font.PLAIN, 18);
+        lblBoletos.setFont(font);
+        lblMovimientos.setFont(font);
+        lblSaldo.setFont(font);
+        Map attributes = font.getAttributes();
+        attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+        lblEventos.setFont(font.deriveFont(attributes));
+        pnlCardLayout.removeAll();
+        ManejadorConexiones conexionBD = new ManejadorConexiones();
+        EventosDAO eventosDAO = new EventosDAO(conexionBD);
+        ControlMostrarEventos control = new ControlMostrarEventos(eventosDAO);
+        PnlEventos pnlEventos = new PnlEventos(control, this);
+        pnlCardLayout.add(pnlEventos);
+        pnlCardLayout.repaint();
+        pnlCardLayout.revalidate();
+    };
+    
     private void lblEventosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEventosMouseEntered
         if (currentSection != EVENTOS) {
             Font font = new Font("Sans Serif", Font.PLAIN, 18);
@@ -346,23 +365,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pnlCardLayout.add(pnlEventos);
         pnlCardLayout.repaint();
         pnlCardLayout.revalidate();
-        lblEventos.setBackground(new Color(16, 23, 66));
     }//GEN-LAST:event_lblEventosMouseClicked
 
     private void lblMovimientosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMovimientosMouseClicked
-        currentSection = MOVIMIENTOS;
-        Font font = new Font("Sans Serif", Font.PLAIN, 18);
-        lblBoletos.setFont(font);
-        lblEventos.setFont(font);
-        lblSaldo.setFont(font);
-        Map attributes = font.getAttributes();
-        attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
-        lblMovimientos.setFont(font.deriveFont(attributes));
-        pnlCardLayout.removeAll();
-        pnlCardLayout.add(pnlMovimientos);
-        pnlCardLayout.repaint();
-        pnlCardLayout.revalidate();
-        lblEventos.setBackground(new Color(16, 23, 66));
+        mostrarEventos();
     }//GEN-LAST:event_lblMovimientosMouseClicked
 
     private void lblMovimientosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMovimientosMouseEntered
