@@ -8,12 +8,12 @@ package presentacion;
  *
  * @author Peter
  */
-public class NewJPanel extends javax.swing.JPanel {
+public class PnlConfirmarCompra extends javax.swing.JPanel {
 
     /**
      * Creates new form NewJPanel
      */
-    public NewJPanel() {
+    public PnlConfirmarCompra() {
         initComponents();
     }
 
