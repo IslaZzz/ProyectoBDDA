@@ -349,7 +349,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_lblBoletosMouseClicked
 
     private void lblEventosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEventosMouseClicked
-        currentSection = EVENTOS;
+        mostrarEventos();
+    }//GEN-LAST:event_lblEventosMouseClicked
+
+    private void lblMovimientosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMovimientosMouseClicked
+        currentSection = MOVIMIENTOS;
         Font font = new Font("Sans Serif", Font.PLAIN, 18);
         lblBoletos.setFont(font);
         lblMovimientos.setFont(font);
@@ -361,14 +365,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
         ManejadorConexiones conexionBD = new ManejadorConexiones();
         EventosDAO eventosDAO = new EventosDAO(conexionBD);
         ControlMostrarEventos control = new ControlMostrarEventos(eventosDAO);
-        PnlEventos pnlEventos = new PnlEventos(control, this);
-        pnlCardLayout.add(pnlEventos);
+        pnlCardLayout.add(pnlMovimientos);
         pnlCardLayout.repaint();
         pnlCardLayout.revalidate();
-    }//GEN-LAST:event_lblEventosMouseClicked
-
-    private void lblMovimientosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMovimientosMouseClicked
-        mostrarEventos();
     }//GEN-LAST:event_lblMovimientosMouseClicked
 
     private void lblMovimientosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMovimientosMouseEntered

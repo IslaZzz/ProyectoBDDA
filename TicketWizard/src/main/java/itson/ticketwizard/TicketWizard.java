@@ -17,5 +17,6 @@ public class TicketWizard {
         FrmPrincipal frame = new FrmPrincipal();
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
     }
 }   
