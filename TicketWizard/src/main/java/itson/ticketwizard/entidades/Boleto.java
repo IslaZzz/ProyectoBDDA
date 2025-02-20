@@ -142,6 +142,7 @@ public class Boleto {
         this.asiento = asiento;
     }
 
+    
     /**
      *
      * @return El codigo hash generado a partir del numero de control
