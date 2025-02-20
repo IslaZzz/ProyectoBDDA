@@ -7,6 +7,14 @@ public class BoletosDTO {
     private String asiento;
     private Integer idEvento;
 
+    /**
+     *
+     * @param idBoleto
+     * @param numeroSerie
+     * @param fila
+     * @param asiento
+     * @param idEvento
+     */
     public BoletosDTO(Integer idBoleto, String numeroSerie, String fila, String asiento, Integer idEvento) {
 
         this.idBoleto = idBoleto;

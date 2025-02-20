@@ -8,6 +8,15 @@ public class EventosDTO {
     private String descripcion;
     private String recinto;
 
+    /**
+     * Parametros del constructor
+     * @param nombre
+     * @param fecha
+     * @param ciudad
+     * @param estado
+     * @param descripcion
+     * @param recinto
+     */
     public EventosDTO(String nombre, String fecha, String ciudad, String estado, String descripcion, String recinto) {
         this.nombre = nombre;
         this.fecha = fecha;
@@ -35,8 +44,4 @@ public class EventosDTO {
     public String getRecinto() {
         return recinto;
     }
-
-
-
-
 }
