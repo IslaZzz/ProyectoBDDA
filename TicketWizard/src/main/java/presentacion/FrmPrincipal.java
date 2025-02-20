@@ -36,11 +36,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pnlPrincipal = new javax.swing.JPanel();
         lblBienvenido = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        pnlEventos = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("TicketWizard");
-        getContentPane().setLayout(new java.awt.BorderLayout());
 
         pnlMenu.setBackground(new java.awt.Color(233, 233, 233));
 
@@ -67,7 +69,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         lblEventos1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblEventos1.setForeground(new java.awt.Color(30, 30, 30));
         lblEventos1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblEventos1.setText("Boletos");
+        lblEventos1.setText("Mis Boletos");
         lblEventos1.setAlignmentX(0.5F);
         lblEventos1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblEventos1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -142,6 +144,39 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         pnlCardLayout.add(pnlPrincipal, "card4");
 
+        pnlEventos.setBackground(new java.awt.Color(233, 233, 233));
+        pnlEventos.setForeground(new java.awt.Color(30, 30, 30));
+
+        jScrollPane1.setBackground(new java.awt.Color(233, 233, 233));
+
+        jLabel2.setFont(new java.awt.Font("SansSerif", 1, 48)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("Eventos Disponibles");
+
+        javax.swing.GroupLayout pnlEventosLayout = new javax.swing.GroupLayout(pnlEventos);
+        pnlEventos.setLayout(pnlEventosLayout);
+        pnlEventosLayout.setHorizontalGroup(
+            pnlEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEventosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 874, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEventosLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(200, 200, 200))
+        );
+        pnlEventosLayout.setVerticalGroup(
+            pnlEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlEventosLayout.createSequentialGroup()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        pnlCardLayout.add(pnlEventos, "card4");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -197,7 +232,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblBienvenido;
     private javax.swing.JLabel lblBoletos;
     private javax.swing.JLabel lblEventos;
@@ -205,6 +242,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lblEventos2;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel pnlCardLayout;
+    private javax.swing.JPanel pnlEventos;
     private javax.swing.JPanel pnlMenu;
     private javax.swing.JPanel pnlPrincipal;
     // End of variables declaration//GEN-END:variables

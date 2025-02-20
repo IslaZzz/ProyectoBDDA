@@ -14,13 +14,19 @@ import java.util.List;
  */
 public class BoletosDAO implements IBoletosDAO {
 
-    @Override
-    public void crearBoleto(boleto) {
-
+    private ManejadorConexiones manejadorConexiones;
+    
+    public BoletosDAO(ManejadorConexiones manejadorConexiones){
+        this.manejadorConexiones = manejadorConexiones;
     }
-
+    
     @Override
     public List<Boleto> consultarBoleto() {
         return List.of();
+    }
+
+    @Override
+    public void crearBoleto() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

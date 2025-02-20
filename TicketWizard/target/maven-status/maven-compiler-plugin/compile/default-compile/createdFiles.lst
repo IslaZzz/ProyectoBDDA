@@ -1,5 +1,13 @@
-presentacion\FrmInicioSesion$2.class
 presentacion\FrmInicioSesion$4.class
-presentacion\FrmInicioSesion$3.class
+itson\ticketwizard\excepciones\TransaccionException.class
+itson\ticketwizard\entidades\Transaccion.class
 presentacion\FrmInicioSesion.class
+itson\ticketwizard\persistencia\IBoletosDAO.class
 presentacion\FrmInicioSesion$1.class
+itson\ticketwizard\persistencia\EventosDAO.class
+presentacion\FrmInicioSesion$2.class
+itson\ticketwizard\persistencia\IEventosDAO.class
+itson\ticketwizard\dto\BoletosDTO.class
+itson\ticketwizard\excepciones\EventoException.class
+presentacion\FrmInicioSesion$3.class
+itson\ticketwizard\dto\EventosDTO.class

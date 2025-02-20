@@ -14,11 +14,17 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class EventosDAO implements IEventosDAO {
+    
+    private ManejadorConexiones manejadorConexiones;
+    
+    public EventosDAO(ManejadorConexiones manejadorConexiones){
+        this.manejadorConexiones = manejadorConexiones;
+    }
     @Override
     public void crearEvento(EventosDTO eventoDTO){
         String crearEventoSQL = "INSERT INTO EVENTOS(NOMBRE,FECHA,CIUDAD,ESTADO,DESCRIPCION,RECINTO) VALUES('?','?','?','?','?','?')";
         try{
-            Connection conexion = ManejadorConexiones.crearConexion();
+            Connection conexion = manejadorConexiones.crearConexion();
             PreparedStatement comando = conexion.prepareStatement(crearEventoSQL);
 
             comando.setString(2, eventoDTO.getNombre());
@@ -43,7 +49,7 @@ public class EventosDAO implements IEventosDAO {
         List<Evento> listaEventos = new LinkedList<>();
 
         try {
-            Connection conexion = this.ManejadorConexiones.crearConexion();
+            Connection conexion = this.manejadorConexiones.crearConexion();
             PreparedStatement comando = conexion.prepareStatement(consultarEventoSQL);
             ResultSet resultadoConsulta = comando.executeQuery();
             while (resultadoConsulta.next()) {

@@ -5,6 +5,7 @@
 package itson.ticketwizard;
 
 import presentacion.FrmInicioSesion;
+import presentacion.FrmPrincipal;
 
 /**
  *
@@ -13,7 +14,7 @@ import presentacion.FrmInicioSesion;
 public class TicketWizard {
 
     public static void main(String[] args) {
-        FrmInicioSesion frame = new FrmInicioSesion();
+        FrmPrincipal frame = new FrmPrincipal();
         frame.setVisible(true);
     }
 }
