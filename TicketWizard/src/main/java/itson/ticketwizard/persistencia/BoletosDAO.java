@@ -4,10 +4,23 @@
  */
 package itson.ticketwizard.persistencia;
 
+import itson.ticketwizard.entidades.Boleto;
+
+import java.util.List;
+
 /**
  *
  * @author 52644
  */
-public class BoletosDAO {
-    
+public class BoletosDAO implements IBoletosDAO {
+
+    @Override
+    public void crearBoleto(boleto) {
+
+    }
+
+    @Override
+    public List<Boleto> consultarBoleto() {
+        return List.of();
+    }
 }
