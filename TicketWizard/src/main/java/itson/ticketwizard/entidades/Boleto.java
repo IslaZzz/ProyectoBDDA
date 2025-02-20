@@ -12,13 +12,15 @@ import java.util.Objects;
  */
 public class Boleto {
 
-    private String numeroControl;
+    private String idBoleto;
     private String numeroSerie;
     private double precio;
     private boolean disponible;
     private String fila;
     private int asiento;
     private Integer idEvento;
+    private Integer precioOriginal;
+    private Integer idUsuario;
 
     /**
      * Constructor que recibe los atributos de un boleto y lo crea a partir de
@@ -39,7 +41,7 @@ public class Boleto {
         this.disponible = disponible;
         this.fila = fila;
         this.asiento = asiento;
-        this.numeroControl = generarNumeroControl(fila, precio);
+        this.idBoleto = generarNumeroControl(fila, precio);
         
     }
 
@@ -56,7 +58,7 @@ public class Boleto {
      * @param idEvento
      */
     public Boleto(String numeroControl, String numeroSerie, double precio, boolean disponible, String fila, int asiento, Integer idEvento) {
-        this.numeroControl = numeroControl;
+        this.idBoleto = numeroControl;
         this.numeroSerie = numeroSerie;
         this.precio = precio;
         this.disponible = disponible;
@@ -159,7 +161,7 @@ public class Boleto {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.numeroControl);
+        hash = 97 * hash + Objects.hashCode(this.idBoleto);
         return hash;
     }
 
@@ -180,7 +182,7 @@ public class Boleto {
             return false;
         }
         final Boleto other = (Boleto) obj;
-        return Objects.equals(this.numeroControl, other.numeroControl);
+        return Objects.equals(this.idBoleto, other.idBoleto);
     }
 
     /**
