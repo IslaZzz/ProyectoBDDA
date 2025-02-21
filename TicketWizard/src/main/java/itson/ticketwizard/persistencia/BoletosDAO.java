@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
@@ -98,7 +99,7 @@ public class BoletosDAO implements IBoletosDAO {
                               DELIMITER //
                               CREATE PROCEDURE  consultarBoletosUsuario()
                               BEGIN
-                                SELECT B.IDBOLETO, E.NOMBRE, B.FILA, B.ASIENTO, E.FECHA, B.CIUDAD,
+                                SELECT B.IDBOLETO, E.idEvento, B.FILA, B.ASIENTO, E.FECHA, B.CIUDAD,
                                 FROM BOLETOS AS B
                                 INNER JOIN USUARIO AS U ON B.idUsuario = U.idUsuario
                                 INNER JOIN  EVENTOS AS E ON B.idEvento = E.idEvento
@@ -106,20 +107,19 @@ public class BoletosDAO implements IBoletosDAO {
                               DELIMITER; 
                               """;
         List<Boleto> listaBoletos = new LinkedList<>();
-            try {
-                Connection conexion = this.manejadorConexiones.crearConexion();
-                PreparedStatement comando = conexion.prepareStatement(consultarBoletoSQL);
-                comando.setInt(1, idEv);
-                ResultSet resultadoConsulta = comando.executeQuery();
-        
+        try {
+            Connection conexion = this.manejadorConexiones.crearConexion();
+            PreparedStatement comando = conexion.prepareStatement(spUsuariosSQL);
+           // comando.setInt(1, idEv);
+            ResultSet resultadoConsulta = comando.executeQuery();
 
-        while (spUsuariosSQL.next()) {
-            String nombreEvento = spUsuariosSQL.getString("E.NOMBRE");
-            String numSerie = spUsuariosSQL.getString(" B.FILA");
-            String fila = spUsuariosSQL.getString("fila");
-            Integer asiento = spUsuariosSQL.getInt("B.ASIENTO");
-            boolean disponible = spUsuariosSQL.getBoolean("E.FECHA");
-            double precio = spUsuariosSQL.getDouble("B.CIUDAD");
+            while (resultadoConsulta.next()) {
+                String idboleto = resultadoConsulta.getString("IDBOLETO");
+                String idEvento = resultadoConsulta.getString("E.NOMBRE");
+                String fila = resultadoConsulta.getString("B.FILA");
+                Integer asiento = resultadoConsulta.getInt("B.ASIENTO");
+                Date fecha = resultadoConsulta.getDate("E.FECHA");
+                String ciudad = resultadoConsulta.getString("B.CIUDAD");
 
             Boleto boleto = new Boleto(numControl, precio, fila, asiento, idEvento);
             //listaBoletos.add(boleto);
