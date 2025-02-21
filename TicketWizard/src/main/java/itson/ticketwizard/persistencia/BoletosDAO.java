@@ -25,6 +25,7 @@ public class BoletosDAO implements IBoletosDAO {
         this.manejadorConexiones = manejadorConexiones;
     }
 
+    /// Boletos DAO
     @Override
     public List<Boleto> consultarBoletosEvento(Integer idEv) {
         String consultarBoletoSQL = """
@@ -47,19 +48,14 @@ public class BoletosDAO implements IBoletosDAO {
                 double precio = resultadoConsulta.getDouble("precio");
                 String numControl = resultadoConsulta.getString("idBoleto");
 
-                if(numControl!=null){
-
-
-                }
-                Boleto boleto = new Boleto(idEvento, precio, fila, asiento, idEvento);
+                Boleto boleto = new Boleto(numControl, precio, fila, asiento, idEvento);
                 //listaBoletos.add(boleto);
                 if(boleto.isDisponible()==true){
                     listaBoletos.add(boleto);
                 }
-
-                Integer idUsuario = resultadoConsulta.getInt("idUsuario");
+                /*Integer idUsuario = resultadoConsulta.getInt("idUsuario");
                 Boleto boleto = new Boleto(numControl, numSerie, precio, disponible, fila, asiento, idEvento, idUsuario);
-                listaBoletos.add(boleto);
+                listaBoletos.add(boleto);*/
             }
         } catch (SQLException e) {
             System.err.println("Error al consultar boletos" + e.getMessage());
@@ -91,13 +87,11 @@ public class BoletosDAO implements IBoletosDAO {
             Connection conexion = this.manejadorConexiones.crearConexion();
             PreparedStatement comando = conexion.prepareStatement(actualizarBoletoSQL);
             ResultSet resultadoConsulta = comando.executeQuery();
-
             comando.setInt(1, boleto.getIdUsuario());
 
         } catch (SQLException e) {
             System.err.println("Error al consultar boletos" + e.getMessage());
         }
-        return listaBoletos;
     }
 
     }
@@ -106,7 +100,7 @@ public class BoletosDAO implements IBoletosDAO {
         SET ContactName = 'Alfred Schmidt', City= 'Frankfurt'
         WHERE CustomerID = 1;
          */
-   /* public void actualizarBoletoReventa(List<Boleto> listaBoletos,Integer idBoleto, Integer idUsuario,Integer procentaje) throws BoletoException {
+   /* public void actualizarBoletoReventa(Integer idBoleto, Integer idUsuario,Integer porcentaje) throws BoletoException {
 
         if(listaBoletos.contains(idBoleto)) {
             String consultarBoletoSQL = """
