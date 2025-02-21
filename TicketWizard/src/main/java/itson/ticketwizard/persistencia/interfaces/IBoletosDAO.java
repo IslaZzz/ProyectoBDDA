@@ -1,4 +1,4 @@
-package itson.ticketwizard.persistencia;
+package itson.ticketwizard.persistencia.interfaces;
 import java.util.List;
 import itson.ticketwizard.entidades.Boleto;
 

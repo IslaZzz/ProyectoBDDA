@@ -2,13 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package itson.ticketwizard.persistencia;
+package itson.ticketwizard.persistencia.interfaces;
+
+import itson.ticketwizard.entidades.Direccion;
 
 /**
  *
- * @author 52644
+ * @author Peter
  */
-public interface IUsuarios {
+public interface IDireccionesDAO {
     
-    //public void registrarUsuario(UsuarioDTO);
+    public Direccion insertarDireccion();
 }

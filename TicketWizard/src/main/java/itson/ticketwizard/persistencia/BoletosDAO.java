@@ -19,12 +19,12 @@ import java.util.UUID;
  *
  * @author 52644
  */
-public class BoletosDAO implements IBoletosDAO {
+public class BoletosDAO {
     private ManejadorConexiones manejadorConexiones;
     public BoletosDAO(ManejadorConexiones manejadorConexiones) {
         this.manejadorConexiones = manejadorConexiones;
     }
-
+    /*
     @Override
     public List<Boleto> consultarBoletosEvento(Integer idEv) {
         String consultarBoletoSQL = """
