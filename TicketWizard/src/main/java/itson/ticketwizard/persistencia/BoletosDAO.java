@@ -53,9 +53,6 @@ public class BoletosDAO implements IBoletosDAO {
                 if(boleto.isDisponible()==true){
                     listaBoletos.add(boleto);
                 }
-                /*Integer idUsuario = resultadoConsulta.getInt("idUsuario");
-                Boleto boleto = new Boleto(numControl, numSerie, precio, disponible, fila, asiento, idEvento, idUsuario);
-                listaBoletos.add(boleto);*/
             }
         } catch (SQLException e) {
             System.err.println("Error al consultar boletos" + e.getMessage());
@@ -94,6 +91,48 @@ public class BoletosDAO implements IBoletosDAO {
         }
     }
 
+    @Override
+    public List<Boleto> consultarBoletosUsuario(Integer idUsuario){
+
+        String spUsuariosSQL= """
+                              DELIMITER //
+                              CREATE PROCEDURE  consultarBoletosUsuario()
+                              BEGIN
+                                SELECT B.IDBOLETO, E.NOMBRE, B.FILA, B.ASIENTO, E.FECHA, B.CIUDAD,
+                                FROM BOLETOS AS B
+                                INNER JOIN USUARIO AS U ON B.idUsuario = U.idUsuario
+                                INNER JOIN  EVENTOS AS E ON B.idEvento = E.idEvento
+                              END //;
+                              DELIMITER; 
+                              """;
+        List<Boleto> listaBoletos = new LinkedList<>();
+            try {
+                Connection conexion = this.manejadorConexiones.crearConexion();
+                PreparedStatement comando = conexion.prepareStatement(consultarBoletoSQL);
+                comando.setInt(1, idEv);
+                ResultSet resultadoConsulta = comando.executeQuery();
+        
+
+        while (spUsuariosSQL.next()) {
+            String nombreEvento = spUsuariosSQL.getString("E.NOMBRE");
+            String numSerie = spUsuariosSQL.getString(" B.FILA");
+            String fila = spUsuariosSQL.getString("fila");
+            Integer asiento = spUsuariosSQL.getInt("B.ASIENTO");
+            boolean disponible = spUsuariosSQL.getBoolean("E.FECHA");
+            double precio = spUsuariosSQL.getDouble("B.CIUDAD");
+
+            Boleto boleto = new Boleto(numControl, precio, fila, asiento, idEvento);
+            //listaBoletos.add(boleto);
+            if(boleto.isDisponible()==true){
+                listaBoletos.add(boleto);
+            }
+        }
+    } catch (SQLException e) {
+        System.err.println("Error al consultar boletos" + e.getMessage());
+    }
+        return listaBoletos;
+}
+
     }
         /*
         UPDATE Customers
@@ -125,5 +164,5 @@ public class BoletosDAO implements IBoletosDAO {
 
 
     }*/
-}
+
 
