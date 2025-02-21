@@ -26,7 +26,7 @@ public class Boleto {
     private Integer idUsuario;
 
     //Constructor para instanciar un boleto. Cuando se instancia es por parte de la boletera
-    public void crearBoletoBoletera(String idBoleto,double precio, String fila, Integer asiento,  Integer idEvento){
+    public  Boleto(String idBoleto,double precio, String fila, Integer asiento, Integer idEvento){
         this.idBoleto = idBoleto;
         this.precio = precio;
         this.fila = fila;
@@ -108,4 +108,5 @@ public class Boleto {
     public void setIdUsuario(Integer idUsuario) {
         this.idUsuario = idUsuario;
     }
+
 }

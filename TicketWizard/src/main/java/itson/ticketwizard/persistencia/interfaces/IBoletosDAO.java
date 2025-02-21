@@ -5,4 +5,5 @@ import itson.ticketwizard.entidades.Boleto;
 public interface IBoletosDAO {
    public List<Boleto> consultarBoletosEvento(Integer idEv);
    public void venderBoletoBoletera(Integer idUsuario, Boleto boleto);
+    public List<Boleto> consultarBoletosUsuario(Integer idUsuario);
 }
