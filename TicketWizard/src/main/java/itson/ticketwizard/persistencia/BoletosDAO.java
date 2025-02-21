@@ -46,17 +46,20 @@ public class BoletosDAO implements IBoletosDAO {
                 boolean disponible = resultadoConsulta.getBoolean("Disponible");
                 double precio = resultadoConsulta.getDouble("precio");
                 String numControl = resultadoConsulta.getString("idBoleto");
-<<<<<<< HEAD
-                Boleto boleto = new Boleto(numControl, precio, disponible, fila, asiento, idEvento);
+
+                if(numControl!=null){
+
+
+                }
+                Boleto boleto = new Boleto(idEvento, precio, fila, asiento, idEvento);
                 //listaBoletos.add(boleto);
                 if(boleto.isDisponible()==true){
                     listaBoletos.add(boleto);
                 }
-=======
+
                 Integer idUsuario = resultadoConsulta.getInt("idUsuario");
                 Boleto boleto = new Boleto(numControl, numSerie, precio, disponible, fila, asiento, idEvento, idUsuario);
                 listaBoletos.add(boleto);
->>>>>>> 1ad219504838f6ab9473940659cc9c8bfb49d7be
             }
         } catch (SQLException e) {
             System.err.println("Error al consultar boletos" + e.getMessage());
@@ -129,3 +132,4 @@ public class BoletosDAO implements IBoletosDAO {
 
     }*/
 }
+
