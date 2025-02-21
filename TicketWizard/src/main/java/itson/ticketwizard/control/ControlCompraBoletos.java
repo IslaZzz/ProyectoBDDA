@@ -22,4 +22,11 @@ public class ControlCompraBoletos {
     public List<Boleto> consultarBoletosEvento(Integer idEvento){
         return boletosDAO.consultarBoletosEvento(idEvento);
     }
+    public String determinarTipoVenta(Boleto boleto){
+        if(boleto.getIdUsuario() != 0){
+            return "Reventa";
+        } else {
+            return "Boletera";
+        }
+    }
 }

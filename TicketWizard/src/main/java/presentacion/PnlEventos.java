@@ -62,7 +62,9 @@ public class PnlEventos extends javax.swing.JPanel {
         pnlEventos.setForeground(new java.awt.Color(30, 30, 30));
 
         panelEventos.setBackground(new java.awt.Color(233, 233, 233));
+        panelEventos.setBorder(null);
 
+        boxPanelEventos.setBackground(new java.awt.Color(233, 233, 233));
         boxPanelEventos.setLayout(new javax.swing.BoxLayout(boxPanelEventos, javax.swing.BoxLayout.Y_AXIS));
         panelEventos.setViewportView(boxPanelEventos);
 
@@ -74,14 +76,14 @@ public class PnlEventos extends javax.swing.JPanel {
         pnlEventos.setLayout(pnlEventosLayout);
         pnlEventosLayout.setHorizontalGroup(
             pnlEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEventosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panelEventos, javax.swing.GroupLayout.DEFAULT_SIZE, 874, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEventosLayout.createSequentialGroup()
+            .addGroup(pnlEventosLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(200, 200, 200))
+            .addGroup(pnlEventosLayout.createSequentialGroup()
+                .addGap(102, 102, 102)
+                .addComponent(panelEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(104, Short.MAX_VALUE))
         );
         pnlEventosLayout.setVerticalGroup(
             pnlEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

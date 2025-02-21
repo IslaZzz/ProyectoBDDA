@@ -55,6 +55,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pnlPrincipal = new javax.swing.JPanel();
         lblBienvenido = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        lblCerrarSesion = new javax.swing.JLabel();
         pnlBoletos = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         pnlMovimientos = new javax.swing.JPanel();
@@ -193,6 +194,25 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logo.png"))); // NOI18N
 
+        lblCerrarSesion.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        lblCerrarSesion.setForeground(new java.awt.Color(30, 30, 30));
+        lblCerrarSesion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCerrarSesion.setText("Cerrar Sesión");
+        lblCerrarSesion.setAlignmentX(0.5F);
+        lblCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblCerrarSesion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lblCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCerrarSesionMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblCerrarSesionMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblCerrarSesionMouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlPrincipalLayout = new javax.swing.GroupLayout(pnlPrincipal);
         pnlPrincipal.setLayout(pnlPrincipalLayout);
         pnlPrincipalLayout.setHorizontalGroup(
@@ -203,6 +223,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 874, Short.MAX_VALUE)
                     .addComponent(lblBienvenido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 874, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(pnlPrincipalLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(lblCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlPrincipalLayout.setVerticalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,7 +235,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblBienvenido, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addComponent(lblCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
 
         pnlCardLayout.add(pnlPrincipal, "card4");
@@ -434,6 +460,22 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pnlCardLayout.revalidate();
         lblEventos.setBackground(new Color(16, 23, 66));
     }//GEN-LAST:event_lblTituloMouseClicked
+
+    private void lblCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarSesionMouseClicked
+        controlInicioSesion.mostrarInicioSesion();
+    }//GEN-LAST:event_lblCerrarSesionMouseClicked
+
+    private void lblCerrarSesionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarSesionMouseEntered
+        Font font = new Font("Sans Serif", Font.PLAIN, 18);
+        Map attributes = font.getAttributes();
+        attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+        lblSaldo.setFont(font.deriveFont(attributes));
+    }//GEN-LAST:event_lblCerrarSesionMouseEntered
+
+    private void lblCerrarSesionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarSesionMouseExited
+        Font font =  new Font("Sans Serif", Font.PLAIN, 18);
+        lblSaldo.setFont(font);
+    }//GEN-LAST:event_lblCerrarSesionMouseExited
     
     public void mostrarBoletosEvento(Integer idEvento){
         pnlCardLayout.removeAll();
@@ -455,6 +497,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel lblBienvenido;
     private javax.swing.JLabel lblBoletos;
+    private javax.swing.JLabel lblCerrarSesion;
     private javax.swing.JLabel lblEventos;
     private javax.swing.JLabel lblMovimientos;
     private javax.swing.JLabel lblSaldo;
