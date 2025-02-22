@@ -4,7 +4,7 @@ import itson.ticketwizard.dto.EventosDTO;
 import itson.ticketwizard.dto.MostrarEventoDTO;
 import itson.ticketwizard.entidades.Evento;
 import itson.ticketwizard.excepciones.EventoException;
-import itson.ticketwizard.persistencia.IEventosDAO;
+import itson.ticketwizard.persistencia.interfaces.IEventosDAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

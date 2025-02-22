@@ -20,13 +20,12 @@ import java.util.UUID;
  *
  * @author 52644
  */
-public class BoletosDAO implements IBoletosDAO {
+public class BoletosDAO {
     private ManejadorConexiones manejadorConexiones;
     public BoletosDAO(ManejadorConexiones manejadorConexiones) {
         this.manejadorConexiones = manejadorConexiones;
     }
 
-    /// Boletos DAO
     @Override
     public List<Boleto> consultarBoletosEvento(Integer idEv) {
         String consultarBoletoSQL = """
@@ -49,11 +48,19 @@ public class BoletosDAO implements IBoletosDAO {
                 double precio = resultadoConsulta.getDouble("precio");
                 String numControl = resultadoConsulta.getString("idBoleto");
 
-                Boleto boleto = new Boleto(numControl, precio, fila, asiento, idEvento);
+                if(numControl!=null){
+
+
+                }
+                Boleto boleto = new Boleto(idEvento, precio, fila, asiento, idEvento);
                 //listaBoletos.add(boleto);
                 if(boleto.isDisponible()==true){
                     listaBoletos.add(boleto);
                 }
+
+                Integer idUsuario = resultadoConsulta.getInt("idUsuario");
+                Boleto boleto = new Boleto(numControl, numSerie, precio, disponible, fila, asiento, idEvento, idUsuario);
+                listaBoletos.add(boleto);
             }
         } catch (SQLException e) {
             System.err.println("Error al consultar boletos" + e.getMessage());
@@ -85,6 +92,7 @@ public class BoletosDAO implements IBoletosDAO {
             Connection conexion = this.manejadorConexiones.crearConexion();
             PreparedStatement comando = conexion.prepareStatement(actualizarBoletoSQL);
             ResultSet resultadoConsulta = comando.executeQuery();
+
             comando.setInt(1, boleto.getIdUsuario());
 
         } catch (SQLException e) {
@@ -131,7 +139,7 @@ public class BoletosDAO implements IBoletosDAO {
         System.err.println("Error al consultar boletos" + e.getMessage());
     }
         return listaBoletos;
-}
+    }
 
     }
         /*
@@ -139,7 +147,7 @@ public class BoletosDAO implements IBoletosDAO {
         SET ContactName = 'Alfred Schmidt', City= 'Frankfurt'
         WHERE CustomerID = 1;
          */
-   /* public void actualizarBoletoReventa(Integer idBoleto, Integer idUsuario,Integer porcentaje) throws BoletoException {
+   /* public void actualizarBoletoReventa(List<Boleto> listaBoletos,Integer idBoleto, Integer idUsuario,Integer procentaje) throws BoletoException {
 
         if(listaBoletos.contains(idBoleto)) {
             String consultarBoletoSQL = """
@@ -163,6 +171,6 @@ public class BoletosDAO implements IBoletosDAO {
         }
 
 
-    }*/
-
+    }
+}
 

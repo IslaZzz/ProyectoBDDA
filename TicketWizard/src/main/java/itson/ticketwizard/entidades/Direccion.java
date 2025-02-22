@@ -8,7 +8,7 @@ package itson.ticketwizard.entidades;
  *
  * @author 52644
  */
-public class Domicilio {
+public class Direccion {
     // Atributos de la clase
     private Integer id;
     private String calle;
@@ -24,20 +24,20 @@ public class Domicilio {
      * @param calle
      * @param colonia
      * @param ciudad
-     * @param codigoPostal
      * @param estado
+     * @param codigoPostal
      */
-    public Domicilio(Integer id, String calle, String colonia, String ciudad, String codigoPostal, String estado) {
+    public Direccion(Integer id, String calle, String colonia, String ciudad, String estado, String codigoPostal) {
         this.calle = calle;
         this.colonia = colonia;
         this.ciudad = ciudad;
-        this.codigoPostal = codigoPostal;
         this.estado = estado;
+        this.codigoPostal = codigoPostal;
     }
 /**
  * Constructor vacio
  */
-    public Domicilio() {
+    public Direccion() {
 
     }
 /**
@@ -144,7 +144,7 @@ public class Domicilio {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Domicilio other = (Domicilio) obj;
+        final Direccion other = (Direccion) obj;
         return this.id == other.id;
     }
 /**

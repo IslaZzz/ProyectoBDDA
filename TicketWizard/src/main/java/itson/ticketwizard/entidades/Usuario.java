@@ -10,12 +10,12 @@ public class Usuario {
     private String apellidoPaterno;
     private String correoElectronico;
     private double saldo;
-    private Domicilio domicilio;
+    private Direccion domicilio;
     private String contrasenia;
     private Date fechaNacimiento;
 
     public Usuario(int id, String nombres, String apellidoMaterno, String apellidoPaterno,
-            String correoElectronico, double saldo, Domicilio domicilio, String contrasenia, Date fechaNacimiento) {
+            String correoElectronico, double saldo, Direccion domicilio, String contrasenia, Date fechaNacimiento) {
         this.id = id;
         this.nombres = nombres;
         this.apellidoMaterno = apellidoMaterno;
@@ -75,11 +75,11 @@ public class Usuario {
         this.saldo = saldo;
     }
 
-    public Domicilio getDomicilio() {
+    public Direccion getDomicilio() {
         return domicilio;
     }
 
-    public void setDomicilio(Domicilio domicilio) {
+    public void setDomicilio(Direccion domicilio) {
         this.domicilio = domicilio;
     }
 

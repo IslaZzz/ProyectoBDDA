@@ -1,4 +1,4 @@
-package itson.ticketwizard.persistencia;
+package itson.ticketwizard.persistencia.interfaces;
 
 import itson.ticketwizard.dto.EventosDTO;
 import itson.ticketwizard.dto.MostrarEventoDTO;
