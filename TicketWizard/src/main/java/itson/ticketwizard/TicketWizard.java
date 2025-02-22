@@ -5,6 +5,7 @@
 package itson.ticketwizard;
 
 import itson.ticketwizard.control.ControlInicioSesion;
+import itson.ticketwizard.persistencia.DireccionesDAO;
 import itson.ticketwizard.persistencia.ManejadorConexiones;
 import itson.ticketwizard.persistencia.UsuariosDAO;
 import presentacion.FrmInicioSesion;
@@ -19,7 +20,8 @@ public class TicketWizard {
     public static void main(String[] args) {
         ManejadorConexiones conexion = new ManejadorConexiones();
         UsuariosDAO usuariosDAO = new UsuariosDAO(conexion);
-        ControlInicioSesion control = new ControlInicioSesion(usuariosDAO);
+        DireccionesDAO direccionesDAO = new DireccionesDAO(conexion);
+        ControlInicioSesion control = new ControlInicioSesion(usuariosDAO, direccionesDAO);
         control.IniciarFlujo();
     }
 }   

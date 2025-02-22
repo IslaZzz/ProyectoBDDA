@@ -20,22 +20,24 @@ public class ControlInicioSesion {
     private FrmInicioSesion frameInicioSesion;
     private FrmRegistroUsuario frameRegistroUsuario;
     private FrmPrincipal framePrincipal;
-
-    public ControlInicioSesion(UsuariosDAO usuariosDAO) {
+    private DireccionesDAO direccionesDAO;
+    
+    public ControlInicioSesion(UsuariosDAO usuariosDAO, DireccionesDAO direccionesDAO) {
         this.usuariosDAO = usuariosDAO;
+        this.direccionesDAO = direccionesDAO;
+        
     }
 
     public void IniciarFlujo() {
         frameInicioSesion = new FrmInicioSesion(this);
+        frameRegistroUsuario = new FrmRegistroUsuario(this, new ControlRegistro(direccionesDAO, usuariosDAO));
+        framePrincipal = new FrmPrincipal(this);
         frameInicioSesion.setVisible(true);
         frameInicioSesion.setLocationRelativeTo(null);
     }
 
     
     public void mostrarRegistro() {
-        if (frameRegistroUsuario == null) {
-            frameRegistroUsuario = new FrmRegistroUsuario(this);
-        }
         frameInicioSesion.dispose();
         frameRegistroUsuario.setVisible(true);
         frameRegistroUsuario.setLocationRelativeTo(null);
@@ -52,9 +54,6 @@ public class ControlInicioSesion {
     }
 
     public void mostrarFramePrincipal() {
-        if (framePrincipal == null) {
-            framePrincipal = new FrmPrincipal(this);
-        }
         frameInicioSesion.dispose();
         framePrincipal.setVisible(true);
         framePrincipal.setLocationRelativeTo(null);

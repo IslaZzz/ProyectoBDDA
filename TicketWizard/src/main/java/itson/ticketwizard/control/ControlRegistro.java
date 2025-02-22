@@ -22,8 +22,8 @@ public class ControlRegistro {
         this.usuariosDAO = usuariosDAO;
     }
     
-    public void registrarUsuario(NuevaDireccionDTO direccionDTO, RegistroUsuarioDTO usuarioDTO){
+    public int registrarUsuario(NuevaDireccionDTO direccionDTO, RegistroUsuarioDTO usuarioDTO){
         int idDireccion = direccionesDAO.insertarDireccion(direccionDTO);
-        usuariosDAO.registrarUsuario(usuarioDTO, idDireccion);
+        return usuariosDAO.registrarUsuario(usuarioDTO, idDireccion);
     }
 }
