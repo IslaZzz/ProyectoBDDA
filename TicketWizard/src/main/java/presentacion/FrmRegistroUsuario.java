@@ -9,7 +9,6 @@ import itson.ticketwizard.control.ControlRegistro;
 import itson.ticketwizard.dto.NuevaDireccionDTO;
 import itson.ticketwizard.dto.RegistroUsuarioDTO;
 import itson.ticketwizard.entidades.Seguridad;
-import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -519,6 +518,18 @@ public class FrmRegistroUsuario extends javax.swing.JFrame {
                     "El usuario se registró correctamente",
                     "Información",
                     JOptionPane.INFORMATION_MESSAGE);
+            txtNombre.setText("");
+            txtApellidoPaterno.setText("");
+            txtApellidoMaterno.setText("");
+            txtCorreo.setText("");
+            txtContraseña.setText("");
+            txtRepetirContraseña.setText("");
+            txtFecha.setText("");
+            txtCalle.setText("");
+            txtColonia.setText("");
+            txtCodigoPostal.setText("");
+            txtEstado.setText("");
+            txtCiudad.setText("");
             control.mostrarInicioSesion();
         } else {
             JOptionPane.showMessageDialog(

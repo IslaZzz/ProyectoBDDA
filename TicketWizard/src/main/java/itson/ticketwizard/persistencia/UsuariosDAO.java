@@ -111,5 +111,35 @@ public class UsuariosDAO implements IUsuariosDAO {
         return null;
 
     }
+    
+        public double agregarSaldo(double cantidad, Usuario usuario){
+            int id = usuario.getId();
+            double nSaldo =usuario.getSaldo()+cantidad;
+            String updateSaldo ="""
+                                UPDATE USUARIOS 
+                                SET SALDO=?
+                                WHERE IDUSUARIO=?;
+                                """;
+            try{
+            Connection conexion = manejadorConexion.crearConexion();
+            PreparedStatement consulta = conexion.prepareStatement(updateSaldo);
+            usuario.setSaldo(nSaldo);
+            consulta.setDouble(1, nSaldo);
+            consulta.setInt(2, id);
+            int filasActualizadas = consulta.executeUpdate();
+
+            if(filasActualizadas>0){
+                return nSaldo;
+            }
+            }catch(SQLException ex){
+                ex.getMessage();
+                return usuario.getSaldo();
+            }
+            return usuario.getSaldo();
+        }
+        
+        public double consultarSaldo(int cantidad, Usuario usuario){
+            return usuario.getSaldo();
+        }
 
 }
