@@ -66,7 +66,7 @@ public class BoletosDAO {
         return numeroDeSerie;
     }
 
-    @Override
+    //@Override
     public List<Boleto> consultarBoletosUsuario(Integer idUsuario) {
         String spUsuariosSQL = """
                         DELIMITER //
