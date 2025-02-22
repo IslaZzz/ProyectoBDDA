@@ -25,17 +25,17 @@ INSERT INTO Eventos (nombre, fecha, ciudad, Estado, descripcion, recinto) VALUES
 ('Concierto de Bad Bunny', '2023-09-30', 'Monterrey', 'Nuevo León', 'Concierto en el Estadio BBVA.', 'Estadio BBVA');
 
 -- Insertar boletos
-INSERT INTO Boletos (idBoleto, idEvento, numSerie, fila, asiento, Disponible, precio, precioOriginal) VALUES
-("JAKSJ",1, 'A1B2C3D4', 'A', 1, 1, 500, 500),
-("AKLSDK",1, 'E5F6G7H8', 'B', 2, 1,7841,500),
-("JAKJDSKSAKD",2, 'I9J0K1L2', 'C', 3, 1,700,500),
-("ASDASD",2, 'M3N4O5P6', 'D', 4, 1,612,500),
-("ASDASDAS",3, 'Q7R8S9T0', 'E', 5, 1,1024, 1024),
-("SDASD",3, 'U1V2W3X4', 'F', 6, 1,976, 976),
-("ASDKLSD",4, 'Y5Z6A7B8', 'G', 7, 1,1358, 1358),
-("KASLSKDL",4, 'C9D0E1F2', 'H', 8, 1,35813, 35813),
-("WKLFLDS",5, 'G3H4I5J6', 'I', 9, 1,500, 500),
-("LLSÑDAL",5, 'K7L8M9N0', 'J', 10, 1,500, 500);
+INSERT INTO Boletos (idEvento, numSerie, fila, asiento, Disponible, precio) VALUES
+(1, 'A1B2C3D4', 'A', 1, 1, 500),
+(1, 'E5F6G7H8', 'B', 2, 1,7841),
+(2, 'I9J0K1L2', 'C', 3, 1,700),
+(2, 'M3N4O5P6', 'D', 4, 1,612),
+(3, 'Q7R8S9T0', 'E', 5, 1,1024),
+(3, 'U1V2W3X4', 'F', 6, 1,976),
+(4, 'Y5Z6A7B8', 'G', 7, 1,1358),
+(4, 'C9D0E1F2', 'H', 8, 1,35813),
+(5, 'G3H4I5J6', 'I', 9, 1,5813),
+(5, 'K7L8M9N0', 'J', 10, 1,8132);
 
 -- Insertar transacciones
 INSERT INTO Transacciones (fechaHora, TipoCompra, monto) VALUES
@@ -60,14 +60,14 @@ INSERT INTO Usuarios_Transacciones (rol, idUsuario, idTransaccion) VALUES
 
 -- Insertar transacciones_boletos
 INSERT INTO TransaccionesBoletos (idTransaccion, idBoleto) VALUES
-(1, "JAKSJ"),
-(1, "ASDASDAS"),
-(2, "ASDASDAS"),
-(2, "ASDASDAS"),
-(3, "ASDASDAS"),
-(3, "ASDASDAS"),
-(4, "ASDASDAS"),
-(4, "ASDASDAS"),
-(5, "ASDASDAS"),
-(5, "ASDASDAS");
+(1, 1),
+(1, 2),
+(2, 3),
+(2, 4),
+(3, 5),
+(3, 6),
+(4, 7),
+(4, 8),
+(5, 9),
+(5, 10);
 

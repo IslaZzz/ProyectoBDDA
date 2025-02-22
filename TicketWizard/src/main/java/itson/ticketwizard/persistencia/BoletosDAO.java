@@ -58,6 +58,14 @@ public class BoletosDAO {
         return listaBoletos;
     }
 
+    public static String generarNumeroDeSerie(String fila, int asiento) {
+        // Genera una parte aleatoria
+        String parteAleatoria = UUID.randomUUID().toString().substring(0, 4).toUpperCase();
+        // Crear el número de serie con la fila, el asiento y la parte aleatoria
+        String numeroDeSerie = fila + asiento + parteAleatoria;
+        return numeroDeSerie;
+    }
+
     //@Override
     public List<Boleto> consultarBoletosUsuario(Integer idUsuario) {
         String spUsuariosSQL = """
@@ -68,7 +76,8 @@ public class BoletosDAO {
                         FROM BOLETOS AS B
                         INNER JOIN USUARIO AS U ON B.idUsuario = U.idUsuario
                         INNER JOIN  EVENTOS AS E ON B.idEvento = E.idEvento
-                                                  DELIMITER; 
+                        GROUP BY B.idUsuario;
+                        DELIMITER; 
                     """;
         List<Boleto> listaBoletos = new LinkedList<>();
         try {
@@ -96,5 +105,7 @@ public class BoletosDAO {
         }
         return listaBoletos;
     }
+
+    //consultar saldo y movimientos transacciones
 }
 
