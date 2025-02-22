@@ -5,6 +5,12 @@
 package presentacion;
 
 import itson.ticketwizard.control.ControlInicioSesion;
+import itson.ticketwizard.control.ControlRegistro;
+import itson.ticketwizard.dto.NuevaDireccionDTO;
+import itson.ticketwizard.dto.RegistroUsuarioDTO;
+import itson.ticketwizard.entidades.Seguridad;
+import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,12 +19,14 @@ import itson.ticketwizard.control.ControlInicioSesion;
 public class FrmRegistroUsuario extends javax.swing.JFrame {
 
     private ControlInicioSesion control;
-    
+    private ControlRegistro controlRegistro;
+
     /**
      * Creates new form FrmRegistroUsuario
      */
-    public FrmRegistroUsuario(ControlInicioSesion control) {
+    public FrmRegistroUsuario(ControlInicioSesion control, ControlRegistro controlRegistro) {
         this.control = control;
+        this.controlRegistro = controlRegistro;
         initComponents();
     }
 
@@ -34,13 +42,11 @@ public class FrmRegistroUsuario extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         scrollPane = new javax.swing.JScrollPane();
         pnlFormulario = new javax.swing.JPanel();
-        txtRepetirContraseña = new javax.swing.JTextField();
         lblCorreo = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         lblRepetirContraseña = new javax.swing.JLabel();
         txtCorreo = new javax.swing.JTextField();
-        txtContraseña = new javax.swing.JTextField();
         lblContraseña = new javax.swing.JLabel();
         lblApellidoPaterno = new javax.swing.JLabel();
         txtApellidoMaterno = new javax.swing.JTextField();
@@ -59,8 +65,10 @@ public class FrmRegistroUsuario extends javax.swing.JFrame {
         lblColonia = new javax.swing.JLabel();
         txtCodigoPostal = new javax.swing.JTextField();
         lblCodigoPostal = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        txtRepetirContraseña = new javax.swing.JPasswordField();
+        txtContraseña = new javax.swing.JPasswordField();
+        btnRegistro = new javax.swing.JButton();
+        btnVolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("TicketWizard");
@@ -72,15 +80,7 @@ public class FrmRegistroUsuario extends javax.swing.JFrame {
         jLabel2.setText("Registro de cuenta");
         jLabel2.setPreferredSize(new java.awt.Dimension(363, 58));
 
-        txtRepetirContraseña.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
-        txtRepetirContraseña.setForeground(new java.awt.Color(255, 255, 255));
-        txtRepetirContraseña.setBorder(null);
-        txtRepetirContraseña.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        txtRepetirContraseña.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtRepetirContraseñaActionPerformed(evt);
-            }
-        });
+        pnlFormulario.setForeground(new java.awt.Color(233, 233, 233));
 
         lblCorreo.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
         lblCorreo.setText("Correo electrónico");
@@ -88,8 +88,9 @@ public class FrmRegistroUsuario extends javax.swing.JFrame {
         lblNombre.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
         lblNombre.setText("Nombre (s)");
 
+        txtNombre.setBackground(new java.awt.Color(255, 255, 255));
         txtNombre.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
-        txtNombre.setForeground(new java.awt.Color(255, 255, 255));
+        txtNombre.setForeground(new java.awt.Color(30, 30, 30));
         txtNombre.setBorder(null);
         txtNombre.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
@@ -101,23 +102,14 @@ public class FrmRegistroUsuario extends javax.swing.JFrame {
         lblRepetirContraseña.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
         lblRepetirContraseña.setText("Repetir Contraseña");
 
+        txtCorreo.setBackground(new java.awt.Color(255, 255, 255));
         txtCorreo.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
-        txtCorreo.setForeground(new java.awt.Color(255, 255, 255));
+        txtCorreo.setForeground(new java.awt.Color(30, 30, 30));
         txtCorreo.setBorder(null);
         txtCorreo.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtCorreo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCorreoActionPerformed(evt);
-            }
-        });
-
-        txtContraseña.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
-        txtContraseña.setForeground(new java.awt.Color(255, 255, 255));
-        txtContraseña.setBorder(null);
-        txtContraseña.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        txtContraseña.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtContraseñaActionPerformed(evt);
             }
         });
 
@@ -127,8 +119,9 @@ public class FrmRegistroUsuario extends javax.swing.JFrame {
         lblApellidoPaterno.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
         lblApellidoPaterno.setText("Apellido Paterno");
 
+        txtApellidoMaterno.setBackground(new java.awt.Color(255, 255, 255));
         txtApellidoMaterno.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
-        txtApellidoMaterno.setForeground(new java.awt.Color(255, 255, 255));
+        txtApellidoMaterno.setForeground(new java.awt.Color(30, 30, 30));
         txtApellidoMaterno.setBorder(null);
         txtApellidoMaterno.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtApellidoMaterno.addActionListener(new java.awt.event.ActionListener() {
@@ -140,8 +133,9 @@ public class FrmRegistroUsuario extends javax.swing.JFrame {
         lblApellidoMaterno.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
         lblApellidoMaterno.setText("Apellido Materno");
 
+        txtApellidoPaterno.setBackground(new java.awt.Color(255, 255, 255));
         txtApellidoPaterno.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
-        txtApellidoPaterno.setForeground(new java.awt.Color(255, 255, 255));
+        txtApellidoPaterno.setForeground(new java.awt.Color(30, 30, 30));
         txtApellidoPaterno.setBorder(null);
         txtApellidoPaterno.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtApellidoPaterno.addActionListener(new java.awt.event.ActionListener() {
@@ -152,8 +146,9 @@ public class FrmRegistroUsuario extends javax.swing.JFrame {
 
         jLabel11.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
 
+        txtFecha.setBackground(new java.awt.Color(255, 255, 255));
         txtFecha.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
-        txtFecha.setForeground(new java.awt.Color(255, 255, 255));
+        txtFecha.setForeground(new java.awt.Color(30, 30, 30));
         txtFecha.setBorder(null);
         txtFecha.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtFecha.addActionListener(new java.awt.event.ActionListener() {
@@ -168,8 +163,9 @@ public class FrmRegistroUsuario extends javax.swing.JFrame {
         lblEstado.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
         lblEstado.setText("Estado");
 
+        txtCiudad.setBackground(new java.awt.Color(255, 255, 255));
         txtCiudad.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
-        txtCiudad.setForeground(new java.awt.Color(255, 255, 255));
+        txtCiudad.setForeground(new java.awt.Color(30, 30, 30));
         txtCiudad.setBorder(null);
         txtCiudad.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtCiudad.addActionListener(new java.awt.event.ActionListener() {
@@ -181,8 +177,9 @@ public class FrmRegistroUsuario extends javax.swing.JFrame {
         lblCiudad.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
         lblCiudad.setText("Ciudad");
 
+        txtEstado.setBackground(new java.awt.Color(255, 255, 255));
         txtEstado.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
-        txtEstado.setForeground(new java.awt.Color(255, 255, 255));
+        txtEstado.setForeground(new java.awt.Color(30, 30, 30));
         txtEstado.setBorder(null);
         txtEstado.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtEstado.addActionListener(new java.awt.event.ActionListener() {
@@ -191,8 +188,9 @@ public class FrmRegistroUsuario extends javax.swing.JFrame {
             }
         });
 
+        txtCalle.setBackground(new java.awt.Color(255, 255, 255));
         txtCalle.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
-        txtCalle.setForeground(new java.awt.Color(255, 255, 255));
+        txtCalle.setForeground(new java.awt.Color(30, 30, 30));
         txtCalle.setBorder(null);
         txtCalle.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtCalle.addActionListener(new java.awt.event.ActionListener() {
@@ -204,8 +202,9 @@ public class FrmRegistroUsuario extends javax.swing.JFrame {
         lblCalle.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
         lblCalle.setText("Calle");
 
+        txtColonia.setBackground(new java.awt.Color(255, 255, 255));
         txtColonia.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
-        txtColonia.setForeground(new java.awt.Color(255, 255, 255));
+        txtColonia.setForeground(new java.awt.Color(30, 30, 30));
         txtColonia.setBorder(null);
         txtColonia.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtColonia.addActionListener(new java.awt.event.ActionListener() {
@@ -217,8 +216,9 @@ public class FrmRegistroUsuario extends javax.swing.JFrame {
         lblColonia.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
         lblColonia.setText("Colonia");
 
+        txtCodigoPostal.setBackground(new java.awt.Color(255, 255, 255));
         txtCodigoPostal.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
-        txtCodigoPostal.setForeground(new java.awt.Color(255, 255, 255));
+        txtCodigoPostal.setForeground(new java.awt.Color(30, 30, 30));
         txtCodigoPostal.setBorder(null);
         txtCodigoPostal.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtCodigoPostal.addActionListener(new java.awt.event.ActionListener() {
@@ -230,6 +230,14 @@ public class FrmRegistroUsuario extends javax.swing.JFrame {
         lblCodigoPostal.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
         lblCodigoPostal.setText("Código Postal");
 
+        txtRepetirContraseña.setBackground(new java.awt.Color(255, 255, 255));
+        txtRepetirContraseña.setForeground(new java.awt.Color(30, 30, 30));
+        txtRepetirContraseña.setBorder(null);
+
+        txtContraseña.setBackground(new java.awt.Color(255, 255, 255));
+        txtContraseña.setForeground(new java.awt.Color(30, 30, 30));
+        txtContraseña.setBorder(null);
+
         javax.swing.GroupLayout pnlFormularioLayout = new javax.swing.GroupLayout(pnlFormulario);
         pnlFormulario.setLayout(pnlFormularioLayout);
         pnlFormularioLayout.setHorizontalGroup(
@@ -240,54 +248,53 @@ public class FrmRegistroUsuario extends javax.swing.JFrame {
                     .addGroup(pnlFormularioLayout.createSequentialGroup()
                         .addComponent(lblNombre)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(pnlFormularioLayout.createSequentialGroup()
-                        .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(pnlFormularioLayout.createSequentialGroup()
-                                    .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblEstado)
-                                        .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(26, 26, 26)
-                                    .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblCiudad)
-                                        .addComponent(txtCiudad)))
-                                .addGroup(pnlFormularioLayout.createSequentialGroup()
-                                    .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblColonia)
-                                        .addComponent(txtColonia, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(26, 26, 26)
-                                    .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblCalle)
-                                        .addComponent(txtCalle)))
-                                .addGroup(pnlFormularioLayout.createSequentialGroup()
-                                    .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblApellidoPaterno)
-                                        .addComponent(txtApellidoPaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(26, 26, 26)
-                                    .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(pnlFormularioLayout.createSequentialGroup()
-                                            .addComponent(lblApellidoMaterno)
-                                            .addGap(0, 0, Short.MAX_VALUE))
-                                        .addComponent(txtApellidoMaterno)))
-                                .addGroup(pnlFormularioLayout.createSequentialGroup()
-                                    .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(lblFecha)
-                                        .addComponent(jLabel11)
-                                        .addComponent(lblContraseña)
-                                        .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(lblRepetirContraseña)
-                                        .addComponent(txtRepetirContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(lblCorreo))
-                                    .addGap(0, 0, Short.MAX_VALUE)))
-                            .addGroup(pnlFormularioLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFormularioLayout.createSequentialGroup()
+                        .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtContraseña, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtRepetirContraseña, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlFormularioLayout.createSequentialGroup()
+                                .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblEstado)
+                                    .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(26, 26, 26)
+                                .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblCiudad)
+                                    .addComponent(txtCiudad)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlFormularioLayout.createSequentialGroup()
+                                .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblColonia)
+                                    .addComponent(txtColonia, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(26, 26, 26)
+                                .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblCalle)
+                                    .addComponent(txtCalle)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlFormularioLayout.createSequentialGroup()
+                                .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblApellidoPaterno)
+                                    .addComponent(txtApellidoPaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(26, 26, 26)
+                                .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pnlFormularioLayout.createSequentialGroup()
+                                        .addComponent(lblApellidoMaterno)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(txtApellidoMaterno)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlFormularioLayout.createSequentialGroup()
+                                .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblFecha)
+                                    .addComponent(jLabel11)
+                                    .addComponent(lblContraseña)
+                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblRepetirContraseña)
+                                    .addComponent(lblCorreo))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlFormularioLayout.createSequentialGroup()
                                 .addGap(87, 87, 87)
                                 .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblCodigoPostal)
                                     .addComponent(txtCodigoPostal, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(107, 107, 107)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(232, 232, 232))))
         );
         pnlFormularioLayout.setVerticalGroup(
@@ -312,12 +319,12 @@ public class FrmRegistroUsuario extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(lblContraseña)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblRepetirContraseña)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtRepetirContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(4, 4, 4)
+                .addComponent(txtRepetirContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblFecha)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -341,36 +348,32 @@ public class FrmRegistroUsuario extends javax.swing.JFrame {
                 .addComponent(lblCodigoPostal)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtCodigoPostal, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61)
+                .addGap(67, 67, 67)
                 .addComponent(jLabel11)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         scrollPane.setViewportView(pnlFormulario);
 
-        jButton1.setBackground(new java.awt.Color(0, 0, 0));
-        jButton1.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Registrar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnRegistro.setBackground(new java.awt.Color(0, 0, 0));
+        btnRegistro.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        btnRegistro.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegistro.setText("Registrar");
+        btnRegistro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnRegistroActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(0, 0, 0));
-        jButton2.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Volver");
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
-            }
-        });
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnVolver.setBackground(new java.awt.Color(0, 0, 0));
+        btnVolver.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        btnVolver.setForeground(new java.awt.Color(255, 255, 255));
+        btnVolver.setText("Volver");
+        btnVolver.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnVolverActionPerformed(evt);
             }
         });
 
@@ -384,9 +387,9 @@ public class FrmRegistroUsuario extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(38, 38, 38)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(174, 174, 174)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -398,17 +401,13 @@ public class FrmRegistroUsuario extends javax.swing.JFrame {
                 .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtRepetirContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRepetirContraseñaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtRepetirContraseñaActionPerformed
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
@@ -417,10 +416,6 @@ public class FrmRegistroUsuario extends javax.swing.JFrame {
     private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCorreoActionPerformed
-
-    private void txtContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraseñaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtContraseñaActionPerformed
 
     private void txtApellidoMaternoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoMaternoActionPerformed
         // TODO add your handling code here:
@@ -454,22 +449,94 @@ public class FrmRegistroUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCodigoPostalActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        String nombre = txtNombre.getText();
+        String apellidoPaterno = txtApellidoPaterno.getText();
+        String apellidoMaterno = txtApellidoMaterno.getText();
+        String correoElectronico = txtCorreo.getText();
+        String contrasenia = txtContraseña.getText();
+        String repetirContrasenia = txtRepetirContraseña.getText();
+        String fechaNac = txtFecha.getText();
+        String estado = txtEstado.getText();
+        String ciudad = txtCiudad.getText();
+        String colonia = txtColonia.getText();
+        String calle = txtCalle.getText();
+        String codigoPostal = txtCodigoPostal.getText();
+        if (nombre == "" || apellidoPaterno == "" || apellidoMaterno == ""
+                || correoElectronico == "" || contrasenia == "" || repetirContrasenia == ""
+                || estado == "" || ciudad == "" || colonia == "" || calle == "") {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Asegurese de llenar todos los campos",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(!Seguridad.validaEmail(correoElectronico)){
+            JOptionPane.showMessageDialog(
+                    this,
+                    "El correo no es valido",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (!contrasenia.equals(repetirContrasenia)) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Las contraseñas no coinciden",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if (!Seguridad.validaFecha(fechaNac)) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "El formato de la fecha no es válido",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        contrasenia = Seguridad.encriptar(contrasenia);
+        java.sql.Date dateFechaNac = new java.sql.Date(Seguridad.dateMapper(fechaNac).getTime());
 
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        if (codigoPostal.length() != 5) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "El código postal debe de ser de 5 digitos",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        RegistroUsuarioDTO usuarioDTO = new RegistroUsuarioDTO(
+                nombre, apellidoPaterno, apellidoMaterno, correoElectronico, contrasenia, dateFechaNac);
+        NuevaDireccionDTO direccionDTO = new NuevaDireccionDTO(
+         calle, colonia, ciudad, codigoPostal, estado);
+        if(controlRegistro.registrarUsuario(direccionDTO, usuarioDTO) == 1){
+            JOptionPane.showMessageDialog(
+                    this, 
+                    "El usuario se registró correctamente",
+                    "Información",
+                    JOptionPane.INFORMATION_MESSAGE);
+            control.mostrarInicioSesion();
+        } else {
+            JOptionPane.showMessageDialog(
+                    this, 
+                    "Ocurrió un error al registrar al usuario",
+                    "Información",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnRegistroActionPerformed
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         control.mostrarInicioSesion();
-    }//GEN-LAST:event_jButton2MouseClicked
+    }//GEN-LAST:event_btnVolverActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnRegistro;
+    private javax.swing.JButton btnVolver;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblApellidoMaterno;
@@ -492,11 +559,11 @@ public class FrmRegistroUsuario extends javax.swing.JFrame {
     private javax.swing.JTextField txtCiudad;
     private javax.swing.JTextField txtCodigoPostal;
     private javax.swing.JTextField txtColonia;
-    private javax.swing.JTextField txtContraseña;
+    private javax.swing.JPasswordField txtContraseña;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtFecha;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtRepetirContraseña;
+    private javax.swing.JPasswordField txtRepetirContraseña;
     // End of variables declaration//GEN-END:variables
 }

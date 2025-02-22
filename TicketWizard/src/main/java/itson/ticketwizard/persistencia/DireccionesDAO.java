@@ -26,7 +26,7 @@ public class DireccionesDAO {
         this.manejadorConexiones = manejadorConexiones;
     }
     
-    public Direccion insertarDireccion(NuevaDireccionDTO direccionDTO){
+    public Integer insertarDireccion(NuevaDireccionDTO direccionDTO){
         String insertarDireccionSQL = """
                 INSERT INTO Direcciones (calle, colonia, ciudad, estado, codigoPostal)
                 VALUES (?,?,?,?,?);
@@ -41,22 +41,15 @@ public class DireccionesDAO {
             comando.setString(5,direccionDTO.getCodigoPostal());
             int filasAfectadas = comando.executeUpdate();
             if(filasAfectadas != 0){
-                System.out.println("Se registró el artista");
                 String consultarDireccionInsertada = """
-                    SELECT idDireccion, calle, colonia, ciudad, estado, codigoPostal
-                    FROM Direcciones WHERE idDireccion = (
-                        SELECT MAX(idDireccion) FROM Direcciones)             
+                        SELECT MAX(idDireccion) FROM Direcciones;             
                                                      """;
                 comando = conexion.prepareStatement(consultarDireccionInsertada);
                 ResultSet resultado = comando.executeQuery();
-                Integer id = resultado.getInt("idDireccion");
-                String calle = resultado.getString("calle");
-                String colonia = resultado.getString("colonia");
-                String ciudad = resultado.getString("ciudad");
-                String estado = resultado.getString("estado");
-                String codigoPostal = resultado.getString("codigoPostal");
-                Direccion direccion = new Direccion(id, calle, colonia, ciudad, estado, codigoPostal);
-                return direccion;
+                resultado.next();
+                Integer idDireccion = resultado.getInt(1);
+                System.out.println("Direccion registrada");
+                return idDireccion;
             } else{
                 System.out.println("No se afectaron filas");
             }

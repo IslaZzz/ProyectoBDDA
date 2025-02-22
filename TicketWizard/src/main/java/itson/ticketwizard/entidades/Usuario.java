@@ -10,19 +10,19 @@ public class Usuario {
     private String apellidoPaterno;
     private String correoElectronico;
     private double saldo;
-    private Direccion domicilio;
+    private int idDireccion;
     private String contrasenia;
     private Date fechaNacimiento;
 
     public Usuario(int id, String nombres, String apellidoMaterno, String apellidoPaterno,
-            String correoElectronico, double saldo, Direccion domicilio, String contrasenia, Date fechaNacimiento) {
+            String correoElectronico, double saldo, int domicilio, String contrasenia, Date fechaNacimiento) {
         this.id = id;
         this.nombres = nombres;
         this.apellidoMaterno = apellidoMaterno;
         this.apellidoPaterno = apellidoPaterno;
         this.correoElectronico = correoElectronico;
         this.saldo = saldo;
-        this.domicilio = domicilio;
+        this.idDireccion = domicilio;
         this.contrasenia = contrasenia;
         this.fechaNacimiento = fechaNacimiento;
     }
@@ -75,12 +75,12 @@ public class Usuario {
         this.saldo = saldo;
     }
 
-    public Direccion getDomicilio() {
-        return domicilio;
+    public int getIdDireccion() {
+        return idDireccion;
     }
 
-    public void setDomicilio(Direccion domicilio) {
-        this.domicilio = domicilio;
+    public void setIdDireccion(int idDireccion) {
+        this.idDireccion = idDireccion;
     }
 
     public String getContrasenia() {
@@ -125,7 +125,7 @@ public class Usuario {
     public String toString() {
         return "Usuario{" + "nombres=" + nombres + ", apellidoMaterno=" + apellidoMaterno
                 + ", apellidoPaterno=" + apellidoPaterno + ", correoElectronico=" + correoElectronico
-                + ", saldo=" + saldo + ", domicilio=" + domicilio + ", fechaNacimiento=" + fechaNacimiento + '}';
+                + ", saldo=" + saldo + ", domicilio=" + idDireccion + ", fechaNacimiento=" + fechaNacimiento + '}';
 
     }
 }

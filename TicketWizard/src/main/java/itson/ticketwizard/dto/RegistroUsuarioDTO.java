@@ -16,16 +16,14 @@ public class RegistroUsuarioDTO {
     private String apellidoMaterno;
     private String apellidoPaterno;
     private String correoElectronico;
-    private Direccion domicilio;
     private String contrasenia;
     private Date fechaNacimiento;
 
-    public RegistroUsuarioDTO(String nombres, String apellidoMaterno, String apellidoPaterno, String correoElectronico, Direccion domicilio, String contrasenia, Date fechaNacimiento) {
+    public RegistroUsuarioDTO(String nombres, String apellidoMaterno, String apellidoPaterno, String correoElectronico, String contrasenia, Date fechaNacimiento) {
         this.nombres = nombres;
         this.apellidoMaterno = apellidoMaterno;
         this.apellidoPaterno = apellidoPaterno;
         this.correoElectronico = correoElectronico;
-        this.domicilio = domicilio;
         this.contrasenia = contrasenia;
         this.fechaNacimiento = fechaNacimiento;
     }
@@ -46,10 +44,6 @@ public class RegistroUsuarioDTO {
         return correoElectronico;
     }
 
-    public Direccion getDomicilio() {
-        return domicilio;
-    }
-
     public String getContrasenia() {
         return contrasenia;
     }
@@ -57,5 +51,6 @@ public class RegistroUsuarioDTO {
     public Date getFechaNacimiento() {
         return fechaNacimiento;
     }
+    
     
 }

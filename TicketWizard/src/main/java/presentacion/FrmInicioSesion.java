@@ -43,6 +43,7 @@ public class FrmInicioSesion extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(233, 233, 233));
 
         btnInicioSesion.setBackground(new java.awt.Color(44, 44, 44));
         btnInicioSesion.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
@@ -54,7 +55,9 @@ public class FrmInicioSesion extends javax.swing.JFrame {
             }
         });
 
+        jPasswordField1.setBackground(new java.awt.Color(255, 255, 255));
         jPasswordField1.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        jPasswordField1.setForeground(new java.awt.Color(30, 30, 30));
         jPasswordField1.setBorder(null);
 
         lblRegistro.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
@@ -80,8 +83,9 @@ public class FrmInicioSesion extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
         jLabel3.setText("Correo eléctronico");
 
+        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
         jTextField1.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(255, 255, 255));
+        jTextField1.setForeground(new java.awt.Color(30, 30, 30));
         jTextField1.setBorder(null);
         jTextField1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
