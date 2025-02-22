@@ -9,6 +9,7 @@ import itson.ticketwizard.dto.RegistroUsuarioDTO;
 import itson.ticketwizard.entidades.Seguridad;
 import itson.ticketwizard.entidades.Usuario;
 import itson.ticketwizard.persistencia.interfaces.IUsuariosDAO;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -37,30 +38,35 @@ public class UsuariosDAO implements IUsuariosDAO {
     @Override
     public int registrarUsuario(RegistroUsuarioDTO usuarioDTO, NuevaDireccionDTO nuevaDireccionDTO) {
 
-        String insertSQL = """
-                   INSERT INTO usuarios (nombre, apellidoPaterno, apellidoMaterno, correoElectronico, contraseña, fechaNacimiento, saldo, idDireccion)
-                   VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+        String LlamarSP = """
+                            Call realizarRegistro(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
                    """;
         try {
             Connection conexion = manejadorConexion.crearConexion();
-            PreparedStatement insert = conexion.prepareStatement(insertSQL);
-            insert.setString(1, usuarioDTO.getNombres());
-            insert.setString(2, usuarioDTO.getApellidoPaterno());
-            insert.setString(3, usuarioDTO.getApellidoMaterno());
-            insert.setString(4, usuarioDTO.getCorreoElectronico());
-            insert.setString(5, usuarioDTO.getContrasenia());
-            insert.setDate(6, usuarioDTO.getFechaNacimiento());
-            insert.setDouble(7, 0);
-            insert.setInt(8, idDireccion);
-            int filasAfectadas = insert.executeUpdate();
-            if (filasAfectadas != 0) {
-                System.out.println("Se registró el usuario");
-                return 1;
-            } else {
-                System.out.println("Hubo un error al registrar el usuario");
-                return 0;
-            }
+            CallableStatement sp = conexion.prepareCall(LlamarSP);
+            sp.setString(1, usuarioDTO.getNombres());
+            sp.setString(2, usuarioDTO.getApellidoPaterno());
+            sp.setString(3, usuarioDTO.getApellidoMaterno());
+            sp.setString(4, usuarioDTO.getCorreoElectronico());
+            sp.setString(5, usuarioDTO.getContrasenia());
+            sp.setDate(6, usuarioDTO.getFechaNacimiento());
+            sp.setDouble(7, 0);
+            sp.setString(8, nuevaDireccionDTO.getCalle());
+            sp.setString(9, nuevaDireccionDTO.getColonia());
+            sp.setString(10, nuevaDireccionDTO.getCiudad());
+            sp.setString(11, nuevaDireccionDTO.getCodigoPostal());
+            sp.setString(12, nuevaDireccionDTO.getEstado());
+            ResultSet flujo = sp.executeQuery();
+            if (flujo.next()) {
+                if (flujo.getInt("resultado") != 0) {
+                    System.out.println("Se registró el usuario");
+                    return 1;
+                } else {
+                    System.out.println("Hubo un error al registrar el usuario");
+                    return 0;
+                }
 
+            }
         } catch (SQLException ex) {
 
             System.err.println(ex.getMessage());
@@ -95,8 +101,7 @@ public class UsuariosDAO implements IUsuariosDAO {
                 } else {
                     return null;
                 }
-            }
-            else{
+            } else {
                 return null;
             }
 
