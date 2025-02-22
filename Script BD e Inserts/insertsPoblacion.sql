@@ -123,7 +123,7 @@ BEGIN
             p_contrasena,
             p_fechaNacimiento,
             p_saldo,
-            idDireccion
+            direccion_id
         );
         
         COMMIT;
@@ -131,3 +131,5 @@ BEGIN
     END IF;
 END $$
 DELIMITER ;
+
+
