@@ -1,3 +1,15 @@
+itson\ticketwizard\entidades\Direccion.class
+itson\ticketwizard\persistencia\interfaces\IUsuariosDAO.class
+presentacion\PnlConsultarBoletos.class
+itson\ticketwizard\persistencia\interfaces\IEventosDAO.class
 presentacion\FrmRegistroUsuario$14.class
+presentacion\PnlConsultarSaldo.class
 itson\ticketwizard\control\ControlInicioSesion.class
+itson\ticketwizard\persistencia\interfaces\IBoletosDAO.class
 presentacion\FrmRegistroUsuario$15.class
+itson\ticketwizard\persistencia\interfaces\IDireccionesDAO.class
+itson\ticketwizard\excepciones\BoletoException.class
+itson\ticketwizard\dto\NuevaDireccionDTO.class
+itson\ticketwizard\dto\RegistroUsuarioDTO.class
+itson\ticketwizard\persistencia\DireccionesDAO.class
+itson\ticketwizard\persistencia\UsuariosDAO.class

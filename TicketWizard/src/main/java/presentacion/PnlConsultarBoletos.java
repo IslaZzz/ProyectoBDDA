@@ -8,12 +8,12 @@ package presentacion;
  *
  * @author Peter
  */
-public class pnlConsultarBoletos extends javax.swing.JPanel {
+public class PnlConsultarBoletos extends javax.swing.JPanel {
 
     /**
      * Creates new form pnlConsultarBoletos
      */
-    public pnlConsultarBoletos() {
+    public PnlConsultarBoletos() {
         initComponents();
     }
 

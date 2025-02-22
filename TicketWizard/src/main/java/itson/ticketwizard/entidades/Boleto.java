@@ -24,9 +24,32 @@ public class Boleto {
     private Integer idEvento;
     private double precioOriginal;
     private Integer idUsuario;
-
+    /**
+     * Constructor para mostrar los boletos disponibles de los eventos.
+     * @param idBoleto
+     * @param numeroSerie
+     * @param precio
+     * @param disponible
+     * @param fila
+     * @param asiento
+     * @param idEvento
+     * @param idUsuario 
+     */
+    public Boleto(String idBoleto, String numeroSerie, double precio, boolean disponible, String fila, Integer asiento, Integer idEvento, Integer idUsuario) {
+        this.idBoleto = idBoleto;
+        this.numeroSerie = numeroSerie;
+        this.precio = precio;
+        this.disponible = disponible;
+        this.fila = fila;
+        this.asiento = asiento;
+        this.idEvento = idEvento;
+        this.precioOriginal = precioOriginal;
+        this.idUsuario = idUsuario;
+    }
+    
+    
     //Constructor para instanciar un boleto. Cuando se instancia es por parte de la boletera
-    public  Boleto(String idBoleto,double precio, String fila, Integer asiento, Integer idEvento){
+    public Boleto(String idBoleto,double precio, String fila, Integer asiento, Integer idEvento){
         this.idBoleto = idBoleto;
         this.precio = precio;
         this.fila = fila;
@@ -37,7 +60,7 @@ public class Boleto {
         this.disponible = true;
         this.numeroSerie = null;
     }
-
+    
     public void crearBoletoDisp(String idBoleto,double precio, String fila, Integer asiento,  Integer idEvento){
         this.idBoleto = idBoleto;
         this.precio = precio;

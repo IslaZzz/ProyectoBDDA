@@ -24,8 +24,7 @@ public class BoletosDAO {
     public BoletosDAO(ManejadorConexiones manejadorConexiones) {
         this.manejadorConexiones = manejadorConexiones;
     }
-    /*
-    @Override
+    
     public List<Boleto> consultarBoletosEvento(Integer idEv) {
         String consultarBoletoSQL = """
                                     Select idEvento, numSerie, fila, asiento, Disponible, precio, idBoleto, idUsuario
@@ -46,17 +45,6 @@ public class BoletosDAO {
                 boolean disponible = resultadoConsulta.getBoolean("Disponible");
                 double precio = resultadoConsulta.getDouble("precio");
                 String numControl = resultadoConsulta.getString("idBoleto");
-
-                if(numControl!=null){
-
-
-                }
-                Boleto boleto = new Boleto(idEvento, precio, fila, asiento, idEvento);
-                //listaBoletos.add(boleto);
-                if(boleto.isDisponible()==true){
-                    listaBoletos.add(boleto);
-                }
-
                 Integer idUsuario = resultadoConsulta.getInt("idUsuario");
                 Boleto boleto = new Boleto(numControl, numSerie, precio, disponible, fila, asiento, idEvento, idUsuario);
                 listaBoletos.add(boleto);
@@ -66,7 +54,7 @@ public class BoletosDAO {
         }
         return listaBoletos;
     }
-
+    /**
     public static String generarNumeroDeSerie(String fila, int asiento) {
         // Genera una parte aleatoria
         String parteAleatoria = UUID.randomUUID().toString().substring(0, 4).toUpperCase();
