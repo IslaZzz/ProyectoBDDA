@@ -58,14 +58,6 @@ public class BoletosDAO {
         return listaBoletos;
     }
 
-    public static String generarNumeroDeSerie(String fila, int asiento) {
-        // Genera una parte aleatoria
-        String parteAleatoria = UUID.randomUUID().toString().substring(0, 4).toUpperCase();
-        // Crear el número de serie con la fila, el asiento y la parte aleatoria
-        String numeroDeSerie = fila + asiento + parteAleatoria;
-        return numeroDeSerie;
-    }
-
     //@Override
     public List<Boleto> consultarBoletosUsuario(Integer idUsuario) {
         String spUsuariosSQL = """
