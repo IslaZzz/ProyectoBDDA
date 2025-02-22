@@ -5,6 +5,10 @@
 package presentacion;
 
 import itson.ticketwizard.control.ControlInicioSesion;
+import itson.ticketwizard.dto.RegistroUsuarioDTO;
+import itson.ticketwizard.entidades.Seguridad;
+import java.sql.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -59,7 +63,7 @@ public class FrmRegistroUsuario extends javax.swing.JFrame {
         lblColonia = new javax.swing.JLabel();
         txtCodigoPostal = new javax.swing.JTextField();
         lblCodigoPostal = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnRegistro = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -348,13 +352,13 @@ public class FrmRegistroUsuario extends javax.swing.JFrame {
 
         scrollPane.setViewportView(pnlFormulario);
 
-        jButton1.setBackground(new java.awt.Color(0, 0, 0));
-        jButton1.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Registrar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnRegistro.setBackground(new java.awt.Color(0, 0, 0));
+        btnRegistro.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        btnRegistro.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegistro.setText("Registrar");
+        btnRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnRegistroActionPerformed(evt);
             }
         });
 
@@ -386,7 +390,7 @@ public class FrmRegistroUsuario extends javax.swing.JFrame {
                 .addGap(38, 38, 38)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(174, 174, 174)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -398,7 +402,7 @@ public class FrmRegistroUsuario extends javax.swing.JFrame {
                 .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
@@ -454,21 +458,60 @@ public class FrmRegistroUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCodigoPostalActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
+        String nombre = txtNombre.getText();
+        String apellidoPaterno = txtApellidoPaterno.getText();
+        String apellidoMaterno = txtApellidoMaterno.getText();
+        String correoElectronico = txtCorreo.getText();
+        String contrasenia = Seguridad.encriptar(txtContraseña.getText());
+        String repetirContrasenia = Seguridad.encriptar(txtRepetirContraseña.getText());
+        if(contrasenia != repetirContrasenia){
+            JOptionPane.showMessageDialog(
+                    this, 
+                    "Las contraseñas no coinciden", 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String fechaNac = txtFecha.getText();
+        if (Seguridad.validaFecha(fechaNac)) {
+            JOptionPane.showMessageDialog(
+                    this, 
+                    "El formato de la fecha no es válido", 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        Date dateFechaNac = Seguridad.dateMapper(fechaNac);
+        String estado = txtEstado.getText();
+        String ciudad = txtCiudad.getText();
+        String colonia = txtColonia.getText();
+        String calle = txtCalle.getText();
+        String codigoPostal = txtCodigoPostal.getText();
+        if (codigoPostal.length() != 5) {
+            JOptionPane.showMessageDialog(
+                    this, 
+                    "El código postal debe de ser de 5 digitos", 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        RegistroUsuarioDTO usuarioDTO = new RegistroUsuarioDTO(
+        nombre, apellidoPaterno, apellidoMaterno, correoElectronico, contrasenia, dateFechaNac);
+        
+    }//GEN-LAST:event_btnRegistroActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        control.mostrarInicioSesion();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        control.mostrarInicioSesion();
+        
     }//GEN-LAST:event_jButton2MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnRegistro;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;

@@ -4,6 +4,8 @@
  */
 package itson.ticketwizard.control;
 
+import itson.ticketwizard.persistencia.DireccionesDAO;
+import itson.ticketwizard.persistencia.UsuariosDAO;
 import presentacion.FrmInicioSesion;
 import presentacion.FrmPrincipal;
 import presentacion.FrmRegistroUsuario;
@@ -14,12 +16,13 @@ import presentacion.FrmRegistroUsuario;
  */
 public class ControlInicioSesion {
 
+    private UsuariosDAO usuariosDAO;
     private FrmInicioSesion frameInicioSesion;
     private FrmRegistroUsuario frameRegistroUsuario;
     private FrmPrincipal framePrincipal;
 
-    public ControlInicioSesion() {
-
+    public ControlInicioSesion(UsuariosDAO usuariosDAO) {
+        this.usuariosDAO = usuariosDAO;
     }
 
     public void IniciarFlujo() {
@@ -28,6 +31,7 @@ public class ControlInicioSesion {
         frameInicioSesion.setLocationRelativeTo(null);
     }
 
+    
     public void mostrarRegistro() {
         if (frameRegistroUsuario == null) {
             frameRegistroUsuario = new FrmRegistroUsuario(this);

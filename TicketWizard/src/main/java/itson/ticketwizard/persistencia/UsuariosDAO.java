@@ -23,28 +23,61 @@ public class UsuariosDAO implements IUsuariosDAO {
         this.manejadorConexion = manejadorConexiones;
     }
 
+    /**
+     * Metodo para insertar un usuario en la base de datos TicketWizard
+     *
+     * @param usuarioDTO Paquete con los datos de usuario
+     * @param idDireccion id de la direccion del usuario
+     * @return
+     */
     @Override
-    public Usuario registrarUsuario(RegistroUsuarioDTO usuarioDTO) {
+    public int registrarUsuario(RegistroUsuarioDTO usuarioDTO, int idDireccion) {
 
-        String consulta = """
-                   INSERT INTO artistas (nacionalidad, nombre, tipo, añoInicio)
-                   VALUES (?, ?, ?, ?);
+        String insertSQL = """
+                   INSERT INTO usuarios (nombre, apellidoPaterno, apellidoMaterno, correoElectronico, contraseña, fechaNacimiento, saldo, idDireccion)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?);
                    """;
         try {
             Connection conexion = manejadorConexion.crearConexion();
+            PreparedStatement insert = conexion.prepareStatement(insertSQL);
+            insert.setString(1, usuarioDTO.getNombres());
+            insert.setString(2, usuarioDTO.getApellidoPaterno());
+            insert.setString(3, usuarioDTO.getApellidoMaterno());
+            insert.setString(4, usuarioDTO.getCorreoElectronico());
+            insert.setString(5, usuarioDTO.getContrasenia());
+            insert.setDate(6, usuarioDTO.getFechaNacimiento());
+            insert.setDouble(7, 0);
+            insert.setInt(8, idDireccion);
+            int filasAfectadas = insert.executeUpdate();
+            if (filasAfectadas != 0) {
+                System.out.println("Se registró el usuario");
+                return 1;
+            } else {
+                System.out.println("Hubo un error al registrar el usuario");
+                return 0;
+            }
+
         } catch (SQLException ex) {
+
             System.err.println(ex.getMessage());
         }
-        //TEMPORAL, se necesita sacar el ID del artista que registró
-        return null;
+        // TEMPORAL, se necesita sacar el ID del artista que registró
+        return 0;
+    }
+
+    @Override
+    public Usuario registrarUsuario(RegistroUsuarioDTO usuarioDTO) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public boolean validarCredencialesInicioSesion(String Usuario, String contrasenia) {
         String consulta = """
                           
-                          """
-        
+                          """;
+        return false;
+
     }
 
 }
+
