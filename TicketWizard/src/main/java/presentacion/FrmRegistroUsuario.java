@@ -534,8 +534,8 @@ public class FrmRegistroUsuario extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(
                     this, 
-                    "Ocurrió un error al registrar al usuario",
-                    "Información",
+                    "Ya existe un usuario con ese correo electrónico",
+                    "Error",
                     JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnRegistroActionPerformed

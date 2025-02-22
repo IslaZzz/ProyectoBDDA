@@ -58,14 +58,13 @@ public class UsuariosDAO implements IUsuariosDAO {
             sp.setString(12, nuevaDireccionDTO.getEstado());
             ResultSet flujo = sp.executeQuery();
             if (flujo.next()) {
-                if (flujo.getInt("resultado") != 0) {
+                int resultado = flujo.getInt("resultado");
+                if (resultado == 1) {
                     System.out.println("Se registró el usuario");
-                    return 1;
                 } else {
                     System.out.println("Hubo un error al registrar el usuario");
-                    return 0;
                 }
-
+                return resultado;
             }
         } catch (SQLException ex) {
 

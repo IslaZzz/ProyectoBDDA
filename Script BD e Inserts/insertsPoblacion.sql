@@ -9,7 +9,7 @@ INSERT INTO Direcciones (calle, colonia, ciudad, estado, codigoPostal) VALUES
 ('Av. Paseo de la Reforma', 'Juárez', 'Ciudad de México', 'CDMX', '06600');
 
 -- Insertar usuarios
-INSERT INTO Usuarios (nombresrealizarRegistro, apellidoMaterno, apellidoPaterno, correoElectronico, contraseña, fechaNacimiento, saldo, idDireccion) VALUES
+INSERT INTO Usuarios (nombres, apellidoMaterno, apellidoPaterno, correoElectronico, contraseña, fechaNacimiento, saldo, idDireccion) VALUES
 ('Juan', 'Pérez', 'Gómez', 'juan.perez@gmail.com', 'password123', '1990-05-15', 1500.00, 1),
 ('María', 'López', 'Hernández', 'maria.lopez@gmail.com', 'password456', '1985-08-22', 2000.00, 2),
 ('Carlos', 'García', 'Martínez', 'carlos.garcia@gmail.com', 'password789', '1995-02-10', 1000.00, 3),
@@ -123,7 +123,7 @@ BEGIN
             p_contrasena,
             p_fechaNacimiento,
             p_saldo,
-            idDireccion
+            direccion_id
         );
         
         COMMIT;
