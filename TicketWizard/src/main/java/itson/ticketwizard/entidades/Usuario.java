@@ -27,6 +27,9 @@ public class Usuario {
         this.fechaNacimiento = fechaNacimiento;
     }
 
+    public Usuario(Integer id){
+        this.id = id;
+    }
     public Usuario() {
 
     }

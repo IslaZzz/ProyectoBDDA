@@ -6,6 +6,7 @@ package itson.ticketwizard.persistencia.interfaces;
 
 import itson.ticketwizard.dto.RegistroUsuarioDTO;
 import itson.ticketwizard.entidades.Usuario;
+import java.sql.SQLException;
 
 /**
  *
@@ -13,6 +14,6 @@ import itson.ticketwizard.entidades.Usuario;
  */
 public interface IUsuariosDAO {
     public Usuario registrarUsuario(RegistroUsuarioDTO usuarioDTO);
-    public boolean validarCredencialesInicioSesion(String correo, String contrasenia);
+    public Usuario validarCredencialesInicioSesion(String correo, String contrasenia) throws SQLException;
     public int registrarUsuario(RegistroUsuarioDTO usuarioDTO, int idDireccion);
 }

@@ -5,11 +5,14 @@
 package itson.ticketwizard.persistencia;
 
 import itson.ticketwizard.dto.RegistroUsuarioDTO;
+import itson.ticketwizard.entidades.Seguridad;
 import itson.ticketwizard.entidades.Usuario;
 import itson.ticketwizard.persistencia.interfaces.IUsuariosDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -71,13 +74,39 @@ public class UsuariosDAO implements IUsuariosDAO {
     }
 
     @Override
-    public boolean validarCredencialesInicioSesion(String Usuario, String contrasenia) {
-        String consulta = """
-                          
+    public Usuario validarCredencialesInicioSesion(String correo, String contrasenia) {
+        Usuario usuario;
+        String consultaUsuario = """
+                          Select idUsuario, contraseña from Usuarios where correoElectronico = ?;
                           """;
-        return false;
+
+        try {
+            Connection conexionPSW = manejadorConexion.crearConexion();
+            PreparedStatement consulta = conexionPSW.prepareStatement(consultaUsuario);
+            consulta.setString(1, correo);
+
+            ResultSet usuarioDevuelto = consulta.executeQuery();
+
+            if (usuarioDevuelto.next()) {
+                String hash = usuarioDevuelto.getString("contraseña");
+                int RId = usuarioDevuelto.getInt("idUsuario");
+
+                if (Seguridad.verificar(Seguridad.encriptar(contrasenia), hash)) {
+                    return usuario = new Usuario(RId);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Contraseña Inválida");
+                }
+
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Usuario no encontrado");
+            }
+
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return null;
 
     }
 
 }
-
