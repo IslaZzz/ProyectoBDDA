@@ -5,12 +5,11 @@
 package itson.ticketwizard.persistencia.interfaces;
 
 import itson.ticketwizard.dto.RegistroUsuarioDTO;
-import itson.ticketwizard.entidades.Usuario;
 
 /**
  *
  * @author 52644
  */
 public interface IUsuariosDAO {
-    public Usuario registrarUsuario(RegistroUsuarioDTO usuarioDTO);
+    public int registrarUsuario(RegistroUsuarioDTO usuarioDTO, int idDireccion);
 }

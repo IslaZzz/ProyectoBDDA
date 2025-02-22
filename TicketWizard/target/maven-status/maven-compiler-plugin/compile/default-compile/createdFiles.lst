@@ -2,6 +2,7 @@ itson\ticketwizard\entidades\Direccion.class
 itson\ticketwizard\persistencia\interfaces\IUsuariosDAO.class
 presentacion\PnlConsultarBoletos.class
 itson\ticketwizard\persistencia\interfaces\IEventosDAO.class
+itson\ticketwizard\control\ControlRegistro.class
 presentacion\FrmRegistroUsuario$14.class
 presentacion\PnlConsultarSaldo.class
 itson\ticketwizard\control\ControlInicioSesion.class
