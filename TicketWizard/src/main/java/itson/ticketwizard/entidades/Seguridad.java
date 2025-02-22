@@ -60,6 +60,16 @@ public class Seguridad {
             return null;
         }
     }
+    public static boolean validaEmail(String s){
+        //Define la expresión regular para un email
+        String regEx = "^(\\w\\.?){1,20}@(\\w\\.?){1,20}$";
+        //Compila la expresión regular a un patrón
+        Pattern pattern = Pattern.compile(regEx);
+        //Crea un comparador para comparar la cadena contra el patrón
+        Matcher matcher = pattern.matcher(s);
+        //Regresa si la cadena se ajusta al patron
+        return matcher.matches();
+    }   
 
     public static boolean validaDoble(String s) {
         //Define la expresión regular para un doble

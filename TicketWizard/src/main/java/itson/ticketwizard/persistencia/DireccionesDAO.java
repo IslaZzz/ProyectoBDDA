@@ -41,13 +41,14 @@ public class DireccionesDAO {
             comando.setString(5,direccionDTO.getCodigoPostal());
             int filasAfectadas = comando.executeUpdate();
             if(filasAfectadas != 0){
-                System.out.println("Se registró el artista");
                 String consultarDireccionInsertada = """
                         SELECT MAX(idDireccion) FROM Direcciones;             
                                                      """;
                 comando = conexion.prepareStatement(consultarDireccionInsertada);
                 ResultSet resultado = comando.executeQuery();
-                Integer idDireccion = resultado.getInt("idDireccion");
+                resultado.next();
+                Integer idDireccion = resultado.getInt(1);
+                System.out.println("Direccion registrada");
                 return idDireccion;
             } else{
                 System.out.println("No se afectaron filas");
