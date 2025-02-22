@@ -8,18 +8,18 @@ Create Table Direcciones (
     calle Varchar (100) Not Null,
     colonia Varchar (100) Not Null,
 	ciudad Varchar (100) Not Null,
-    estado Varchar(100) Not Null,
+    estado Varchar(50) Not Null,
     codigoPostal varchar(5) Not Null
 );
 
 Drop Table If Exists Usuarios;
 Create Table Usuarios (
 	idUsuario Int Primary Key AUTO_INCREMENT,
-	nombre Varchar (50) Not Null,
+	nombres Varchar (50) Not Null,
     apellidoMaterno Varchar(50) Not Null,
     apellidoPaterno Varchar(50) Not Null,
     correoElectronico Varchar(150) Not Null,
-    contraseña Varchar(100) Not Null,
+    contraseña Varchar(255) Not Null,
     fechaNacimiento Date Not Null,
     saldo double(10,2) Not Null,
     idDireccion int,
@@ -86,4 +86,5 @@ Create table Reservas(
     idBoleto varchar(15) primary key,
     Foreign Key (idBoleto) References Boletos(idBoleto)
 );
+
 

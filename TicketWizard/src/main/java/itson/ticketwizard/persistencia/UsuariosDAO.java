@@ -4,6 +4,7 @@
  */
 package itson.ticketwizard.persistencia;
 
+import itson.ticketwizard.dto.NuevaDireccionDTO;
 import itson.ticketwizard.dto.RegistroUsuarioDTO;
 import itson.ticketwizard.entidades.Seguridad;
 import itson.ticketwizard.entidades.Usuario;
@@ -34,7 +35,7 @@ public class UsuariosDAO implements IUsuariosDAO {
      * @return
      */
     @Override
-    public int registrarUsuario(RegistroUsuarioDTO usuarioDTO, int idDireccion) {
+    public int registrarUsuario(RegistroUsuarioDTO usuarioDTO, NuevaDireccionDTO nuevaDireccionDTO) {
 
         String insertSQL = """
                    INSERT INTO usuarios (nombre, apellidoPaterno, apellidoMaterno, correoElectronico, contraseña, fechaNacimiento, saldo, idDireccion)

@@ -9,7 +9,7 @@ INSERT INTO Direcciones (calle, colonia, ciudad, estado, codigoPostal) VALUES
 ('Av. Paseo de la Reforma', 'Juárez', 'Ciudad de México', 'CDMX', '06600');
 
 -- Insertar usuarios
-INSERT INTO Usuarios (nombre, apellidoMaterno, apellidoPaterno, correoElectronico, contraseña, fechaNacimiento, saldo, idDireccion) VALUES
+INSERT INTO Usuarios (nombresrealizarRegistro, apellidoMaterno, apellidoPaterno, correoElectronico, contraseña, fechaNacimiento, saldo, idDireccion) VALUES
 ('Juan', 'Pérez', 'Gómez', 'juan.perez@gmail.com', 'password123', '1990-05-15', 1500.00, 1),
 ('María', 'López', 'Hernández', 'maria.lopez@gmail.com', 'password456', '1985-08-22', 2000.00, 2),
 ('Carlos', 'García', 'Martínez', 'carlos.garcia@gmail.com', 'password789', '1995-02-10', 1000.00, 3),
@@ -70,3 +70,64 @@ INSERT INTO TransaccionesBoletos (idTransaccion, idBoleto) VALUES
 (4, "ASDASDAS"),
 (5, "ASDASDAS"),
 (5, "ASDASDAS");
+
+drop procedure if exists realizarRegistro;
+DELIMITER $$
+CREATE PROCEDURE realizarRegistro(
+    IN p_nombres VARCHAR(50),
+    IN p_apellidoPaterno VARCHAR(50),
+    IN p_apellidoMaterno VARCHAR(50),
+    IN p_correoElectronico VARCHAR(150),
+    IN p_contrasena VARCHAR(255),
+    IN p_fechaNacimiento DATE,
+    IN p_saldo DECIMAL(10,2),
+    IN p_calle VARCHAR(100),
+    IN p_colonia VARCHAR(100),
+    IN p_ciudad VARCHAR(50),
+    IN p_codigoPostal VARCHAR(5),
+    IN p_estado VARCHAR(50)
+)
+BEGIN
+    DECLARE existe INT DEFAULT 0;
+    DECLARE direccion_id INT;
+    
+    START TRANSACTION;
+
+    SELECT COUNT(*) INTO existe 
+    FROM Usuarios 
+    WHERE correoElectronico = p_correoElectronico;
+    
+    IF existe > 0 THEN
+        ROLLBACK;
+        SELECT 0 AS resultado;
+    ELSE
+        INSERT INTO Direcciones (calle, colonia, ciudad, codigoPostal, estado)
+        VALUES (p_calle, p_colonia, p_ciudad, p_codigoPostal, p_estado);
+        
+        SET direccion_id = LAST_INSERT_ID();         
+
+        INSERT INTO Usuarios (
+            nombres, 
+            apellidoPaterno, 
+            apellidoMaterno, 
+            correoElectronico, 
+            contraseña, 
+            fechaNacimiento, 
+            saldo, 
+            idDireccion
+        ) VALUES (
+            p_nombres,
+            p_apellidoPaterno,
+            p_apellidoMaterno,
+            p_correoElectronico,
+            p_contrasena,
+            p_fechaNacimiento,
+            p_saldo,
+            idDireccion
+        );
+        
+        COMMIT;
+        SELECT 1 AS resultado; 
+    END IF;
+END $$
+DELIMITER ;
