@@ -66,7 +66,7 @@ public class BoletosDAO {
         return numeroDeSerie;
     }
 
-    @Override
+    //@Override
     public List<Boleto> consultarBoletosUsuario(Integer idUsuario) {
         String spUsuariosSQL = """
                         DELIMITER //
@@ -76,7 +76,8 @@ public class BoletosDAO {
                         FROM BOLETOS AS B
                         INNER JOIN USUARIO AS U ON B.idUsuario = U.idUsuario
                         INNER JOIN  EVENTOS AS E ON B.idEvento = E.idEvento
-                                                  DELIMITER; 
+                        GROUP BY B.idUsuario;
+                        DELIMITER; 
                     """;
         List<Boleto> listaBoletos = new LinkedList<>();
         try {
@@ -104,5 +105,7 @@ public class BoletosDAO {
         }
         return listaBoletos;
     }
+
+    //consultar saldo y movimientos transacciones
 }
 
