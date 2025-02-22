@@ -13,4 +13,5 @@ import itson.ticketwizard.entidades.Usuario;
  */
 public interface IUsuariosDAO {
     public Usuario registrarUsuario(RegistroUsuarioDTO usuarioDTO);
+    public boolean validarCredencialesInicioSesion(String correo, String contrasenia);
 }

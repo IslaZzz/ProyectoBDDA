@@ -16,6 +16,7 @@ import java.util.Map;
 public class FrmInicioSesion extends javax.swing.JFrame {
 
     private ControlInicioSesion control;
+
     /**
      * Creates new form FrmInicioSesion
      */
@@ -142,6 +143,9 @@ public class FrmInicioSesion extends javax.swing.JFrame {
 
     private void btnInicioSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioSesionActionPerformed
         control.mostrarFramePrincipal();
+        //El control va a llamar al método de UsuariosDAO que se comunica con la DB y valida las credenciales, 
+        //en caso de devolver true llamar a control.mostrarFramePrincipal, caso contrario un jOptionPane de error
+        //UsuarioDAO -> ControlInicioSesion -> FrmInicioSesion
     }//GEN-LAST:event_btnInicioSesionActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -150,14 +154,14 @@ public class FrmInicioSesion extends javax.swing.JFrame {
 
     private void lblRegistroMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegistroMouseEntered
         // TODO add your handling code here:
-        Font font =  new Font("Sans Serif", Font.PLAIN, 14);
+        Font font = new Font("Sans Serif", Font.PLAIN, 14);
         Map attributes = font.getAttributes();
         attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
         lblRegistro.setFont(font.deriveFont(attributes));
     }//GEN-LAST:event_lblRegistroMouseEntered
 
     private void lblRegistroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegistroMouseExited
-        Font font =  new Font("Sans Serif", Font.PLAIN, 14);
+        Font font = new Font("Sans Serif", Font.PLAIN, 14);
         lblRegistro.setFont(font);
     }//GEN-LAST:event_lblRegistroMouseExited
 

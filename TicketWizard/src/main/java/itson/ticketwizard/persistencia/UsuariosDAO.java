@@ -22,22 +22,29 @@ public class UsuariosDAO implements IUsuariosDAO {
     public UsuariosDAO(ManejadorConexiones manejadorConexiones) {
         this.manejadorConexion = manejadorConexiones;
     }
-    
+
     @Override
     public Usuario registrarUsuario(RegistroUsuarioDTO usuarioDTO) {
-        
+
         String consulta = """
                    INSERT INTO artistas (nacionalidad, nombre, tipo, añoInicio)
                    VALUES (?, ?, ?, ?);
                    """;
-        try{
+        try {
             Connection conexion = manejadorConexion.crearConexion();
-        } catch(SQLException ex){
+        } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
         //TEMPORAL, se necesita sacar el ID del artista que registró
         return null;
     }
 
-    
+    @Override
+    public boolean validarCredencialesInicioSesion(String Usuario, String contrasenia) {
+        String consulta = """
+                          
+                          """
+        
+    }
+
 }
