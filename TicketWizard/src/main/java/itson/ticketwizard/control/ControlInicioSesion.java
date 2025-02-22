@@ -4,6 +4,7 @@
  */
 package itson.ticketwizard.control;
 
+import itson.ticketwizard.entidades.Usuario;
 import itson.ticketwizard.persistencia.DireccionesDAO;
 import itson.ticketwizard.persistencia.UsuariosDAO;
 import presentacion.FrmInicioSesion;
@@ -27,7 +28,16 @@ public class ControlInicioSesion {
         this.direccionesDAO = direccionesDAO;
         
     }
-
+    /**
+     * Metodo a ser llamado al dar clic en iniciar sesión, consulta el correo y contraseña en la base de datos
+     * Retorna un usuario con el id o null si no se encontró al usuario
+     * @param correo Correo del usuario a validar
+     * @param contrasenia Contrasenia del usuario a validar
+     * @return Retorna un usuario con el id o null si no se encontró al usuario
+     */
+    public Usuario iniciarSesion(String correo, String contrasenia){
+        return usuariosDAO.validarCredencialesInicioSesion(correo, contrasenia);
+    }
     public void IniciarFlujo() {
         frameInicioSesion = new FrmInicioSesion(this);
         frameRegistroUsuario = new FrmRegistroUsuario(this, new ControlRegistro(direccionesDAO, usuariosDAO));
@@ -53,8 +63,9 @@ public class ControlInicioSesion {
         frameInicioSesion.setLocationRelativeTo(null);
     }
 
-    public void mostrarFramePrincipal() {
+    public void mostrarFramePrincipal(Usuario usuario) {
         frameInicioSesion.dispose();
+        framePrincipal.setUsuario(usuario);
         framePrincipal.setVisible(true);
         framePrincipal.setLocationRelativeTo(null);
     }

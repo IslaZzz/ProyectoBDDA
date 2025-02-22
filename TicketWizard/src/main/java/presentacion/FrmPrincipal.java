@@ -7,6 +7,7 @@ package presentacion;
 import itson.ticketwizard.control.ControlCompraBoletos;
 import itson.ticketwizard.control.ControlInicioSesion;
 import itson.ticketwizard.control.ControlMostrarEventos;
+import itson.ticketwizard.entidades.Usuario;
 import itson.ticketwizard.persistencia.BoletosDAO;
 import itson.ticketwizard.persistencia.EventosDAO;
 import itson.ticketwizard.persistencia.ManejadorConexiones;
@@ -26,7 +27,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private int BOLETOS = 2;
     private int MOVIMIENTOS = 3;
     private int SALDO = 4;
-
+    private Usuario usuario;
+    
     private ControlInicioSesion controlInicioSesion;
     /**
      * Creates new form FrmPrincipal
@@ -489,7 +491,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }
     
 
-
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;

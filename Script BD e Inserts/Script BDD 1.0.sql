@@ -19,7 +19,7 @@ Create Table Usuarios (
     apellidoMaterno Varchar(50) Not Null,
     apellidoPaterno Varchar(50) Not Null,
     correoElectronico Varchar(150) Not Null,
-    contraseña Varchar(100) Not Null,
+    contraseña Varchar(100) Not Null,
     fechaNacimiento Date Not Null,
     saldo double(10,2) Not Null,
     idDireccion int,

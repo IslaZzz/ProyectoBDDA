@@ -75,11 +75,9 @@ public class UsuariosDAO implements IUsuariosDAO {
 
     @Override
     public Usuario validarCredencialesInicioSesion(String correo, String contrasenia) {
-        Usuario usuario;
         String consultaUsuario = """
                           Select idUsuario, contraseña from Usuarios where correoElectronico = ?;
                           """;
-
         try {
             Connection conexionPSW = manejadorConexion.crearConexion();
             PreparedStatement consulta = conexionPSW.prepareStatement(consultaUsuario);
@@ -91,15 +89,14 @@ public class UsuariosDAO implements IUsuariosDAO {
                 String hash = usuarioDevuelto.getString("contraseña");
                 int RId = usuarioDevuelto.getInt("idUsuario");
 
-                if (Seguridad.verificar(Seguridad.encriptar(contrasenia), hash)) {
-                    return usuario = new Usuario(RId);
+                if (Seguridad.verificar(contrasenia, hash)) {
+                    return new Usuario(RId);
                 } else {
-                    JOptionPane.showMessageDialog(null, "Contraseña Inválida");
+                    return null;
                 }
-
             }
             else{
-                JOptionPane.showMessageDialog(null, "Usuario no encontrado");
+                return null;
             }
 
         } catch (SQLException e) {

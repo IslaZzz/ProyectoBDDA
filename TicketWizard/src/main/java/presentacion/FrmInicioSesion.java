@@ -5,9 +5,11 @@
 package presentacion;
 
 import itson.ticketwizard.control.ControlInicioSesion;
+import itson.ticketwizard.entidades.Usuario;
 import java.awt.Font;
 import java.awt.font.TextAttribute;
 import java.util.Map;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -36,12 +38,12 @@ public class FrmInicioSesion extends javax.swing.JFrame {
     private void initComponents() {
 
         btnInicioSesion = new javax.swing.JButton();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txtContrasenia = new javax.swing.JPasswordField();
         lblRegistro = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
+        lblCorreo = new javax.swing.JLabel();
+        txtCorreo = new javax.swing.JTextField();
+        lblContrasenia = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(233, 233, 233));
@@ -56,10 +58,10 @@ public class FrmInicioSesion extends javax.swing.JFrame {
             }
         });
 
-        jPasswordField1.setBackground(new java.awt.Color(255, 255, 255));
-        jPasswordField1.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
-        jPasswordField1.setForeground(new java.awt.Color(30, 30, 30));
-        jPasswordField1.setBorder(null);
+        txtContrasenia.setBackground(new java.awt.Color(255, 255, 255));
+        txtContrasenia.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        txtContrasenia.setForeground(new java.awt.Color(30, 30, 30));
+        txtContrasenia.setBorder(null);
 
         lblRegistro.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         lblRegistro.setForeground(new java.awt.Color(20, 143, 233));
@@ -81,22 +83,22 @@ public class FrmInicioSesion extends javax.swing.JFrame {
         jLabel2.setText("Inicio de Sesión");
         jLabel2.setPreferredSize(new java.awt.Dimension(363, 58));
 
-        jLabel3.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
-        jLabel3.setText("Correo eléctronico");
+        lblCorreo.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        lblCorreo.setText("Correo eléctronico");
 
-        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField1.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(30, 30, 30));
-        jTextField1.setBorder(null);
-        jTextField1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtCorreo.setBackground(new java.awt.Color(255, 255, 255));
+        txtCorreo.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        txtCorreo.setForeground(new java.awt.Color(30, 30, 30));
+        txtCorreo.setBorder(null);
+        txtCorreo.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtCorreo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtCorreoActionPerformed(evt);
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
-        jLabel4.setText("Contraseña");
+        lblContrasenia.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        lblContrasenia.setText("Contraseña");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -111,11 +113,11 @@ public class FrmInicioSesion extends javax.swing.JFrame {
                                 .addGap(99, 99, 99)
                                 .addComponent(btnInicioSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextField1)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(lblContrasenia)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE)
+                                .addComponent(txtCorreo)
+                                .addComponent(lblCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(321, 321, 321)
                         .addComponent(lblRegistro)))
@@ -127,13 +129,13 @@ public class FrmInicioSesion extends javax.swing.JFrame {
                 .addGap(41, 41, 41)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(79, 79, 79)
-                .addComponent(jLabel3)
+                .addComponent(lblCorreo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel4)
+                .addComponent(lblContrasenia)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addComponent(btnInicioSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -146,15 +148,36 @@ public class FrmInicioSesion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInicioSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioSesionActionPerformed
-        control.mostrarFramePrincipal();
-        //El control va a llamar al método de UsuariosDAO que se comunica con la DB y valida las credenciales, 
-        //en caso de devolver true llamar a control.mostrarFramePrincipal, caso contrario un jOptionPane de error
-        //UsuarioDAO -> ControlInicioSesion -> FrmInicioSesion
+        
+        //El control va a llamar al método de controlInicioSesion que se comunica con la DB y valida las credenciales, 
+        //en caso de devolver un usuario llamar a control.mostrarFramePrincipal, caso contrario un jOptionPane de error
+        //ControlInicioSesion -> UsuarioDAO -> ControlInicioSesion -> FrmPrincipal
+        String correo = txtCorreo.getText();
+        String contrasenia = txtContrasenia.getText();
+        Usuario usuario = control.iniciarSesion(correo,contrasenia);
+        if( usuario != null){
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Se ha encontrado el usuario",
+                    "Inicio correcto",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+            txtCorreo.setText("");
+            txtContrasenia.setText("");
+            control.mostrarFramePrincipal(usuario);
+        } else {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Usuario o contraseña incorrectos",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }
     }//GEN-LAST:event_btnInicioSesionActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtCorreoActionPerformed
 
     private void lblRegistroMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegistroMouseEntered
         // TODO add your handling code here:
@@ -176,10 +199,10 @@ public class FrmInicioSesion extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnInicioSesion;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lblContrasenia;
+    private javax.swing.JLabel lblCorreo;
     private javax.swing.JLabel lblRegistro;
+    private javax.swing.JPasswordField txtContrasenia;
+    private javax.swing.JTextField txtCorreo;
     // End of variables declaration//GEN-END:variables
 }

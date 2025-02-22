@@ -9,7 +9,6 @@ import itson.ticketwizard.dto.MostrarEventoDTO;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.Box;
-import javax.swing.BoxLayout;
 
 /**
  *
