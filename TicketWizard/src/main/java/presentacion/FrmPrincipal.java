@@ -464,6 +464,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_lblTituloMouseClicked
 
     private void lblCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarSesionMouseClicked
+        this.usuario = null;
         controlInicioSesion.mostrarInicioSesion();
     }//GEN-LAST:event_lblCerrarSesionMouseClicked
 
