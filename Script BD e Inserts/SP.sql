@@ -2,12 +2,21 @@
 use ticketWizard;
 
 -- SP para consultar las consultas, divididas por usuario.
-drop procedure consultarTransacciones;
+drop procedure  if exists consultarTransacciones;
 
 DELIMITER //
 CREATE  PROCEDURE consultarTransacciones(IN ID VARCHAR(20))
 BEGIN 
-SELECT TR.FECHAHORA as "Fecha-hora",TR.TIPOCOMPRA as "Tipo de compra",TR.MONTO as "Monto",UT.ROL as "Rol",b.fila as "Fila",b.asiento as "Asiento",E.NOMBRE as "Evento",TB.IDBOLETO as "Número de control",TB.IDTRANSACCIONBOLETOS as "ID de la transacción", ut.idUsuario as "ID usuario"
+SELECT TR.FECHAHORA as "Fecha-hora",
+TR.TIPOCOMPRA as "Tipo de compra",
+TR.MONTO as "Monto",
+UT.ROL as "Rol",
+b.fila as "Fila",
+b.asiento as "Asiento",
+E.NOMBRE as "Evento",
+TB.IDTRANSACCION as "ID de la transacción",
+ut.idUsuario as "ID usuario"
+
 FROM usuarios_transacciones as ut
 JOIN transacciones as tr on ut.idtransaccion = tr.idtransaccion 
 JOIN TRANSACCIONESBOLETOS AS TB ON UT.idtransaccion = TB.idtransaccion 
@@ -18,10 +27,10 @@ END //
 DELIMITER ;
 
 -- Comando de llamada a la funcion, recibe como parametro el id del cliente a consultar
-CALL consultarTransacciones(1);
+CALL consultarTransacciones(5);
 
 -- SP para consultar boletos por usuario 
-drop procedure consultarBoletosUsuario;
+drop procedure  if exists consultarBoletosUsuario;
 
 DELIMITER //
 CREATE PROCEDURE consultarBoletosUsuario(IN ID VARCHAR(20))
