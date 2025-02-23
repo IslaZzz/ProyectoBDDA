@@ -31,17 +31,7 @@ public class PnlComprarBoletos extends javax.swing.JPanel {
 
     private void cargarBoletos(){
         List<Boleto> boletos = control.consultarBoletosEvento(idEvento);
-        DefaultTableModel modelo = (DefaultTableModel) this.tblBoletos.getModel();
-        for(Boleto boleto : boletos){
-            Object[] filaTabla = {
-                String.valueOf(boleto.getIdEvento()),
-                boleto.getFila(),
-                boleto.getAsiento(),
-                boleto.getPrecio(),
-                control.determinarTipoVenta(boleto)
-            };
-            modelo.addRow(filaTabla);
-        }
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -52,47 +42,13 @@ public class PnlComprarBoletos extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblBoletos = new javax.swing.JTable();
         btnVolver = new javax.swing.JButton();
         btnComprar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        boxPnlBoletos = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(233, 233, 233));
         setForeground(new java.awt.Color(233, 233, 233));
-
-        tblBoletos.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
-        tblBoletos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Evento", "Fila", "Asiento", "Precio", "Tipo Venta", "Seleccionar"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.Boolean.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(tblBoletos);
-        if (tblBoletos.getColumnModel().getColumnCount() > 0) {
-            tblBoletos.getColumnModel().getColumn(0).setResizable(false);
-            tblBoletos.getColumnModel().getColumn(1).setResizable(false);
-            tblBoletos.getColumnModel().getColumn(2).setResizable(false);
-            tblBoletos.getColumnModel().getColumn(3).setResizable(false);
-            tblBoletos.getColumnModel().getColumn(4).setResizable(false);
-            tblBoletos.getColumnModel().getColumn(5).setResizable(false);
-        }
 
         btnVolver.setBackground(new java.awt.Color(0, 0, 0));
         btnVolver.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
@@ -116,6 +72,19 @@ public class PnlComprarBoletos extends javax.swing.JPanel {
         btnComprar.setText("Comprar Boletos");
         btnComprar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
+        javax.swing.GroupLayout boxPnlBoletosLayout = new javax.swing.GroupLayout(boxPnlBoletos);
+        boxPnlBoletos.setLayout(boxPnlBoletosLayout);
+        boxPnlBoletosLayout.setHorizontalGroup(
+            boxPnlBoletosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 574, Short.MAX_VALUE)
+        );
+        boxPnlBoletosLayout.setVerticalGroup(
+            boxPnlBoletosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 303, Short.MAX_VALUE)
+        );
+
+        jScrollPane2.setViewportView(boxPnlBoletos);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -125,26 +94,22 @@ public class PnlComprarBoletos extends javax.swing.JPanel {
                 .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53)
                 .addComponent(btnComprar, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(216, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(162, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(154, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(156, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(149, 149, 149))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(337, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnComprar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(130, Short.MAX_VALUE)))
+                    .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnComprar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -158,9 +123,9 @@ public class PnlComprarBoletos extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel boxPnlBoletos;
     private javax.swing.JButton btnComprar;
     private javax.swing.JButton btnVolver;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblBoletos;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }

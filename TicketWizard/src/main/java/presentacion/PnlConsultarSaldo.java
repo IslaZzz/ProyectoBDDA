@@ -168,6 +168,13 @@ public class PnlConsultarSaldo extends javax.swing.JPanel {
                 return;
             }
             double saldo = Double.parseDouble(strDoble);
+            if(saldo < 0){
+                JOptionPane.showMessageDialog(
+                parent,
+                "No puede ingresar un saldo negativo",
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
+            }
             control.agregarSaldo(saldo, parent.getUsuario());
             cargarSaldo();
         } catch(NumberFormatException ex){
