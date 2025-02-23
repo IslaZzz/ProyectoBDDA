@@ -14,6 +14,7 @@ import itson.ticketwizard.excepciones.TransaccionException;
 import itson.ticketwizard.persistencia.interfaces.IUsuariosDAO;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -81,11 +82,6 @@ public class UsuariosDAO implements IUsuariosDAO {
     }
 
     @Override
-    public Usuario registrarUsuario(RegistroUsuarioDTO usuarioDTO) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
     public Usuario validarCredencialesInicioSesion(String correo, String contrasenia) {
         String consultaUsuario = """
                           Select idUsuario, contraseña from Usuarios where correoElectronico = ?;
@@ -102,7 +98,25 @@ public class UsuariosDAO implements IUsuariosDAO {
                 int RId = usuarioDevuelto.getInt("idUsuario");
 
                 if (Seguridad.verificar(contrasenia, hash)) {
-                    return new Usuario(RId);
+                    consultaUsuario = """
+                    SELECT idUsuario, nombres, apellidoPaterno, apellidoMaterno, correoElectronico, fechaNacimiento, saldo, idDireccion FROM usuarios
+                                      WHERE idUsuario = ?;
+                    """;
+                    consulta = conexionPSW.prepareStatement(consultaUsuario);
+                    consulta.setInt(1, RId);
+                    ResultSet resultado = consulta.executeQuery();
+                    if(resultado.next()){
+                        int idUsuario = resultado.getInt("idUsuario");
+                        String nombres = resultado.getString("idUsuario");
+                        String apellidoPaterno = resultado.getString("apellidoPaterno");
+                        String apellidoMaterno = resultado.getString("apellidoMaterno");
+                        String correoElectronico = resultado.getString("correoElectronico");
+                        Date fechaNacimiento = resultado.getDate("fechaNacimiento");
+                        double saldo = resultado.getDouble("saldo");
+                        int idDireccion = resultado.getInt("idDireccion");
+                        return new Usuario(idUsuario, nombres, apellidoPaterno, apellidoMaterno, correoElectronico, fechaNacimiento, saldo, idDireccion);
+                    }
+                    return null;
                 } else {
                     return null;
                 }
@@ -128,12 +142,12 @@ public class UsuariosDAO implements IUsuariosDAO {
             try{
             Connection conexion = manejadorConexion.crearConexion();
             PreparedStatement consulta = conexion.prepareStatement(updateSaldo);
-            usuario.setSaldo(nSaldo);
             consulta.setDouble(1, nSaldo);
             consulta.setInt(2, id);
             int filasActualizadas = consulta.executeUpdate();
 
             if(filasActualizadas>0){
+                usuario.setSaldo(nSaldo);
                 return nSaldo;
             }
             }catch(SQLException ex){
@@ -143,7 +157,7 @@ public class UsuariosDAO implements IUsuariosDAO {
             return usuario.getSaldo();
         }
         
-        public double consultarSaldo(int cantidad, Usuario usuario){
+        public double consultarSaldo(Usuario usuario){
             return usuario.getSaldo();
         }
         
