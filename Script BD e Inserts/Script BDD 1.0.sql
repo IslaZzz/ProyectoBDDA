@@ -86,5 +86,3 @@ Create table Reservas(
     idBoleto varchar(15) primary key,
     Foreign Key (idBoleto) References Boletos(idBoleto)
 );
-
-SELECT * FROM usuarios;
