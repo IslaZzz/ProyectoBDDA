@@ -1,6 +1,7 @@
 package presentacion;
 
 import itson.ticketwizard.entidades.Boleto;
+import javax.swing.JCheckBox;
 
 /**
  *
@@ -22,6 +23,16 @@ public class PnlBoletoComprar extends javax.swing.JPanel {
         initComponents();
         cargarBoleto();
     }
+
+    public JCheckBox getCheckBox() {
+        return CheckBox;
+    }
+
+    public Boleto getBoleto() {
+        return boleto;
+    }
+    
+    
 
     private void cargarBoleto(){
         lblNombre.setText(parent.getControl().consultaEvento(boleto));
@@ -46,7 +57,7 @@ public class PnlBoletoComprar extends javax.swing.JPanel {
         lblFila = new javax.swing.JLabel();
         lblAsiento = new javax.swing.JLabel();
         lblPrecio = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        CheckBox = new javax.swing.JCheckBox();
         lblTipoVenta = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -67,9 +78,9 @@ public class PnlBoletoComprar extends javax.swing.JPanel {
         lblPrecio.setForeground(new java.awt.Color(30, 30, 30));
         lblPrecio.setText("Precio");
 
-        jCheckBox1.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
-        jCheckBox1.setForeground(new java.awt.Color(30, 30, 30));
-        jCheckBox1.setText("Seleccionar");
+        CheckBox.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
+        CheckBox.setForeground(new java.awt.Color(30, 30, 30));
+        CheckBox.setText("Seleccionar");
 
         lblTipoVenta.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         lblTipoVenta.setForeground(new java.awt.Color(30, 30, 30));
@@ -90,7 +101,7 @@ public class PnlBoletoComprar extends javax.swing.JPanel {
                             .addComponent(lblFila)
                             .addComponent(lblAsiento))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jCheckBox1)
+                        .addComponent(CheckBox)
                         .addGap(53, 53, 53))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,7 +120,7 @@ public class PnlBoletoComprar extends javax.swing.JPanel {
                         .addComponent(lblFila)
                         .addGap(33, 33, 33))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jCheckBox1)
+                        .addComponent(CheckBox)
                         .addComponent(lblAsiento)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblPrecio)
@@ -142,7 +153,7 @@ public class PnlBoletoComprar extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox CheckBox;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblAsiento;
     private javax.swing.JLabel lblFila;

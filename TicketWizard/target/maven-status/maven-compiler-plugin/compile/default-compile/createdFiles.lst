@@ -20,6 +20,7 @@ presentacion\FrmRegistroUsuario$10.class
 presentacion\PnlConsultarBoletos.class
 presentacion\FrmPrincipal$2.class
 itson\ticketwizard\entidades\Seguridad.class
+presentacion\PnlComprarBoletos$3.class
 itson\ticketwizard\excepciones\EventoException.class
 itson\ticketwizard\entidades\Usuario.class
 itson\ticketwizard\persistencia\interfaces\IEventosDAO.class
