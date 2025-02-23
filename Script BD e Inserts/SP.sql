@@ -26,7 +26,7 @@ drop procedure consultarBoletosUsuario;
 DELIMITER //
 CREATE PROCEDURE consultarBoletosUsuario(IN ID VARCHAR(20))
 BEGIN
-SELECT B.IDBOLETO as "idBoleto", E.idEvento as "idEvento", E.NOMBRE, B.FILA as "Fila", B.ASIENTO  as "Asiento", E.FECHA as "Fecha", B.CIUDAD as "Ciudad", B.precio as "precio"
+SELECT B.IDBOLETO as "idBoleto", E.idEvento as "idEvento", E.NOMBRE, B.FILA as "Fila", B.ASIENTO  as "Asiento", E.FECHA as "Fecha", B.CIUDAD as "Ciudad", B.precio as "precio", B.numSerie as "numero de serie"
 FROM BOLETOS AS B
 INNER JOIN USUARIO AS U ON B.idUsuario = U.idUsuario
 INNER JOIN  EVENTOS AS E ON B.idEvento = E.idEvento
@@ -54,7 +54,12 @@ UPDATE USUARIOS
 SET SALDO=?
  WHERE IDUSUARIO=?;
  
+ select *
+ from boletos;
  
+
+
+
 
 
 
