@@ -71,7 +71,7 @@ public class Seguridad {
 
     public static boolean validaDoble(String s) {
         //Define la expresión regular para un doble
-        String reCadena = "^\\d+(\\.\\d*)?$";
+        String reCadena = "^\\d+(\\.\\d{1,2})?$";
         // Compila la expresión regular a un patrón
         Pattern pattern = Pattern.compile(reCadena);
         // Crea un comparador para comparar la cadena contra el patrón

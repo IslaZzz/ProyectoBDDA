@@ -1,3 +1,4 @@
+presentacion\PnlConsultarSaldo$1.class
 itson\ticketwizard\entidades\Direccion.class
 itson\ticketwizard\persistencia\interfaces\IUsuariosDAO.class
 presentacion\PnlConsultarBoletos.class
@@ -5,6 +6,7 @@ itson\ticketwizard\persistencia\interfaces\IEventosDAO.class
 itson\ticketwizard\control\ControlRegistro.class
 presentacion\PnlConsultarSaldo.class
 itson\ticketwizard\control\ControlInicioSesion.class
+itson\ticketwizard\control\ControlSaldo.class
 itson\ticketwizard\persistencia\interfaces\IBoletosDAO.class
 itson\ticketwizard\persistencia\interfaces\IDireccionesDAO.class
 itson\ticketwizard\excepciones\BoletoException.class

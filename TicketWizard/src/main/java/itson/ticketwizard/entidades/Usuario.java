@@ -6,27 +6,39 @@ public class Usuario {
 
     private Integer id;
     private String nombres;
-    private String apellidoMaterno;
     private String apellidoPaterno;
+    private String apellidoMaterno;
     private String correoElectronico;
     private double saldo;
     private int idDireccion;
     private String contrasenia;
     private Date fechaNacimiento;
 
-    public Usuario(int id, String nombres, String apellidoMaterno, String apellidoPaterno,
+    public Usuario(int id, String nombres, String apellidoPaterno, String apellidoMaterno,
             String correoElectronico, double saldo, int domicilio, String contrasenia, Date fechaNacimiento) {
         this.id = id;
         this.nombres = nombres;
-        this.apellidoMaterno = apellidoMaterno;
         this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
         this.correoElectronico = correoElectronico;
+        this.fechaNacimiento = fechaNacimiento;
         this.saldo = saldo;
         this.idDireccion = domicilio;
         this.contrasenia = contrasenia;
-        this.fechaNacimiento = fechaNacimiento;
     }
 
+    public Usuario(Integer id, String nombres, String apellidoPaterno, String apellidoMaterno, String correoElectronico,  Date fechaNacimiento, double saldo, int idDireccion) {
+        this.id = id;
+        this.nombres = nombres;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.correoElectronico = correoElectronico;
+        this.fechaNacimiento = fechaNacimiento;
+        this.saldo = saldo;
+        this.idDireccion = idDireccion;
+    }
+
+    
     public Usuario(Integer id){
         this.id = id;
     }
