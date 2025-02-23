@@ -87,4 +87,4 @@ Create table Reservas(
     Foreign Key (idBoleto) References Boletos(idBoleto)
 );
 
-
+SELECT * FROM usuarios;
