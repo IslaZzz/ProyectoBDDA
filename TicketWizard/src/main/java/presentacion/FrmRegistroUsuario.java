@@ -462,9 +462,9 @@ public class FrmRegistroUsuario extends javax.swing.JFrame {
         String colonia = txtColonia.getText();
         String calle = txtCalle.getText();
         String codigoPostal = txtCodigoPostal.getText();
-        if (nombre == "" || apellidoPaterno == "" || apellidoMaterno == ""
-                || correoElectronico == "" || contrasenia == "" || repetirContrasenia == ""
-                || estado == "" || ciudad == "" || colonia == "" || calle == "") {
+        if (nombre.isBlank() || apellidoPaterno.isBlank() || apellidoMaterno.isBlank()
+                || correoElectronico.isBlank()|| contrasenia.isBlank() || repetirContrasenia.isBlank()
+                || estado.isBlank() || ciudad.isBlank() || colonia.isBlank() || calle.isBlank()) {
             JOptionPane.showMessageDialog(
                     this,
                     "Asegurese de llenar todos los campos",
