@@ -56,8 +56,77 @@ WHERE ID=U.IDUSUARIO;
 END//
 DELIMITER ;
 
+drop procedure if exists ActualizarUsuario;
+DELIMITER $$
+CREATE PROCEDURE ActualizarUsuario(
+    IN p_usuario_id INT,
+    
+    IN p_nombres VARCHAR(50),
+    IN p_apellidoPaterno VARCHAR(50),
+    IN p_apellidoMaterno VARCHAR(50),
+    IN p_correo VARCHAR(150),
+    IN p_contrasena VARCHAR(255),
+    IN p_fechaNacimiento DATE,
+    
+    IN p_calle VARCHAR(100),
+    IN p_colonia VARCHAR(100),
+    IN p_ciudad VARCHAR(100),
+    IN p_estado VARCHAR(50),
+    IN p_codigoPostal VARCHAR(5)
+)
+BEGIN
+    DECLARE v_direccion_id INT;
+    DECLARE v_correo VARCHAR(100);
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+        SELECT 0 AS resultado;
+    END;
+
+    START TRANSACTION;
 
 
+    SELECT correoElectronico, idDireccion
+    INTO v_correo, v_direccion_id 
+    FROM Usuarios 
+    WHERE idUsuario = p_usuario_id;
+
+    IF v_direccion_id IS NULL THEN
+        ROLLBACK;
+        SELECT 0 AS resultado;
+    ELSE
+        IF p_correo <> v_correo THEN
+            IF EXISTS (SELECT 1 FROM Usuarios WHERE correoElectronico = p_correo) THEN
+                ROLLBACK;
+                SELECT 0 AS resultado;
+            END IF;
+        END IF;
+
+        UPDATE Direcciones
+        SET 
+            calle = p_calle,
+            colonia = p_colonia,
+            ciudad = p_ciudad,
+            estado = p_estado,
+            codigoPostal = p_codigoPostal
+        WHERE id = v_direccion_id;
+
+        UPDATE Usuarios
+        SET 
+            nombres = p_nombres,
+            apellidoPaterno = p_apellidoPaterno,
+            apellidoMaterno = p_apellidoMaterno,
+            correo = p_correo,
+            contraseña = p_contrasena,
+            fechaNacimiento = p_fechaNacimiento
+        WHERE id = p_usuario_id;
+
+        COMMIT;
+        SELECT 1 AS resultado;
+    END IF;
+END $$
+
+DELIMITER ;
 
 
 

@@ -104,7 +104,7 @@ public class UsuariosDAO implements IUsuariosDAO {
                     consulta = conexionPSW.prepareStatement(consultaUsuario);
                     consulta.setInt(1, RId);
                     ResultSet resultado = consulta.executeQuery();
-                    if(resultado.next()){
+                    if (resultado.next()) {
                         int idUsuario = resultado.getInt("idUsuario");
                         String nombres = resultado.getString("idUsuario");
                         String apellidoPaterno = resultado.getString("apellidoPaterno");
@@ -129,35 +129,73 @@ public class UsuariosDAO implements IUsuariosDAO {
         return null;
 
     }
-    
-        public double agregarSaldo(double cantidad, Usuario usuario){
-            int id = usuario.getId();
-            double nSaldo =usuario.getSaldo()+cantidad;
-            String updateSaldo ="""
+
+    public double agregarSaldo(double cantidad, Usuario usuario) {
+        int id = usuario.getId();
+        double nSaldo = usuario.getSaldo() + cantidad;
+        String updateSaldo = """
                                 UPDATE USUARIOS 
                                 SET SALDO=?
                                 WHERE IDUSUARIO=?;
                                 """;
-            try{
+        try {
             Connection conexion = manejadorConexion.crearConexion();
             PreparedStatement consulta = conexion.prepareStatement(updateSaldo);
             consulta.setDouble(1, nSaldo);
             consulta.setInt(2, id);
             int filasActualizadas = consulta.executeUpdate();
 
-            if(filasActualizadas>0){
+            if (filasActualizadas > 0) {
                 usuario.setSaldo(nSaldo);
                 return nSaldo;
             }
-            }catch(SQLException ex){
-                ex.getMessage();
-                return usuario.getSaldo();
+        } catch (SQLException ex) {
+            ex.getMessage();
+            return usuario.getSaldo();
+        }
+        return usuario.getSaldo();
+    }
+
+    public double consultarSaldo(Usuario usuario) {
+        return usuario.getSaldo();
+    }
+
+    @Override
+    public int actualizarUsuario(Usuario usuario, RegistroUsuarioDTO usuarioDTO, NuevaDireccionDTO nuevaDireccionDTO) {
+        String LlamarSP = """
+                            Call actualizarusuario(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+                   """;
+        try {
+            Connection conexion = manejadorConexion.crearConexion();
+            CallableStatement sp = conexion.prepareCall(LlamarSP);
+            sp.setInt(1, usuario.getId());
+            sp.setString(2, usuarioDTO.getNombres());
+            sp.setString(3, usuarioDTO.getApellidoPaterno());
+            sp.setString(4, usuarioDTO.getApellidoMaterno());
+            sp.setString(5, usuarioDTO.getCorreoElectronico());
+            sp.setString(6, usuarioDTO.getContrasenia());
+            sp.setDate(7, usuarioDTO.getFechaNacimiento());
+            sp.setString(8, nuevaDireccionDTO.getCalle());
+            sp.setString(9, nuevaDireccionDTO.getColonia());
+            sp.setString(10, nuevaDireccionDTO.getCiudad());
+            sp.setString(11, nuevaDireccionDTO.getEstado());
+            sp.setString(12, nuevaDireccionDTO.getCodigoPostal());
+            ResultSet flujo = sp.executeQuery();
+            if (flujo.next()) {
+                int resultado = flujo.getInt("resultado");
+                if (resultado == 1) {
+                    System.out.println("Se actualizó el usuario");
+                } else {
+                    System.out.println("Hubo un error al actualizar el usuario");
+                }
+                return resultado;
             }
-            return usuario.getSaldo();
+        } catch (SQLException ex) {
+
+            System.err.println(ex.getMessage());
         }
-        
-        public double consultarSaldo(Usuario usuario){
-            return usuario.getSaldo();
-        }
-        
+        // TEMPORAL, se necesita sacar el ID del artista que registró
+        return 0;
+    }
+
 }

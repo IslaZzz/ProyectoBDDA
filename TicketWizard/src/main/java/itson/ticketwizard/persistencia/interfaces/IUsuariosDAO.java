@@ -16,4 +16,5 @@ import java.sql.SQLException;
 public interface IUsuariosDAO {
     public Usuario validarCredencialesInicioSesion(String correo, String contrasenia) throws SQLException;
     public int registrarUsuario(RegistroUsuarioDTO usuarioDTO, NuevaDireccionDTO nuevaDireccionDTO);  
+    public int actualizarUsuario(Usuario usuario, RegistroUsuarioDTO usuarioDTO, NuevaDireccionDTO nuevaDireccionDTO);
 }
