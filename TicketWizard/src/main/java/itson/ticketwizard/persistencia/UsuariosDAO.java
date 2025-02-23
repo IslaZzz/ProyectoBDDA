@@ -6,6 +6,7 @@ package itson.ticketwizard.persistencia;
 
 import itson.ticketwizard.dto.NuevaDireccionDTO;
 import itson.ticketwizard.dto.RegistroUsuarioDTO;
+import itson.ticketwizard.entidades.Boleto;
 import itson.ticketwizard.entidades.Seguridad;
 import itson.ticketwizard.entidades.Usuario;
 import itson.ticketwizard.persistencia.interfaces.IUsuariosDAO;
@@ -13,6 +14,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -136,5 +138,6 @@ public class UsuariosDAO implements IUsuariosDAO {
         public double consultarSaldo(int cantidad, Usuario usuario){
             return usuario.getSaldo();
         }
-
+        
+        
 }
