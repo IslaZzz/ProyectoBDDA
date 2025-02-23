@@ -16,7 +16,6 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
-
 /**
  *
  * @author 52644
@@ -80,17 +79,20 @@ public class BoletosDAO {
                 consulta.setInt(1, id);
                 ResultSet resultadoConsulta = consulta.executeQuery();
                 int filasActualizadas = consulta.executeUpdate();
-                
+            //  String idBoleto, String numeroSerie, double precio, boolean disponible,
+            //          String fila, Integer asiento, Integer idEvento, Integer idUsuario
                  while (resultadoConsulta.next()) {
                     Integer idEvento = resultadoConsulta.getInt("idEvento");
-                    String numSerie = resultadoConsulta.getString("numSerie");
-                    String fila = resultadoConsulta.getString("fila");
-                    Integer asiento = resultadoConsulta.getInt("asiento");
-                    boolean disponible = resultadoConsulta.getBoolean("Disponible");
+                    String fila = resultadoConsulta.getString("Fila");
+                    Integer asiento = resultadoConsulta.getInt("Asiento");
+                    Date fecha = resultadoConsulta.getDate("fecha");
                     double precio = resultadoConsulta.getDouble("precio");
                     String numControl = resultadoConsulta.getString("idBoleto");
                     Integer idUsuario = resultadoConsulta.getInt("idUsuario");
-                    Boleto boleto = new Boleto(numControl, numSerie, precio, disponible, fila, asiento, idEvento, idUsuario);
+                    String numSerie = resultadoConsulta.getString("numero de serie");
+                    
+                    boolean disp=false;
+                    Boleto boleto = new Boleto(numControl,numSerie,precio,disp,fila,asiento,idEvento,id);
                     listaBoletosUs.add(boleto);
                 }
             }catch (SQLException e) {
