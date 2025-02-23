@@ -8,13 +8,17 @@ import itson.ticketwizard.dto.NuevaDireccionDTO;
 import itson.ticketwizard.dto.RegistroUsuarioDTO;
 import itson.ticketwizard.entidades.Boleto;
 import itson.ticketwizard.entidades.Seguridad;
+import itson.ticketwizard.entidades.Transaccion;
 import itson.ticketwizard.entidades.Usuario;
+import itson.ticketwizard.excepciones.TransaccionException;
 import itson.ticketwizard.persistencia.interfaces.IUsuariosDAO;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -143,5 +147,41 @@ public class UsuariosDAO implements IUsuariosDAO {
             return usuario.getSaldo();
         }
         
+        public List<Transaccion> consultarMovimientos(Usuario usuario) throws TransaccionException{
+            int id = usuario.getId();
+            List<Transaccion> listaTransacciones = new LinkedList<>();
+            String consultarMovimientos=  """
+                                          CALL consultarTransacciones(?);
+                                          """;
+            try{
+                Connection conexion = manejadorConexion.crearConexion();
+                PreparedStatement consulta = conexion.prepareStatement(consultarMovimientos);
+                consulta.setInt(1, id);
+                ResultSet resultadoConsulta = consulta.executeQuery();
+                int filasActualizadas = consulta.executeUpdate();
+                
+                while(resultadoConsulta.next()){
+                    
+                    Integer idTransaccion = resultadoConsulta.getInt("ID de la transacción");
+                    Integer numeroControl = resultadoConsulta.getInt("Número de control");
+                    Date fechaHora = resultadoConsulta.getDate("Fecha-hora");
+                    String tipoCompra = resultadoConsulta.getString("Tipo de compra");
+                    double monto = resultadoConsulta.getDouble("Monto");
+                    String rol = resultadoConsulta.getString("Rol");
+                    String idUsuario = resultadoConsulta.getString("ID usuario");
+                    String fila = resultadoConsulta.getString("Fila");
+                    int asiento = resultadoConsulta.getInt("Asiento");
+                    String evento = resultadoConsulta.getString("Evento");
+                    
+                    Transaccion tran = new Transaccion(idTransaccion, numeroControl, fechaHora, tipoCompra, monto, rol, idUsuario, asiento,fila,evento);
+                    listaTransacciones.add(tran);
+                }
+            
+            }catch(SQLException ex){
+                ex.getMessage();
+                }
+            
+        return listaTransacciones;
+        }
         
 }
