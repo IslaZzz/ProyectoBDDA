@@ -10,11 +10,11 @@ INSERT INTO Direcciones (calle, colonia, ciudad, estado, codigoPostal) VALUES
 
 -- Insertar usuarios
 INSERT INTO Usuarios (nombres, apellidoMaterno, apellidoPaterno, correoElectronico, contraseña, fechaNacimiento, saldo, idDireccion) VALUES
-('Juan', 'Pérez', 'Gómez', 'juan.perez@gmail.com', 'password123', '1990-05-15', 1500.00, 1),
-('María', 'López', 'Hernández', 'maria.lopez@gmail.com', 'password456', '1985-08-22', 2000.00, 2),
-('Carlos', 'García', 'Martínez', 'carlos.garcia@gmail.com', 'password789', '1995-02-10', 1000.00, 3),
-('Ana', 'Martínez', 'Sánchez', 'ana.martinez@gmail.com', 'password012', '1988-11-30', 2500.00, 4),
-('Luis', 'Rodríguez', 'Díaz', 'luis.rodriguez@gmail.com', 'password345', '1992-07-25', 3000.00, 5);
+('Juan', 'Pérez', 'Gómez', 'juan.perez@gmail.com', '$2a$12$BPT62ygPE123FLs8Fn6WGO6KG3HTp08NyRww/gIjElgWt3EMJ3VXS', '1990-05-15', 1500.00, 1),
+('María', 'López', 'Hernández', 'maria.lopez@gmail.com', '$2a$12$BPT62ygPE123FLs8Fn6WGO6KG3HTp08NyRww/gIjElgWt3EMJ3VXS', '1985-08-22', 2000.00, 2),
+('Carlos', 'García', 'Martínez', 'carlos.garcia@gmail.com', '$2a$12$BPT62ygPE123FLs8Fn6WGO6KG3HTp08NyRww/gIjElgWt3EMJ3VXS', '1995-02-10', 1000.00, 3),
+('Ana', 'Martínez', 'Sánchez', 'ana.martinez@gmail.com', '$2a$12$BPT62ygPE123FLs8Fn6WGO6KG3HTp08NyRww/gIjElgWt3EMJ3VXS', '1988-11-30', 2500.00, 4),
+('Luis', 'Rodríguez', 'Díaz', 'luis.rodriguez@gmail.com', '$2a$12$BPT62ygPE123FLs8Fn6WGO6KG3HTp08NyRww/gIjElgWt3EMJ3VXS', '1992-07-25', 3000.00, 5);
 
 -- Insertar eventos
 INSERT INTO Eventos (nombre, fecha, ciudad, Estado, descripcion, recinto) VALUES
@@ -25,17 +25,17 @@ INSERT INTO Eventos (nombre, fecha, ciudad, Estado, descripcion, recinto) VALUES
 ('Concierto de Bad Bunny', '2023-09-30', 'Monterrey', 'Nuevo León', 'Concierto en el Estadio BBVA.', 'Estadio BBVA');
 
 -- Insertar boletos
-INSERT INTO Boletos (idBoleto, idEvento, numSerie, fila, asiento, Disponible, precio, precioOriginal) VALUES
-("JAKSJ",1, 'A1B2C3D4', 'A', 1, 1, 500, 500),
-("AKLSDK",1, 'E5F6G7H8', 'B', 2, 1,7841,500),
-("JAKJDSKSAKD",2, 'I9J0K1L2', 'C', 3, 1,700,500),
-("ASDASD",2, 'M3N4O5P6', 'D', 4, 1,612,500),
-("ASDASDAS",3, 'Q7R8S9T0', 'E', 5, 1,1024, 1024),
-("SDASD",3, 'U1V2W3X4', 'F', 6, 1,976, 976),
-("ASDKLSD",4, 'Y5Z6A7B8', 'G', 7, 1,1358, 1358),
-("KASLSKDL",4, 'C9D0E1F2', 'H', 8, 1,35813, 35813),
-("WKLFLDS",5, 'G3H4I5J6', 'I', 9, 1,500, 500),
-("LLSÑDAL",5, 'K7L8M9N0', 'J', 10, 1,500, 500);
+INSERT INTO Boletos (idBoleto, idEvento, numSerie, fila, asiento, Disponible, precio, precioOriginal,idUsuario) VALUES
+("JAKSJ",1, 'A1B2C3D4', 'A', 1, 1, 500, 500, null),
+("AKLSDK",1, 'E5F6G7H8', 'B', 2, 1,515,500, 1),
+("JAKJDSKSAKD",2, 'I9J0K1L2', 'C', 3, 1,500,500, 1),
+("ASDASD",2, 'M3N4O5P6', 'D', 4, 1,501,500, 2),
+("ASDASDAS",3, 'Q7R8S9T0', 'E', 5, 1,1024, 1024, null),
+("SDASD",3, 'U1V2W3X4', 'F', 6, 1,976, 976, null),
+("ASDKLSD",4, 'Y5Z6A7B8', 'G', 7, 1,1358, 1358, null),
+("KASLSKDL",4, 'C9D0E1F2', 'H', 8, 1,35813, 35813, null),
+("WKLFLDS",5, 'G3H4I5J6', 'I', 9, 1,500, 500, null),
+("LLSÑDAL",5, 'K7L8M9N0', 'J', 10, 1,500, 500, null);
 
 -- Insertar transacciones
 INSERT INTO Transacciones (fechaHora, TipoCompra, monto) VALUES
