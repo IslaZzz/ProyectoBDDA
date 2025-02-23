@@ -9,6 +9,7 @@ import itson.ticketwizard.entidades.Boleto;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.Box;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -84,6 +85,11 @@ public class PnlComprarBoletos extends javax.swing.JPanel {
         btnComprar.setForeground(new java.awt.Color(255, 255, 255));
         btnComprar.setText("Comprar Boletos");
         btnComprar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnComprar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnComprarActionPerformed(evt);
+            }
+        });
 
         scrollPane.setBackground(new java.awt.Color(233, 233, 233));
         scrollPane.setBorder(null);
@@ -127,6 +133,25 @@ public class PnlComprarBoletos extends javax.swing.JPanel {
     private void btnVolverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolverMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_btnVolverMouseClicked
+
+    private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
+        List<Boleto> boletos = new LinkedList<>();
+        for (PnlBoletoComprar pnlBoleto : listaPanelesBoletos) {
+            if(pnlBoleto.getCheckBox().isSelected()){
+                boletos.add(pnlBoleto.getBoleto());
+            }
+        }
+        if(boletos.isEmpty()){
+            JOptionPane.showMessageDialog(
+                    parent,
+                    "No ha seleccionado ningún boleto",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
+        } else {
+            parent.mostrarConfirmarCompra(boletos);
+        }
+    }//GEN-LAST:event_btnComprarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

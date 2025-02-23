@@ -9,6 +9,7 @@ import itson.ticketwizard.control.ControlInicioSesion;
 import itson.ticketwizard.control.ControlMostrarEventos;
 import itson.ticketwizard.control.ControlMovimientos;
 import itson.ticketwizard.control.ControlSaldo;
+import itson.ticketwizard.entidades.Boleto;
 import itson.ticketwizard.entidades.Usuario;
 import itson.ticketwizard.persistencia.BoletosDAO;
 import itson.ticketwizard.persistencia.EventosDAO;
@@ -18,6 +19,7 @@ import itson.ticketwizard.persistencia.UsuariosDAO;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.font.TextAttribute;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -444,6 +446,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         lblSaldo.setFont(font);
     }//GEN-LAST:event_lblCerrarSesionMouseExited
     
+    /**
+     * Metodo para mostrar el panel con los boletos de un evento
+     * al seleccionar dicho evento
+     * @param idEvento Evento seleccionado
+     */
     public void mostrarBoletosEvento(Integer idEvento){
         pnlCardLayout.removeAll();
         ManejadorConexiones conexionBD = new ManejadorConexiones();
@@ -455,6 +462,17 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pnlCardLayout.revalidate();
     }
 
+    public void mostrarConfirmarCompra(List<Boleto> boletos){
+        pnlCardLayout.removeAll();
+        ManejadorConexiones conexionBD = new ManejadorConexiones();
+        BoletosDAO boletosDAO = new BoletosDAO(conexionBD);
+        ControlCompraBoletos control = new ControlCompraBoletos(boletosDAO);
+        PnlConfirmarCompra pnlConfirmarCompra = new PnlConfirmarCompra(control, boletos, this);
+        pnlCardLayout.add(pnlConfirmarCompra);
+        pnlCardLayout.repaint();
+        pnlCardLayout.revalidate();
+    }
+    
     public Usuario getUsuario() {
         return usuario;
     }

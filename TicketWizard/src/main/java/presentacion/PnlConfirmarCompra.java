@@ -4,17 +4,52 @@
  */
 package presentacion;
 
+import itson.ticketwizard.control.ControlCompraBoletos;
+import itson.ticketwizard.entidades.Boleto;
+import java.util.List;
+
 /**
  *
  * @author Peter
  */
 public class PnlConfirmarCompra extends javax.swing.JPanel {
 
+    private ControlCompraBoletos control;
+    private List<Boleto> boletos;
+    private FrmPrincipal parent;
+    private double monto;
+    
     /**
      * Creates new form NewJPanel
      */
-    public PnlConfirmarCompra() {
+    public PnlConfirmarCompra(ControlCompraBoletos control, List<Boleto> boletos, FrmPrincipal parent ) {
+        this.control = control;
+        this.boletos = boletos;
+        this.parent = parent;
         initComponents();
+        cargarPanel();
+    }
+    
+    /**
+     * Metodo para cargar la información de la compra
+     */
+    private void cargarPanel(){
+        String asientos = "";
+        double monto = 0;
+        for(Boleto boleto : boletos){
+            asientos+= boleto.getFila()+String.valueOf(boleto.getAsiento());
+            monto += boleto.getPrecio();
+            if(!boletos.getLast().equals(boleto)){
+                asientos+= ", ";
+                
+            }
+        }
+        Boleto boleto = boletos.getFirst();
+        this.monto = monto;
+        lblMonto.setText("Monto: $"+String.valueOf(monto)+"MXN");
+        lblNombre.setText("* Evento: "+ control.consultaEvento(boleto));
+        lblSaldo.setText("Comprado de: "+String.valueOf(parent.getUsuario().getSaldo()));
+        lblAsientos.setText("Asientos: "+asientos);
     }
 
     /**
@@ -29,10 +64,10 @@ public class PnlConfirmarCompra extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lblMonto = new javax.swing.JLabel();
+        lblNombre = new javax.swing.JLabel();
+        lblSaldo = new javax.swing.JLabel();
+        lblAsientos = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
@@ -51,22 +86,22 @@ public class PnlConfirmarCompra extends javax.swing.JPanel {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("n Boletos");
 
-        jLabel3.setFont(new java.awt.Font("SansSerif", 1, 48)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(30, 30, 30));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("$0000 MXN");
+        lblMonto.setFont(new java.awt.Font("SansSerif", 1, 48)); // NOI18N
+        lblMonto.setForeground(new java.awt.Color(30, 30, 30));
+        lblMonto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblMonto.setText("$0000 MXN");
 
-        jLabel4.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(130, 130, 130));
-        jLabel4.setText("* <Nombre Evento> <Fecha>");
+        lblNombre.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        lblNombre.setForeground(new java.awt.Color(130, 130, 130));
+        lblNombre.setText("* <Nombre Evento>");
 
-        jLabel5.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(130, 130, 130));
-        jLabel5.setText("* Saldo actual: <Saldo>");
+        lblSaldo.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        lblSaldo.setForeground(new java.awt.Color(130, 130, 130));
+        lblSaldo.setText("* Saldo actual: <Saldo>");
 
-        jLabel6.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(130, 130, 130));
-        jLabel6.setText("* Asientos: <Fila Asiento>");
+        lblAsientos.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        lblAsientos.setForeground(new java.awt.Color(130, 130, 130));
+        lblAsientos.setText("* Asientos: <Fila Asiento>");
 
         jButton1.setBackground(new java.awt.Color(0, 0, 0));
         jButton1.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
@@ -86,16 +121,16 @@ public class PnlConfirmarCompra extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE))
+                    .addComponent(lblMonto, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel4))
+                    .addComponent(lblAsientos)
+                    .addComponent(lblSaldo)
+                    .addComponent(lblNombre))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -104,13 +139,13 @@ public class PnlConfirmarCompra extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
+                .addComponent(lblMonto)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel4)
+                .addComponent(lblNombre)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel5)
+                .addComponent(lblSaldo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel6)
+                .addComponent(lblAsientos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -147,10 +182,10 @@ public class PnlConfirmarCompra extends javax.swing.JPanel {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblAsientos;
+    private javax.swing.JLabel lblMonto;
+    private javax.swing.JLabel lblNombre;
+    private javax.swing.JLabel lblSaldo;
     // End of variables declaration//GEN-END:variables
 }
