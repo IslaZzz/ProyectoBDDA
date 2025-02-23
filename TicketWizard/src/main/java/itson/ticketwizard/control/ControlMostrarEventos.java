@@ -8,7 +8,6 @@ import itson.ticketwizard.dto.MostrarEventoDTO;
 import itson.ticketwizard.entidades.Evento;
 import itson.ticketwizard.persistencia.EventosDAO;
 import java.util.List;
-import presentacion.PnlEventos;
 
 /**
  *
@@ -16,7 +15,6 @@ import presentacion.PnlEventos;
  */
 public class ControlMostrarEventos {
     private EventosDAO eventosDAO;
-    private PnlEventos pnlEventos;
     
     public ControlMostrarEventos(EventosDAO eventosDAO){
         this.eventosDAO = eventosDAO;

@@ -9,27 +9,18 @@ import java.util.Objects;
  */
 public class Transaccion {
     private Integer idTransaccion;
-    private Integer numeroControl;
     private Date fechaHora;
     private String tipoCompra;
     private double monto;
     private String rol;
-    private Integer idEvento;
     private String idUsuario;
-    private int asiento;
-    private String fila;
-    private String evento;
 
-    public Transaccion(Integer idTransaccion,Integer numeroControl, Date fechaHora, String tipoCompra, double monto, String rol, String idUsuario, int asiento, String fila, String evento) throws TransaccionException{
+    public Transaccion(Integer idTransaccion, Date fechaHora, String tipoCompra, double monto, String rol, String idUsuario) throws TransaccionException{
         this.idTransaccion=idTransaccion;
-        this.numeroControl=numeroControl;
         this.fechaHora=fechaHora;
         this.monto=monto;
         this.rol=rol;
         this.idUsuario=idUsuario;
-        this.asiento=asiento;
-        this.fila=fila;
-        this.evento=evento;
 
         try{
             if(!tipoCompra.equals("Boletera") ||!tipoCompra.equals("Reventa")){
@@ -42,15 +33,6 @@ public class Transaccion {
             ex.getMessage();
         }
     }
-
-    public Integer getNumeroControl() {
-        return numeroControl;
-    }
-
-    public void setNumeroControl(int numeroControl) {
-        this.numeroControl = numeroControl;
-    }
-
     public Date getFechaHora() {
         return fechaHora;
     }
@@ -83,44 +65,12 @@ public class Transaccion {
         this.rol = rol;
     }
 
-    public Integer getIdEvento() {
-        return idEvento;
-    }
-
-    public void setIdEvento(Integer idEvento) {
-        this.idEvento = idEvento;
-    }
-
     public String getIdUsuario() {
         return idUsuario;
     }
 
     public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
-    }
-
-    public int getAsiento() {
-        return asiento;
-    }
-
-    public void setAsiento(int asiento) {
-        this.asiento = asiento;
-    }
-
-    public String getFila() {
-        return fila;
-    }
-
-    public void setFila(String fila) {
-        this.fila = fila;
-    }
-
-    public String getEvento() {
-        return evento;
-    }
-
-    public void setEvento(String evento) {
-        this.evento = evento;
     }
 
     public Integer getIdTransaccion() {
@@ -136,7 +86,7 @@ public class Transaccion {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 29 * hash + this.numeroControl;
+        hash = 29 * hash + this.idTransaccion;
         hash = 29 * hash + Objects.hashCode(this.fechaHora);
         hash = 29 * hash + Objects.hashCode(this.tipoCompra);
         return hash;
@@ -154,12 +104,12 @@ public class Transaccion {
             return false;
         }
         final Transaccion other = (Transaccion) obj;
-        return this.numeroControl == other.numeroControl;
+        return this.idTransaccion == other.idTransaccion;
     }
 
     @Override
     public String toString() {
-        return "Transaccion{" + "numeroControl=" + numeroControl + ", fechaHora=" + fechaHora + ", tipoCompra=" + tipoCompra + ", monto=" + monto + ", rol=" + rol + ", idEvento=" + idEvento + ", idUsuario=" + idUsuario + ", asiento=" + asiento + ", fila=" + fila + ", evento=" + evento + '}';
+        return "Transaccion{" + ", fechaHora=" + fechaHora + ", tipoCompra=" + tipoCompra + ", monto=" + monto + ", rol=" + rol + ", idUsuario=" + idUsuario + '}';
     }
 
     

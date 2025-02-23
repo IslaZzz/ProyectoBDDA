@@ -7,11 +7,13 @@ package presentacion;
 import itson.ticketwizard.control.ControlCompraBoletos;
 import itson.ticketwizard.control.ControlInicioSesion;
 import itson.ticketwizard.control.ControlMostrarEventos;
+import itson.ticketwizard.control.ControlMovimientos;
 import itson.ticketwizard.control.ControlSaldo;
 import itson.ticketwizard.entidades.Usuario;
 import itson.ticketwizard.persistencia.BoletosDAO;
 import itson.ticketwizard.persistencia.EventosDAO;
 import itson.ticketwizard.persistencia.ManejadorConexiones;
+import itson.ticketwizard.persistencia.TransaccionesDAO;
 import itson.ticketwizard.persistencia.UsuariosDAO;
 import java.awt.Color;
 import java.awt.Font;
@@ -62,8 +64,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         lblCerrarSesion = new javax.swing.JLabel();
         pnlBoletos = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        pnlMovimientos = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("TicketWizard");
@@ -265,27 +265,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         pnlCardLayout.add(pnlBoletos, "card3");
 
-        jLabel4.setText("Movimientos");
-
-        javax.swing.GroupLayout pnlMovimientosLayout = new javax.swing.GroupLayout(pnlMovimientos);
-        pnlMovimientos.setLayout(pnlMovimientosLayout);
-        pnlMovimientosLayout.setHorizontalGroup(
-            pnlMovimientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlMovimientosLayout.createSequentialGroup()
-                .addContainerGap(485, Short.MAX_VALUE)
-                .addComponent(jLabel4)
-                .addGap(357, 357, 357))
-        );
-        pnlMovimientosLayout.setVerticalGroup(
-            pnlMovimientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlMovimientosLayout.createSequentialGroup()
-                .addGap(201, 201, 201)
-                .addComponent(jLabel4)
-                .addContainerGap(247, Short.MAX_VALUE))
-        );
-
-        pnlCardLayout.add(pnlMovimientos, "card5");
-
         getContentPane().add(pnlCardLayout, java.awt.BorderLayout.CENTER);
 
         pack();
@@ -373,8 +352,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
         lblEventos.setFont(font.deriveFont(attributes));
         pnlCardLayout.removeAll();
         ManejadorConexiones conexionBD = new ManejadorConexiones();
-        EventosDAO eventosDAO = new EventosDAO(conexionBD);
-        ControlMostrarEventos control = new ControlMostrarEventos(eventosDAO);
+        TransaccionesDAO movimientosDAO = new TransaccionesDAO(conexionBD);
+        ControlMovimientos control = new ControlMovimientos(movimientosDAO);
+        PnlMovimientos pnlMovimientos = new PnlMovimientos(control, this);
         pnlCardLayout.add(pnlMovimientos);
         pnlCardLayout.repaint();
         pnlCardLayout.revalidate();
@@ -487,7 +467,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel lblBienvenido;
     private javax.swing.JLabel lblBoletos;
     private javax.swing.JLabel lblCerrarSesion;
@@ -498,7 +477,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel pnlBoletos;
     private javax.swing.JPanel pnlCardLayout;
     private javax.swing.JPanel pnlMenu;
-    private javax.swing.JPanel pnlMovimientos;
     private javax.swing.JPanel pnlPrincipal;
     // End of variables declaration//GEN-END:variables
 }
