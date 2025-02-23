@@ -52,6 +52,7 @@ public class FrmInicioSesion extends javax.swing.JFrame {
         btnInicioSesion.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
         btnInicioSesion.setForeground(new java.awt.Color(255, 255, 255));
         btnInicioSesion.setText("Iniciar Sesión");
+        btnInicioSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnInicioSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnInicioSesionActionPerformed(evt);

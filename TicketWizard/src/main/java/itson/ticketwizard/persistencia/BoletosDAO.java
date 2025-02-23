@@ -65,7 +65,25 @@ public class BoletosDAO {
         String numeroDeSerie = fila + asiento + parteAleatoria;
         return numeroDeSerie;
     }
-
+    public String consultarEvento(Boleto boleto){
+        String consultaEvento = """
+                                SELECT Nombre FROM Eventos WHERE idEvento = ?
+                                """;
+        try{
+            Connection conexion = manejadorConexiones.crearConexion();
+            PreparedStatement consulta = conexion.prepareStatement(consultaEvento);
+            consulta.setInt(1, boleto.getIdEvento());
+            ResultSet resultadoConsulta = consulta.executeQuery();
+            if(resultadoConsulta.next()){
+                String nombreEvento = resultadoConsulta.getString("Nombre");
+                return nombreEvento;
+            }
+        } catch(SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+        return null;
+    }
+    
     //@Override
      public List<Boleto> consultarBoletosUsuario(Usuario usuario){
             int id = usuario.getId();
@@ -78,7 +96,6 @@ public class BoletosDAO {
                 PreparedStatement consulta = conexion.prepareStatement(consultarBoletos);
                 consulta.setInt(1, id);
                 ResultSet resultadoConsulta = consulta.executeQuery();
-                int filasActualizadas = consulta.executeUpdate();
             //  String idBoleto, String numeroSerie, double precio, boolean disponible,
             //          String fila, Integer asiento, Integer idEvento, Integer idUsuario
                  while (resultadoConsulta.next()) {

@@ -37,7 +37,6 @@ public class PnlEventos extends javax.swing.JPanel {
             boxPanelEventos.add(Box.createVerticalStrut(30));
             listaEventos.add(pnlEvento);
         }
-        
     }
     
     public void mostrarBoletos(Integer idEvento){

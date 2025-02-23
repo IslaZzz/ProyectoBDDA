@@ -6,8 +6,9 @@ package presentacion;
 
 import itson.ticketwizard.control.ControlCompraBoletos;
 import itson.ticketwizard.entidades.Boleto;
+import java.util.LinkedList;
 import java.util.List;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.Box;
 
 /**
  *
@@ -18,6 +19,7 @@ public class PnlComprarBoletos extends javax.swing.JPanel {
     private ControlCompraBoletos control;
     private FrmPrincipal parent;
     private Integer idEvento;
+    private List<PnlBoletoComprar> listaPanelesBoletos;
     /**
      * Creates new form pnlComprarBoletos
      */
@@ -25,14 +27,25 @@ public class PnlComprarBoletos extends javax.swing.JPanel {
         this.control = control;
         this.parent = parent;
         this.idEvento = idEvento;
+        this.listaPanelesBoletos = new LinkedList<>();
         initComponents();
         cargarBoletos();
     }
 
     private void cargarBoletos(){
         List<Boleto> boletos = control.consultarBoletosEvento(idEvento);
-        
+        for(Boleto boleto: boletos){
+            PnlBoletoComprar panel = new PnlBoletoComprar(boleto, this);
+            boxPnlBoletos.add(panel);
+            boxPnlBoletos.add(Box.createVerticalStrut(30));
+            listaPanelesBoletos.add(panel);
+        }
     }
+
+    public ControlCompraBoletos getControl() {
+        return control;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,7 +57,7 @@ public class PnlComprarBoletos extends javax.swing.JPanel {
 
         btnVolver = new javax.swing.JButton();
         btnComprar = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        scrollPane = new javax.swing.JScrollPane();
         boxPnlBoletos = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(233, 233, 233));
@@ -72,18 +85,12 @@ public class PnlComprarBoletos extends javax.swing.JPanel {
         btnComprar.setText("Comprar Boletos");
         btnComprar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        javax.swing.GroupLayout boxPnlBoletosLayout = new javax.swing.GroupLayout(boxPnlBoletos);
-        boxPnlBoletos.setLayout(boxPnlBoletosLayout);
-        boxPnlBoletosLayout.setHorizontalGroup(
-            boxPnlBoletosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 574, Short.MAX_VALUE)
-        );
-        boxPnlBoletosLayout.setVerticalGroup(
-            boxPnlBoletosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 303, Short.MAX_VALUE)
-        );
+        scrollPane.setBackground(new java.awt.Color(233, 233, 233));
+        scrollPane.setBorder(null);
 
-        jScrollPane2.setViewportView(boxPnlBoletos);
+        boxPnlBoletos.setBackground(new java.awt.Color(233, 233, 233));
+        boxPnlBoletos.setLayout(new javax.swing.BoxLayout(boxPnlBoletos, javax.swing.BoxLayout.Y_AXIS));
+        scrollPane.setViewportView(boxPnlBoletos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -94,17 +101,17 @@ public class PnlComprarBoletos extends javax.swing.JPanel {
                 .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53)
                 .addComponent(btnComprar, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(217, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(156, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(149, 149, 149))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 599, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(143, 143, 143))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
+                .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -126,6 +133,6 @@ public class PnlComprarBoletos extends javax.swing.JPanel {
     private javax.swing.JPanel boxPnlBoletos;
     private javax.swing.JButton btnComprar;
     private javax.swing.JButton btnVolver;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane scrollPane;
     // End of variables declaration//GEN-END:variables
 }

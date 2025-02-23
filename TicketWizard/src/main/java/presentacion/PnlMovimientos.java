@@ -261,6 +261,8 @@ public class PnlMovimientos extends javax.swing.JPanel {
 
     private void lblComprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblComprasMouseClicked
         currentSection = COMPRAS;
+        Font font = new Font("Sans Serif", Font.BOLD, 36);
+        lblVentas.setFont(font);
         boxPanelMovimientos.removeAll();
         pnlCompras.removeAll();
         boxPanelMovimientos.add(pnlCompras);
@@ -301,6 +303,8 @@ public class PnlMovimientos extends javax.swing.JPanel {
 
     private void lblVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblVentasMouseClicked
         currentSection = VENTAS;
+        Font font = new Font("Sans Serif", Font.BOLD, 36);
+        lblCompras.setFont(font);
         boxPanelMovimientos.removeAll();
         pnlVentas.removeAll();
         boxPanelMovimientos.add(pnlVentas);
