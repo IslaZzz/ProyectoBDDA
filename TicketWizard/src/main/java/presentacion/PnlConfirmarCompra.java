@@ -217,8 +217,6 @@ public class PnlConfirmarCompra extends javax.swing.JPanel {
             if(opcion == JOptionPane.YES_OPTION){
                 for (Boleto boleto : boletos) {
                     if(boleto.getIdUsuario()!=0){
-                        controlMovimientos.comprarReventa(parent.getUsuario(), boleto.getIdBoleto(), boleto.getPrecio(), Seguridad.generarCodigoAlfanumerico(), boleto.getIdUsuario());
-                        parent.getUsuariosDAO().agregarSaldo(-boleto.getPrecio(), parent.getUsuario());
                         if(parent.getUsuario().getId() == boleto.getIdUsuario()){
                             JOptionPane.showMessageDialog(
                             parent, 
@@ -228,6 +226,8 @@ public class PnlConfirmarCompra extends javax.swing.JPanel {
                             parent.mostrarFramePrincipal();
                             return;
                         }
+                        controlMovimientos.comprarReventa(parent.getUsuario(), boleto.getIdBoleto(), boleto.getPrecio(), Seguridad.generarCodigoAlfanumerico(), boleto.getIdUsuario());
+                        parent.getUsuariosDAO().agregarSaldo(-boleto.getPrecio(), parent.getUsuario());
                     } else {
                         controlMovimientos.comprarBoletera(parent.getUsuario(), boleto.getIdBoleto(), boleto.getPrecio(), Seguridad.generarCodigoAlfanumerico());
                         parent.getUsuariosDAO().agregarSaldo(-boleto.getPrecio(), parent.getUsuario());
