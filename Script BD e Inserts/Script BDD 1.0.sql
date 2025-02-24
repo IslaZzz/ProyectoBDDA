@@ -86,3 +86,84 @@ Create table Reservas(
     idBoleto varchar(15) primary key,
     Foreign Key (idBoleto) References Boletos(idBoleto)
 );
+
+
+-- create procedure comprarBoletera()
+DELIMITER //
+CREATE PROCEDURE compraBoletera(
+    IN idBoleto VARCHAR(20),
+    IN precio DECIMAL(10,2),
+    IN serie VARCHAR(10),
+    IN IDU INT(20)
+)
+BEGIN
+    -- Iniciar la transacción
+    START TRANSACTION;
+
+    -- Actualizar el estado del boleto
+    UPDATE BOLETOS
+    SET DISPONIBLE = FALSE, numSerie = serie
+    WHERE idBoleto = idBoleto;
+
+    -- Actualizar el saldo del usuario
+    UPDATE USUARIOS 
+    SET SALDO = SALDO - precio
+    WHERE IDU = IDU;
+
+    -- Insertar una nueva transacción
+    INSERT INTO TRANSACCIONES (FECHAHORA, TIPOCOMPRA, MONTO)
+    VALUES (NOW(), 'Boletera', precio);
+
+    -- Obtener el ID de la última transacción
+    SET @IDTRANSACCION = LAST_INSERT_ID();
+
+    -- Insertar en la tabla de relaciones usuario-transacción
+    INSERT INTO USUARIOS_TRANSACCIONES (ROL, IDUSUARIO, IDTRANSACCION) 
+    VALUES ('Comprador', IDU, @IDTRANSACCION);
+
+    -- Insertar en la tabla de transacciones de boletos
+    INSERT INTO TRANSACCIONESBOLETOS (IDTRANSACCION, IDBOLETO) 
+    VALUES (@IDTRANSACCION, idBoleto);
+
+    -- Confirmar la transacción
+    COMMIT;
+
+END //
+DELIMITER ;
+
+-- create procedure ventaBoletera()
+drop procedure if exists comprarReventa;
+
+DELIMITER //
+create procedure comprarReventa(
+	IN idBoleto VARCHAR(20),
+	IN precio DECIMAL(10,2),
+    IN serie VARCHAR(10),
+    IN IDU INT(20)
+)
+BEGIN
+ DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
+    BEGIN
+        -- Aquí puedes manejar el error, como hacer un ROLLBACK y un mensaje de error
+        ROLLBACK;
+        SELECT 'Error en la transacción. Los cambios han sido revertidos.' AS error_message;
+    END;
+start transaction;
+-- Insertar una nueva transacción
+    INSERT INTO TRANSACCIONES (FECHAHORA, TIPOCOMPRA, MONTO)
+    VALUES (NOW(), 'Reventa', precio);
+
+    -- Obtener el ID de la última transacción
+    SET @IDTRANSACCION = LAST_INSERT_ID();
+
+    -- Insertar en la tabla de relaciones usuario-transacción
+    INSERT INTO USUARIOS_TRANSACCIONES (ROL, IDUSUARIO, IDTRANSACCION) 
+    VALUES ('Comprador', IDU, @IDTRANSACCION);
+
+    -- Insertar en la tabla de transacciones de boletos
+    INSERT INTO TRANSACCIONESBOLETOS (IDTRANSACCION, IDBOLETO) 
+    VALUES (@IDTRANSACCION, idBoleto);
+    -- Confirmar la transacción
+    COMMIT;
+    end //
+DELIMITER ;
