@@ -5,12 +5,14 @@
 package itson.ticketwizard.persistencia;
 
 import itson.ticketwizard.entidades.Boleto;
+import itson.ticketwizard.entidades.Transaccion;
 import itson.ticketwizard.entidades.Usuario;
+import itson.ticketwizard.excepciones.TransaccionException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
+import java.sql.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
@@ -120,15 +122,49 @@ public class BoletosDAO {
                     Integer asiento = resultadoConsulta.getInt("Asiento");
                     double precio = resultadoConsulta.getDouble("precio");
                     String numControl = resultadoConsulta.getString("idBoleto");
+                    double precioOriginal = resultadoConsulta.getDouble("precioOriginal");
                     String numSerie = resultadoConsulta.getString("numero de serie");
                     boolean disp=false;
-                    Boleto boleto = new Boleto(numControl,numSerie,precio,disp,fila,asiento,idEvento,id);
+                    Boleto boleto = new Boleto(numControl,numSerie,precio,disp,fila, asiento,idEvento, precioOriginal,id);
                     listaBoletosUs.add(boleto);
                 }
             }catch (SQLException e) {
             System.err.println("Error al consultar boletos" + e.getMessage());
             }
         return listaBoletosUs;
+    }
+     
+     public Boleto reventaBoleto(Usuario usuario, double precio, Boleto boleto, Date fechaLimiteVenta){
+        int idUsuario = usuario.getId();
+        String idBoleto = boleto.getIdBoleto();
+        String spReventa = """
+                            CALL revenderBoleto(?,?,?,?)
+                           """;
+        try{
+                Connection conexion = manejadorConexiones.crearConexion();
+                PreparedStatement consulta = conexion.prepareStatement(spReventa);
+                consulta.setInt(1, idUsuario);
+                consulta.setDouble(2, precio);
+                consulta.setString(3, idBoleto);
+                consulta.setDate(4, fechaLimiteVenta);
+                ResultSet resultadoConsulta = consulta.executeQuery();
+                if(resultadoConsulta.next()){
+                    idBoleto = resultadoConsulta.getString("idBoleto");
+                    int idEvento = resultadoConsulta.getInt("idEvento");
+                    String numSerie = resultadoConsulta.getString("numSerie");
+                    String fila = resultadoConsulta.getString("fila");
+                    int asiento = resultadoConsulta.getInt("asiento");
+                    boolean disponible = resultadoConsulta.getBoolean("Disponible");
+                    double nwprecio = resultadoConsulta.getDouble("precio");
+                    double precioOriginal = resultadoConsulta.getDouble("precioOriginal");
+                    idUsuario = resultadoConsulta.getInt("idUsuario");
+                    Date fechalimite = resultadoConsulta.getDate("fechaLimiteventa");
+                    return new Boleto(idBoleto, numSerie, nwprecio, disponible, fila, asiento, idEvento, precioOriginal, idUsuario, fechalimite);
+                }
+            }catch (SQLException e) {
+            System.err.println("Error al consultar boletos" + e.getMessage());
+            }
+        return null;
     }
 }
 

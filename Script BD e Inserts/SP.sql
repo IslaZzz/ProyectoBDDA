@@ -152,10 +152,10 @@ DROP PROCEDURE IF EXISTS revenderBoleto;
 
 CREATE PROCEDURE revenderBoleto(
     IN IDUsuario VARCHAR(20),
-    IN precio DECIMAL(10,2),
-    IN PORCENTAJE DECIMAL(5,2),
-    IN idBoleto VARCHAR(20),
+    IN precioNuevo DECIMAL(10,2),
+    IN idBoletoVenta VARCHAR(20),
     IN idTransaccion INT(10)
+    IN fechaLimite DATE
     -- IN FECHA DATE
 )
 BEGIN
@@ -166,23 +166,15 @@ END;
 START TRANSACTION;
 
 -- Validación de porcentaje
-IF PORCENTAJE > 3 OR PORCENTAJE < 0 THEN
-ROLLBACK; -- Revertir si el porcentaje es mayor a 3
+IF precio > (SELECT precioOriginal FROM Boletos B WHERE B.idBoleto = idBoletoVenta)*1.03 THEN
+ROLLBACK; -- Revertir si el porcentaje es mayor a 103% del precio original
 SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Porcentaje inválido'; -- Mensaje de error
 ELSE
 
 -- Actualiza el boleto y su precio
 UPDATE BOLETOS
-SET DISPONIBLE = TRUE, PRECIO = PRECIO * (PORCENTAJE / 100)
-WHERE idBoleto = idBoleto;
-
--- Insertar en la relación entre usuarios y transacciones
-INSERT INTO USUARIOS_TRANSACCIONES (Rol, idUsuario, idTransaccion)
-VALUES ('Vendedor', IDUsuario, idTransaccion);
-
--- Insertar la relación entre transacciones y boletos
-INSERT INTO TRANSACCIONESBOLETOS (idTransaccion, idBoleto)
-VALUES (idTransaccion, idBoleto);
+SET DISPONIBLE = TRUE, PRECIO = PrecioNuevo, fechaLimiteVenta = fechaLimite
+WHERE idBoleto = idBoletoVenta;
 
 -- Confirmar transacción
 COMMIT;

@@ -6,6 +6,7 @@ package presentacion;
 
 import itson.ticketwizard.control.ControlBoletos;
 import itson.ticketwizard.entidades.Boleto;
+import itson.ticketwizard.entidades.Seguridad;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.Box;
@@ -13,31 +14,30 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Peter
+ * @author pc
  */
-public class PnlMisBoletos extends javax.swing.JPanel {
+public class PnlReventaBoletos extends javax.swing.JPanel {
 
-    
     private List<Boleto> boletos;
-    private FrmPrincipal parent;
+    private List<PnlBoletoReventa> listaPaneles;
     private ControlBoletos control;
-    private List<PnlBoletoMisBoletos> listaPaneles;
+    private FrmPrincipal parent;
+
     /**
-     * Creates new form PnlMisBoletos
+     * Creates new form PnlReventaBoletos
      */
-    public PnlMisBoletos(ControlBoletos control, FrmPrincipal parent) {
+    public PnlReventaBoletos(List<Boleto> boletos, ControlBoletos control, FrmPrincipal parent) {
         this.boletos = boletos;
-        this.parent = parent;
         this.control = control;
+        this.parent = parent;
         initComponents();
         cargarBoletos();
     }
-    
-    private void cargarBoletos(){
-        this.boletos = control.consultaBoletosUsuario(parent.getUsuario());
+
+    private void cargarBoletos() {
         listaPaneles = new LinkedList<>();
-        for(Boleto boleto : boletos){
-            PnlBoletoMisBoletos panel = new PnlBoletoMisBoletos(boleto, parent);
+        for (Boleto boleto : boletos) {
+            PnlBoletoReventa panel = new PnlBoletoReventa(boleto, parent);
             boxPanelBoletos.add(panel);
             boxPanelBoletos.add(Box.createVerticalStrut(30));
             listaPaneles.add(panel);
@@ -54,6 +54,7 @@ public class PnlMisBoletos extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
         pnlEventos = new javax.swing.JPanel();
         scrollPanelEventos = new javax.swing.JScrollPane();
         boxPanelBoletos = new javax.swing.JPanel();
@@ -96,14 +97,15 @@ public class PnlMisBoletos extends javax.swing.JPanel {
                         .addContainerGap()
                         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(pnlEventosLayout.createSequentialGroup()
-                        .addGap(102, 102, 102)
-                        .addComponent(scrollPanelEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 98, Short.MAX_VALUE)))
+                        .addGroup(pnlEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlEventosLayout.createSequentialGroup()
+                                .addGap(232, 232, 232)
+                                .addComponent(btnRevender, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnlEventosLayout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addComponent(scrollPanelEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 846, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 12, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(pnlEventosLayout.createSequentialGroup()
-                .addGap(232, 232, 232)
-                .addComponent(btnRevender, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(242, Short.MAX_VALUE))
         );
         pnlEventosLayout.setVerticalGroup(
             pnlEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,6 +118,27 @@ public class PnlMisBoletos extends javax.swing.JPanel {
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 886, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(pnlEventos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 488, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(pnlEventos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -124,7 +147,7 @@ public class PnlMisBoletos extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(pnlEventos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
@@ -133,7 +156,7 @@ public class PnlMisBoletos extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(pnlEventos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
@@ -159,36 +182,59 @@ public class PnlMisBoletos extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * Boton que manda a otro panel para poner precio a los boletos;
-     * @param evt 
-     */
     private void btnRevenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRevenderActionPerformed
-        List<Boleto> boletosReventa = new LinkedList<>();
-        for(PnlBoletoMisBoletos panelBoleto : listaPaneles){
-            if(panelBoleto.getCheckBox().isSelected()){
-                if(panelBoleto.getBoleto().isDisponible()){
+        try {
+            for (PnlBoletoReventa pnlBoleto : listaPaneles) {
+                if (pnlBoleto.getTxtFechaLimite().getText().isBlank() || pnlBoleto.getTxtPrecio().getText().isBlank()) {
                     JOptionPane.showMessageDialog(
-                    this,
-                    "Uno de los boletos ya está en reventa",
-                    "ERROR",
-                    JOptionPane.ERROR_MESSAGE
-            );
+                            this,
+                            "Asegurese de llenar todos los campos",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                    return;
                 }
-                boletosReventa.add(panelBoleto.getBoleto());
-                
+                if (Double.parseDouble(pnlBoleto.getTxtPrecio().getText()) > pnlBoleto.getBoleto().getPrecioOriginal() * 1.03) {
+                    JOptionPane.showMessageDialog(
+                            this,
+                            "El precio no puede superar al 103% del precio original",
+                            "ERROR",
+                            JOptionPane.ERROR_MESSAGE
+                    );
+                    return;
+                } else if (Double.parseDouble(pnlBoleto.getTxtPrecio().getText()) <= 0) {
+                    JOptionPane.showMessageDialog(
+                            this,
+                            "No puede ingresar precios negativos o 0",
+                            "ERROR",
+                            JOptionPane.ERROR_MESSAGE
+                    );
+                    return;
+                }
+                if (!Seguridad.validaFecha(pnlBoleto.getTxtFechaLimite().getText())) {
+                    JOptionPane.showMessageDialog(
+                            this,
+                            "El formato de la fecha debe ser dd/mm/yyyy",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
             }
-        }
-        if(boletosReventa.isEmpty()){
+            for (PnlBoletoReventa pnlBoleto : listaPaneles) {
+                Double precio = Double.parseDouble(pnlBoleto.getTxtPrecio().getText());
+                java.sql.Date fechaLimite = new java.sql.Date(Seguridad.dateMapper(pnlBoleto.getTxtFechaLimite().getText()).getTime());
+                control.reventaBoleto(parent.getUsuario(),precio, pnlBoleto.getBoleto(), fechaLimite);
+            }
+            parent.mostrarInicio();
+        } catch (NumberFormatException err) {
             JOptionPane.showMessageDialog(
                     this,
-                    "No ha seleccionado ningun boleto",
-                    "ERROR",
-                    JOptionPane.ERROR_MESSAGE
-            );
-        } else {
-            parent.mostrarReventaBoletos(boletosReventa);
+                    "El formato del precio debe ser un decimal",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+
         }
+
     }//GEN-LAST:event_btnRevenderActionPerformed
 
 
@@ -197,6 +243,7 @@ public class PnlMisBoletos extends javax.swing.JPanel {
     private javax.swing.JButton btnRevender;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel pnlEventos;
     private javax.swing.JScrollPane scrollPanelEventos;
     // End of variables declaration//GEN-END:variables
