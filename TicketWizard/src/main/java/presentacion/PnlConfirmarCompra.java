@@ -216,7 +216,7 @@ public class PnlConfirmarCompra extends javax.swing.JPanel {
                     JOptionPane.YES_NO_OPTION);
             if(opcion == JOptionPane.YES_OPTION){
                 for (Boleto boleto : boletos) {
-                    if(boleto.getIdUsuario() != null){
+                    if(boleto.getIdUsuario()!=0){
                         controlMovimientos.comprarReventa(parent.getUsuario(), boleto.getIdBoleto(), boleto.getPrecio(), Seguridad.generarCodigoAlfanumerico(), boleto.getIdUsuario());
                     } else {
                         controlMovimientos.comprarBoletera(parent.getUsuario(), boleto.getIdBoleto(), boleto.getPrecio(), Seguridad.generarCodigoAlfanumerico());
