@@ -1,0 +1,24 @@
+-classpath
+'C:/Users/52644/.m2/repository/com/mysql/mysql-connector-j/8.4.0/mysql-connector-j-8.4.0.jar;C:/Users/52644/.m2/repository/com/google/protobuf/protobuf-java/3.25.1/protobuf-java-3.25.1.jar;C:/Users/52644/.m2/repository/org/mindrot/jbcrypt/0.4/jbcrypt-0.4.jar'
+-encoding
+'UTF-8'
+-protected
+-source
+'21'
+-sourcepath
+'C:/Users/52644/Documents/GitHub/ProyectoBDDA/TicketWizard/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2025. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/52644/Documents/GitHub/ProyectoBDDA/TicketWizard/target/reports/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'TicketWizard 1.0 API'
+-use
+-version
+-windowtitle
+'TicketWizard 1.0 API'
