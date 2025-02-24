@@ -257,30 +257,4 @@ public class UsuariosDAO implements IUsuariosDAO {
             return idTransaccion;
         }
     }
-    /*
-    public Transaccion reventaBoleto(Usuario usuario, double precio, double porcentaje, Boleto boleto) throws TransaccionException{
-        Integer idTransaccion = crearTransaccion(precio, porcentaje); 
-        int idUsuario = usuario.getId();
-        double monto=(precio*(porcentaje/100));
-        //Date fechaHora = fechaHora.getTime();
-        String idU = String.valueOf(idUsuario);
-        String idBoleto = boleto.getIdBoleto();
-        String spReventa = """
-                            CALL revenderBoleto(?,?,?,?,?)
-                           """;
-        try{
-                Connection conexion = manejadorConexion.crearConexion();
-                PreparedStatement consulta = conexion.prepareStatement(spReventa);
-                consulta.setInt(1, idUsuario);
-                consulta.setDouble(2, precio);
-                consulta.setDouble(3, porcentaje);
-                consulta.setString(4, idBoleto);
-                consulta.setInt(5, idTransaccion);
-               // boolean resultadoConsulta = consulta.execute();
-                
-            }catch (SQLException e) {
-            System.err.println("Error al consultar boletos" + e.getMessage());
-            }
-        return new Transaccion(idTransaccion,fechaHora,"Reventa",monto,"Vendedor",idU);
-    }*/
 }

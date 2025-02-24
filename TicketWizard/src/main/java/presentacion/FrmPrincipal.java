@@ -479,8 +479,33 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pnlCardLayout.revalidate();
     }
     
+    public void mostrarReventaBoletos(List<Boleto> boletos){
+        pnlCardLayout.removeAll();
+        PnlReventaBoletos pnlReventa = new PnlReventaBoletos(boletos, controlBoletos, this);
+        pnlCardLayout.add(pnlReventa);
+        pnlCardLayout.repaint();
+        pnlCardLayout.revalidate();
+    }
     public Usuario getUsuario() {
         return usuario;
+    }
+
+    public ControlBoletos getControlBoletos() {
+        return controlBoletos;
+    }
+    
+    public void mostrarInicio(){
+        currentSection = 0;
+        Font font = new Font("Sans Serif", Font.PLAIN, 18);
+        lblEventos.setFont(font);
+        lblBoletos.setFont(font);
+        lblMovimientos.setFont(font);
+        lblSaldo.setFont(font);
+        pnlCardLayout.removeAll();
+        pnlCardLayout.add(pnlPrincipal);
+        pnlCardLayout.repaint();
+        pnlCardLayout.revalidate();
+        lblEventos.setBackground(new Color(16, 23, 66));
     }
     
     

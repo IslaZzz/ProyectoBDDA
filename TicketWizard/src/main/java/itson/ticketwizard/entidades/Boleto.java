@@ -4,6 +4,8 @@
  */
 package itson.ticketwizard.entidades;
 
+import java.sql.Date;
+
 /**
  *
  * @author 52644
@@ -19,6 +21,7 @@ public class Boleto {
     private Integer idEvento;
     private double precioOriginal;
     private Integer idUsuario;
+    private Date fechaLimiteVenta;
     
     /**
      * Constructor para mostrar los boletos disponibles de los eventos.
@@ -39,9 +42,50 @@ public class Boleto {
         this.fila = fila;
         this.asiento = asiento;
         this.idEvento = idEvento;
+        this.idUsuario = idUsuario;
+    }
+
+    public Boleto(String idBoleto, String numeroSerie, double precio, boolean disponible, String fila, Integer asiento, Integer idEvento, double precioOriginal, Integer idUsuario) {
+        this.idBoleto = idBoleto;
+        this.numeroSerie = numeroSerie;
+        this.precio = precio;
+        this.disponible = disponible;
+        this.fila = fila;
+        this.asiento = asiento;
+        this.idEvento = idEvento;
         this.precioOriginal = precioOriginal;
         this.idUsuario = idUsuario;
     }
+    
+    
+
+    /**
+     * Constructor para boleto entero
+     *
+     * @param idBoleto
+     * @param numeroSerie
+     * @param precio
+     * @param disponible
+     * @param fila
+     * @param asiento
+     * @param idEvento
+     * @param precioOriginal
+     * @param idUsuario
+     * @param fechaLimiteVenta 
+     */
+    public Boleto(String idBoleto, String numeroSerie, double precio, boolean disponible, String fila, Integer asiento, Integer idEvento, double precioOriginal, Integer idUsuario, Date fechaLimiteVenta) {
+        this.idBoleto = idBoleto;
+        this.numeroSerie = numeroSerie;
+        this.precio = precio;
+        this.disponible = disponible;
+        this.fila = fila;
+        this.asiento = asiento;
+        this.idEvento = idEvento;
+        this.precioOriginal = precioOriginal;
+        this.idUsuario = idUsuario;
+        this.fechaLimiteVenta = fechaLimiteVenta;
+    }
+    
     
     
     //Constructor para instanciar un boleto. Cuando se instancia es por parte de la boletera

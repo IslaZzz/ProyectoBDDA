@@ -7,6 +7,7 @@ package itson.ticketwizard.control;
 import itson.ticketwizard.entidades.Boleto;
 import itson.ticketwizard.entidades.Usuario;
 import itson.ticketwizard.persistencia.BoletosDAO;
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -39,5 +40,9 @@ public class ControlBoletos {
     
     public List<Boleto> consultaBoletosUsuario(Usuario usuario){
         return boletosDAO.consultarBoletosUsuario(usuario);
+    }
+    
+    public Boleto reventaBoleto(Usuario usuario, double precio, Boleto boleto, Date fechaLimiteVenta){
+        return boletosDAO.reventaBoleto(usuario, precio, boleto, fechaLimiteVenta);
     }
 }

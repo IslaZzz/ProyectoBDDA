@@ -5,6 +5,7 @@
 package presentacion;
 
 import itson.ticketwizard.entidades.Boleto;
+import javax.swing.JCheckBox;
 
 /**
  *
@@ -28,7 +29,7 @@ public class PnlBoletoMisBoletos extends javax.swing.JPanel {
         lblNumSerie.setText("Numero de Serie: "+boleto.getNumeroSerie());
         lblFila.setText("Fila: "+boleto.getFila());
         lblAsiento.setText("Asiento: "+boleto.getAsiento());
-        lblNombreEvento.setText("Evento: ");
+        lblNombreEvento.setText("Evento: "+parent.getControlBoletos().consultaEvento(boleto));
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -161,6 +162,14 @@ public class PnlBoletoMisBoletos extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public Boleto getBoleto() {
+        return boleto;
+    }
+
+    public JCheckBox getCheckBox() {
+        return CheckBox;
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox CheckBox;
