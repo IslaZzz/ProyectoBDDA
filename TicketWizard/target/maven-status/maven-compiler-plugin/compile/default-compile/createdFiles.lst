@@ -1,3 +1,4 @@
+itson\ticketwizard\control\ControlBoletos.class
 presentacion\PnlConsultarSaldo$1.class
 itson\ticketwizard\entidades\Transaccion.class
 presentacion\FrmInicioSesion.class
@@ -14,9 +15,9 @@ presentacion\PnlMovimientos$1.class
 presentacion\FrmPrincipal$6.class
 itson\ticketwizard\persistencia\interfaces\IUsuariosDAO.class
 itson\ticketwizard\entidades\Evento.class
-itson\ticketwizard\control\ControlCompraBoletos.class
 presentacion\FrmRegistroUsuario$1.class
 presentacion\FrmRegistroUsuario$10.class
+presentacion\PnlMisBoletos.class
 presentacion\PnlConsultarBoletos.class
 presentacion\FrmPrincipal$2.class
 itson\ticketwizard\entidades\Seguridad.class
@@ -39,12 +40,14 @@ presentacion\FrmPrincipal$5.class
 presentacion\PnlConsultarSaldo.class
 presentacion\FrmRegistroUsuario$9.class
 itson\ticketwizard\control\ControlInicioSesion.class
+presentacion\PnlConfirmarCompra$1.class
 itson\ticketwizard\dto\MostrarEventoDTO.class
 itson\ticketwizard\control\ControlSaldo.class
 itson\ticketwizard\excepciones\TransaccionException.class
 itson\ticketwizard\persistencia\interfaces\IBoletosDAO.class
 presentacion\FrmRegistroUsuario$11.class
 presentacion\PnlConfirmarCompra.class
+presentacion\PnlBoletoMisBoletos.class
 presentacion\PnlEventos.class
 presentacion\FrmRegistroUsuario$6.class
 itson\ticketwizard\entidades\Boleto.class

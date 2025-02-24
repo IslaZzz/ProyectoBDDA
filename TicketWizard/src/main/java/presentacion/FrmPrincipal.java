@@ -4,11 +4,12 @@
  */
 package presentacion;
 
-import itson.ticketwizard.control.ControlCompraBoletos;
+import itson.ticketwizard.control.ControlBoletos;
 import itson.ticketwizard.control.ControlInicioSesion;
 import itson.ticketwizard.control.ControlMostrarEventos;
 import itson.ticketwizard.control.ControlMovimientos;
 import itson.ticketwizard.control.ControlSaldo;
+
 import itson.ticketwizard.entidades.Boleto;
 import itson.ticketwizard.entidades.Usuario;
 import itson.ticketwizard.persistencia.BoletosDAO;
@@ -16,6 +17,7 @@ import itson.ticketwizard.persistencia.EventosDAO;
 import itson.ticketwizard.persistencia.ManejadorConexiones;
 import itson.ticketwizard.persistencia.TransaccionesDAO;
 import itson.ticketwizard.persistencia.UsuariosDAO;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.font.TextAttribute;
@@ -34,6 +36,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private int MOVIMIENTOS = 3;
     private int SALDO = 4;
     private Usuario usuario;
+    private ControlBoletos controlBoletos;
+    private ControlMostrarEventos controlMostrarEventos;
+    private ControlMovimientos controlMovimientos;
+    private ControlSaldo controlSaldo;
+    private ManejadorConexiones conexionDB;
+    private BoletosDAO boletosDAO;
+    private EventosDAO eventosDAO;
+    private TransaccionesDAO transaccionesDAO;
+    private UsuariosDAO usuariosDAO;
     
     private ControlInicioSesion controlInicioSesion;
     /**
@@ -41,6 +52,16 @@ public class FrmPrincipal extends javax.swing.JFrame {
      */
     public FrmPrincipal(ControlInicioSesion controlInicioSesion) {
         this.controlInicioSesion = controlInicioSesion;
+        this.conexionDB = new ManejadorConexiones();
+        this.boletosDAO = new BoletosDAO(conexionDB);
+        this.eventosDAO = new EventosDAO(conexionDB);
+        this.transaccionesDAO = new TransaccionesDAO(conexionDB);
+        this.usuariosDAO = new UsuariosDAO(conexionDB);
+        this.controlBoletos = new ControlBoletos(boletosDAO);
+        this.controlMostrarEventos = new ControlMostrarEventos(eventosDAO);
+        this.controlMovimientos = new ControlMovimientos(transaccionesDAO);
+        this.controlSaldo = new ControlSaldo(usuariosDAO);
+        
         initComponents();
     }
 
@@ -282,10 +303,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
         lblEventos.setFont(font.deriveFont(attributes));
         pnlCardLayout.removeAll();
-        ManejadorConexiones conexionBD = new ManejadorConexiones();
-        EventosDAO eventosDAO = new EventosDAO(conexionBD);
-        ControlMostrarEventos control = new ControlMostrarEventos(eventosDAO);
-        PnlEventos pnlEventos = new PnlEventos(control, this);
+        PnlEventos pnlEventos = new PnlEventos(controlMostrarEventos, this);
         pnlCardLayout.add(pnlEventos);
         pnlCardLayout.repaint();
         pnlCardLayout.revalidate();
@@ -333,6 +351,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
         lblBoletos.setFont(font.deriveFont(attributes));
         pnlCardLayout.removeAll();
+        PnlMisBoletos pnlBoletos = new PnlMisBoletos(controlBoletos, this);
         pnlCardLayout.add(pnlBoletos);
         pnlCardLayout.repaint();
         pnlCardLayout.revalidate();
@@ -353,10 +372,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
         lblEventos.setFont(font.deriveFont(attributes));
         pnlCardLayout.removeAll();
-        ManejadorConexiones conexionBD = new ManejadorConexiones();
-        TransaccionesDAO movimientosDAO = new TransaccionesDAO(conexionBD);
-        ControlMovimientos control = new ControlMovimientos(movimientosDAO);
-        PnlMovimientos pnlMovimientos = new PnlMovimientos(control, this);
+        PnlMovimientos pnlMovimientos = new PnlMovimientos(controlMovimientos, this);
         pnlCardLayout.add(pnlMovimientos);
         pnlCardLayout.repaint();
         pnlCardLayout.revalidate();
@@ -403,10 +419,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         Map attributes = font.getAttributes();
         attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
         lblSaldo.setFont(font.deriveFont(attributes));
-        
-        ManejadorConexiones conexionBD = new ManejadorConexiones();
-        UsuariosDAO usuariosDAO = new UsuariosDAO(conexionBD);
-        ControlSaldo controlSaldo = new ControlSaldo(usuariosDAO);
         PnlConsultarSaldo pnlConsultarSaldo = new PnlConsultarSaldo(controlSaldo, this);
         pnlCardLayout.removeAll();
         pnlCardLayout.add(pnlConsultarSaldo);
@@ -453,10 +465,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
      */
     public void mostrarBoletosEvento(Integer idEvento){
         pnlCardLayout.removeAll();
-        ManejadorConexiones conexionBD = new ManejadorConexiones();
-        BoletosDAO boletosDAO = new BoletosDAO(conexionBD);
-        ControlCompraBoletos control = new ControlCompraBoletos(boletosDAO);
-        PnlComprarBoletos pnlCompraBoletos = new PnlComprarBoletos(control, this, idEvento);
+        PnlComprarBoletos pnlCompraBoletos = new PnlComprarBoletos(controlBoletos, this, idEvento);
         pnlCardLayout.add(pnlCompraBoletos);
         pnlCardLayout.repaint();
         pnlCardLayout.revalidate();
@@ -464,10 +473,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     public void mostrarConfirmarCompra(List<Boleto> boletos){
         pnlCardLayout.removeAll();
-        ManejadorConexiones conexionBD = new ManejadorConexiones();
-        BoletosDAO boletosDAO = new BoletosDAO(conexionBD);
-        ControlCompraBoletos control = new ControlCompraBoletos(boletosDAO);
-        PnlConfirmarCompra pnlConfirmarCompra = new PnlConfirmarCompra(control, boletos, this);
+        PnlConfirmarCompra pnlConfirmarCompra = new PnlConfirmarCompra(controlBoletos, boletos, this);
         pnlCardLayout.add(pnlConfirmarCompra);
         pnlCardLayout.repaint();
         pnlCardLayout.revalidate();

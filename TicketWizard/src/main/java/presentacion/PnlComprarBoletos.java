@@ -4,7 +4,7 @@
  */
 package presentacion;
 
-import itson.ticketwizard.control.ControlCompraBoletos;
+import itson.ticketwizard.control.ControlBoletos;
 import itson.ticketwizard.entidades.Boleto;
 import java.util.LinkedList;
 import java.util.List;
@@ -17,14 +17,14 @@ import javax.swing.JOptionPane;
  */
 public class PnlComprarBoletos extends javax.swing.JPanel {
 
-    private ControlCompraBoletos control;
+    private ControlBoletos control;
     private FrmPrincipal parent;
     private Integer idEvento;
     private List<PnlBoletoComprar> listaPanelesBoletos;
     /**
      * Creates new form pnlComprarBoletos
      */
-    public PnlComprarBoletos(ControlCompraBoletos control, FrmPrincipal parent, Integer idEvento) {
+    public PnlComprarBoletos(ControlBoletos control, FrmPrincipal parent, Integer idEvento) {
         this.control = control;
         this.parent = parent;
         this.idEvento = idEvento;
@@ -43,7 +43,7 @@ public class PnlComprarBoletos extends javax.swing.JPanel {
         }
     }
 
-    public ControlCompraBoletos getControl() {
+    public ControlBoletos getControl() {
         return control;
     }
     

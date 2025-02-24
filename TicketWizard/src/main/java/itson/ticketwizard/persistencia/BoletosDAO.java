@@ -5,9 +5,7 @@
 package itson.ticketwizard.persistencia;
 
 import itson.ticketwizard.entidades.Boleto;
-import itson.ticketwizard.entidades.Evento;
 import itson.ticketwizard.entidades.Usuario;
-import itson.ticketwizard.excepciones.BoletoException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -83,6 +81,24 @@ public class BoletosDAO {
         }
         return null;
     }
+    public Date consultarFechaEvento(Boleto boleto){
+        String consultaEvento = """
+                                SELECT Fecha FROM Eventos WHERE idEvento = ?
+                                """;
+        try{
+            Connection conexion = manejadorConexiones.crearConexion();
+            PreparedStatement consulta = conexion.prepareStatement(consultaEvento);
+            consulta.setInt(1, boleto.getIdEvento());
+            ResultSet resultadoConsulta = consulta.executeQuery();
+            if(resultadoConsulta.next()){
+                Date FechaEvento = resultadoConsulta.getDate("Fecha");
+                return FechaEvento;
+            }
+        } catch(SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+        return null;
+    }
     
     //@Override
      public List<Boleto> consultarBoletosUsuario(Usuario usuario){
@@ -102,12 +118,9 @@ public class BoletosDAO {
                     Integer idEvento = resultadoConsulta.getInt("idEvento");
                     String fila = resultadoConsulta.getString("Fila");
                     Integer asiento = resultadoConsulta.getInt("Asiento");
-                    Date fecha = resultadoConsulta.getDate("fecha");
                     double precio = resultadoConsulta.getDouble("precio");
                     String numControl = resultadoConsulta.getString("idBoleto");
-                    Integer idUsuario = resultadoConsulta.getInt("idUsuario");
                     String numSerie = resultadoConsulta.getString("numero de serie");
-                    
                     boolean disp=false;
                     Boleto boleto = new Boleto(numControl,numSerie,precio,disp,fila,asiento,idEvento,id);
                     listaBoletosUs.add(boleto);

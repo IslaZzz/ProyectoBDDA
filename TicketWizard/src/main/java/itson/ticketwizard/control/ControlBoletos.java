@@ -5,6 +5,7 @@
 package itson.ticketwizard.control;
 
 import itson.ticketwizard.entidades.Boleto;
+import itson.ticketwizard.entidades.Usuario;
 import itson.ticketwizard.persistencia.BoletosDAO;
 import java.util.List;
 
@@ -12,10 +13,10 @@ import java.util.List;
  *
  * @author 52644
  */
-public class ControlCompraBoletos {
+public class ControlBoletos {
     private BoletosDAO boletosDAO;
     
-    public ControlCompraBoletos(BoletosDAO boletosDAO){
+    public ControlBoletos(BoletosDAO boletosDAO){
         this.boletosDAO = boletosDAO;
     }
     
@@ -25,6 +26,7 @@ public class ControlCompraBoletos {
     
     public String consultaEvento(Boleto boleto){
         return boletosDAO.consultarEvento(boleto);
+        
     }
     
     public String determinarTipoVenta(Boleto boleto){
@@ -33,5 +35,9 @@ public class ControlCompraBoletos {
         } else {
             return "Boletera";
         }
+    }
+    
+    public List<Boleto> consultaBoletosUsuario(Usuario usuario){
+        return boletosDAO.consultarBoletosUsuario(usuario);
     }
 }

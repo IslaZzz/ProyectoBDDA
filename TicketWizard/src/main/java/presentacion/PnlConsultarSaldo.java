@@ -7,7 +7,6 @@ package presentacion;
 import itson.ticketwizard.control.ControlSaldo;
 import itson.ticketwizard.entidades.Seguridad;
 import java.text.DecimalFormat;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -183,6 +182,7 @@ public class PnlConsultarSaldo extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAgregarSaldoActionPerformed
     
     private void mostrarErrorFormato(){
+        //:3
         JOptionPane.showMessageDialog(
                 parent,
                 "Asegurese de ingresar un numero entero o decimal, con solo 2 decimales",

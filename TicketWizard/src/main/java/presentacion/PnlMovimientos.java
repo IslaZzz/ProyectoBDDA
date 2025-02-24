@@ -25,9 +25,9 @@ public class PnlMovimientos extends javax.swing.JPanel {
 
     private ControlMovimientos control;
     private FrmPrincipal parent;
-    private int currentSection = 0;
     private int COMPRAS = 1;
     private int VENTAS = 2;
+    private int currentSection = 0;
     private List<MostrarTransaccionDTO> movimientos;
 
     /**
@@ -43,6 +43,12 @@ public class PnlMovimientos extends javax.swing.JPanel {
     private void almacenarMovimientos() {
         try {
             this.movimientos = control.consultarMovimientos(parent.getUsuario());
+            JOptionPane.showMessageDialog(
+                    parent,
+                    "Selecciona los movimientos que quieres consultar",
+                    "Como usar",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
         } catch (TransaccionException ex) {
             JOptionPane.showMessageDialog(
                     parent,

@@ -78,6 +78,7 @@ public class PnlBoletoComprar extends javax.swing.JPanel {
         lblPrecio.setForeground(new java.awt.Color(30, 30, 30));
         lblPrecio.setText("Precio");
 
+        CheckBox.setBackground(new java.awt.Color(255, 255, 255));
         CheckBox.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
         CheckBox.setForeground(new java.awt.Color(30, 30, 30));
         CheckBox.setText("Seleccionar");

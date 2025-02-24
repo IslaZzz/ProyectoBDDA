@@ -4,11 +4,6 @@
  */
 package itson.ticketwizard.entidades;
 
-import itson.ticketwizard.excepciones.BoletoException;
-
-import java.util.List;
-import java.util.Objects;
-
 /**
  *
  * @author 52644
@@ -24,6 +19,7 @@ public class Boleto {
     private Integer idEvento;
     private double precioOriginal;
     private Integer idUsuario;
+    
     /**
      * Constructor para mostrar los boletos disponibles de los eventos.
      * @param idBoleto
