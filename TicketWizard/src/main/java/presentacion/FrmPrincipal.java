@@ -351,6 +351,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
         lblBoletos.setFont(font.deriveFont(attributes));
         pnlCardLayout.removeAll();
+        boletosDAO = new BoletosDAO(conexionDB);
+        controlBoletos = new ControlBoletos(boletosDAO);
         PnlMisBoletos pnlBoletos = new PnlMisBoletos(controlBoletos, this);
         pnlCardLayout.add(pnlBoletos);
         pnlCardLayout.repaint();
@@ -508,6 +510,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
         lblEventos.setBackground(new Color(16, 23, 66));
     }
     
+    public void mostrarFramePrincipal(){
+        controlInicioSesion.mostrarFramePrincipal(usuario);
+    }
+
+    public UsuariosDAO getUsuariosDAO() {
+        return usuariosDAO;
+    }
     
     
     public void setUsuario(Usuario usuario) {

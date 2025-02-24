@@ -493,75 +493,72 @@ BEGIN
 END //
 
 DELIMITER ;
-call compraBoletera("A100000", 1000, "ads54as4", 1);
-SELECT * FROM boletos;
+
 -- create procedure ventaBoletera()
 DROP PROCEDURE IF EXISTS comprarReventa;
 
 DELIMITER //
 CREATE PROCEDURE comprarReventa(
-    IN p_idBoleto VARCHAR(20),
+    IN idBoletoVenta VARCHAR(20),
     IN precio DECIMAL(10,2),
+    IN SERIE VARCHAR(8), 
     IN IDUC INT,  -- ID del usuario comprador
-    IN IDUV INT,   -- ID del usuario vendedor
-    IN SERIE INT
+    IN IDUV INT   -- ID del usuario vendedor
+    
 )
 BEGIN
-    DECLARE v_saldo_comprador DECIMAL(10,2);
-    DECLARE v_id_transaccion INT;
-    DECLARE EXIT HANDLER FOR SQLEXCEPTION  -- Finaliza la ejecución en errores
-    BEGIN
-        ROLLBACK;
-        SELECT 'Error en la transacción. Los cambios han sido revertidos.' AS error_message;
-    END;
+    DECLARE saldoActual DECIMAL(10,2);
 
-    START TRANSACTION;
+    -- Obtener el saldo actual del usuario
+    SELECT saldo INTO saldoActual FROM usuarios WHERE idUsuario = IDUC;
 
-    -- Actualizar saldo del comprador (IDUC)
-    UPDATE USUARIOS 
-    SET SALDO = SALDO - precio
-    WHERE idUsuario = IDUC;  -- Columna correcta: idUsuario
+    -- Verificar si el saldo es suficiente
+    IF saldoActual >= precio THEN
+        -- Iniciar la transacción
+        START TRANSACTION;
 
-    -- Actualizar saldo del vendedor (IDUV)
-    UPDATE USUARIOS 
-    SET SALDO = SALDO + precio
-    WHERE idUsuario = IDUV;
+        -- Actualizar el estado del boleto
+        UPDATE BOLETOS
+        SET DISPONIBLE = FALSE, numSerie = serie, idUsuario = IDUC
+        WHERE idBoleto = idBoletoVenta;
 
-    -- Insertar transacción
-    INSERT INTO TRANSACCIONES (FECHAHORA, TIPOCOMPRA, MONTO)
-    VALUES (NOW(), 'Reventa', precio);
+        -- Actualizar el saldo del usuario Comprador
+        UPDATE USUARIOS 
+        SET SALDO = SALDO - precio
+        WHERE IdUsuario = IDUC;
 
-    -- Obtener ID de la transacción en variable LOCAL
-    SET v_id_transaccion = LAST_INSERT_ID();
+		-- Actualizar el saldo del usuario Vendedor
+        UPDATE USUARIOS 
+        SET SALDO = SALDO + precio
+        WHERE IdUsuario = IDUV;
+        
+        -- Insertar una nueva transacción
+        INSERT INTO TRANSACCIONES (FECHAHORA, TIPOCOMPRA, MONTO)
+        VALUES (NOW(), 'Reventa', precio);
 
-    -- Registrar relación usuario-transacción (comprador)
-    INSERT INTO USUARIOS_TRANSACCIONES (ROL, IDUSUARIO, IDTRANSACCION) 
-    VALUES ('Comprador', IDUC, v_id_transaccion);
+        -- Obtener el ID de la última transacción
+        SET @IDTRANSACCION = LAST_INSERT_ID();
 
-    -- Registrar relación usuario-transacción (vendedor)
-    INSERT INTO USUARIOS_TRANSACCIONES (ROL, IDUSUARIO, IDTRANSACCION) 
-    VALUES ('Vendedor', IDUV, v_id_transaccion);
+        -- Insertar en la tabla de relaciones usuario-transacción
+        INSERT INTO USUARIOS_TRANSACCIONES (ROL, IDUSUARIO, IDTRANSACCION) 
+        VALUES ('Comprador', IDUC, @IDTRANSACCION);
+        
+        -- Insertar en la tabla de relaciones usuario-transacción
+        INSERT INTO USUARIOS_TRANSACCIONES (ROL, IDUSUARIO, IDTRANSACCION) 
+        VALUES ('Vendedor', IDUV, @IDTRANSACCION);
 
-    -- Vincular boleto a la transacción
-    INSERT INTO TRANSACCIONESBOLETOS (IDTRANSACCION, IDBOLETO) 
-    VALUES (v_id_transaccion, idBoleto);
-
-    -- Verificar saldo negativo del comprador
-    SELECT SALDO INTO v_saldo_comprador 
-    FROM USUARIOS 
-    WHERE idUsuario = IDUC;
-
-    IF v_saldo_comprador < 0 THEN
-        ROLLBACK;
-        SELECT 'Saldo insuficiente.' AS error_message;
-    ELSE
+        -- Insertar en la tabla de transacciones de boletos
+        INSERT INTO TRANSACCIONESBOLETOS (IDTRANSACCION, IDBOLETO) 
+        VALUES (@IDTRANSACCION, idBoletoVenta);
+        -- Confirmar la transacción
         COMMIT;
-        SELECT 'Transacción exitosa.' AS resultado;
-    UPDATE BOLETOS
-	SET numSerie = serie
-	WHERE idBoleto = p_idBoleto;
+    ELSE
+        -- Si el saldo es insuficiente, no hacer nada o lanzar un error
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Saldo insuficiente para realizar la compra';
     END IF;
 END //
 DELIMITER ;
 
+SELECT * FROM Boletos;
+SELECT * FROM usuarios;
 SELECT * FROM usuarios_transacciones;

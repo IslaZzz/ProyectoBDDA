@@ -118,6 +118,18 @@ public class PnlMovimientos extends javax.swing.JPanel {
                 }
                 paqueteCompras.add(movimiento);
             }
+            if (movimiento.equals(listaMovimientos.getFirst()) && movimiento.equals(listaMovimientos.getLast())) {
+                PnlMovimiento pnlMovimiento = new PnlMovimiento(paqueteCompras, this);
+                if (currentSection == COMPRAS) {
+                    this.pnlCompras.add(pnlMovimiento);
+                    this.pnlCompras.add(Box.createVerticalStrut(30));
+                } else if (currentSection == VENTAS) {
+                    this.pnlVentas.add(pnlMovimiento);
+                    this.pnlVentas.add(Box.createVerticalStrut(30));
+                } else {
+                    return;
+                }
+            }
 
         }
 

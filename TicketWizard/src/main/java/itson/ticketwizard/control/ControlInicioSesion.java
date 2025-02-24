@@ -65,6 +65,8 @@ public class ControlInicioSesion {
 
     public void mostrarFramePrincipal(Usuario usuario) {
         frameInicioSesion.dispose();
+        framePrincipal.dispose();
+        framePrincipal = new FrmPrincipal(this);
         framePrincipal.setUsuario(usuario);
         framePrincipal.setVisible(true);
         framePrincipal.setLocationRelativeTo(null);

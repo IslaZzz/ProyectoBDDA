@@ -218,8 +218,19 @@ public class PnlConfirmarCompra extends javax.swing.JPanel {
                 for (Boleto boleto : boletos) {
                     if(boleto.getIdUsuario()!=0){
                         controlMovimientos.comprarReventa(parent.getUsuario(), boleto.getIdBoleto(), boleto.getPrecio(), Seguridad.generarCodigoAlfanumerico(), boleto.getIdUsuario());
+                        parent.getUsuariosDAO().agregarSaldo(-boleto.getPrecio(), parent.getUsuario());
+                        if(parent.getUsuario().getId() == boleto.getIdUsuario()){
+                            JOptionPane.showMessageDialog(
+                            parent, 
+                            "No puede comprar un boleto que usted esta revendiendo", 
+                             "Error", 
+                            JOptionPane.ERROR_MESSAGE);
+                            parent.mostrarFramePrincipal();
+                            return;
+                        }
                     } else {
                         controlMovimientos.comprarBoletera(parent.getUsuario(), boleto.getIdBoleto(), boleto.getPrecio(), Seguridad.generarCodigoAlfanumerico());
+                        parent.getUsuariosDAO().agregarSaldo(-boleto.getPrecio(), parent.getUsuario());
                     }
                 }
                 JOptionPane.showMessageDialog(
@@ -227,6 +238,7 @@ public class PnlConfirmarCompra extends javax.swing.JPanel {
                     "Se ha realizado la compra", 
                     "Información", 
                     JOptionPane.INFORMATION_MESSAGE);
+                parent.mostrarFramePrincipal();
             }
         } catch (TransaccionException exx){
             JOptionPane.showMessageDialog(
