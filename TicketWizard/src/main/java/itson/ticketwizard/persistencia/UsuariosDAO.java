@@ -28,8 +28,15 @@ import javax.swing.JOptionPane;
  */
 public class UsuariosDAO implements IUsuariosDAO {
 
+    //Atributo del manejador de conexiones
     private ManejadorConexiones manejadorConexion;
 
+    /**
+     * Crea un objeto UsuariosDAO a y establece el objeto Manejador de
+     * Conexiones con la BD
+     *
+     * @param manejadorConexiones
+     */
     public UsuariosDAO(ManejadorConexiones manejadorConexiones) {
         this.manejadorConexion = manejadorConexiones;
     }
@@ -80,6 +87,14 @@ public class UsuariosDAO implements IUsuariosDAO {
         return 0;
     }
 
+    /**
+     * Método que valida la existencia y coincidencia de las credenciales dadas
+     * en la DB TicketWizard
+     *
+     * @param correo Correo de la cuenta
+     * @param contrasenia Contraseña de la cuenta
+     * @return
+     */
     @Override
     public Usuario validarCredencialesInicioSesion(String correo, String contrasenia) {
         String consultaUsuario = """
@@ -130,6 +145,15 @@ public class UsuariosDAO implements IUsuariosDAO {
 
     }
 
+    /**
+     * Método que añade la cantidad recibida como parámetro en el Usuario
+     * recibido, verifica que sea un número entero positivo con máximo 2
+     * decimales
+     *
+     * @param cantidad cantidad a agregar
+     * @param usuario Usuario que recibe el saldo
+     * @return
+     */
     public double agregarSaldo(double cantidad, Usuario usuario) {
         int id = usuario.getId();
         double nSaldo = usuario.getSaldo() + cantidad;
@@ -160,6 +184,16 @@ public class UsuariosDAO implements IUsuariosDAO {
         return usuario.getSaldo();
     }
 
+    /**
+     * Método que actualiza los datos de un usuario en la DB
+     *
+     * @param usuario Usuario que llama el método
+     * @param usuarioDTO paquete de transferencia con los nuevos datos del
+     * Usuario
+     * @param nuevaDireccionDTO paquete de transferencia con los nuevos datos de
+     * la Dirección
+     * @return
+     */
     @Override
     public int actualizarUsuario(Usuario usuario, RegistroUsuarioDTO usuarioDTO, NuevaDireccionDTO nuevaDireccionDTO) {
         String LlamarSP = """
@@ -197,25 +231,31 @@ public class UsuariosDAO implements IUsuariosDAO {
         // TEMPORAL, se necesita sacar el ID del artista que registró
         return 0;
     }
-    
-    protected Integer crearTransaccion(double precio, double porcentaje){
+
+    /**
+     *Método que inserta los datos de la transacción en la DB (REVENTA)
+     * @param precio
+     * @param porcentaje
+     * @return
+     */
+    protected Integer crearTransaccion(double precio, double porcentaje) {
         Integer idTransaccion = null;
         String crearTransaccion = """
                                 CALL crearTransaccionReventa(?,?);
                                 """;
-            try{
-                Connection conexion = manejadorConexion.crearConexion();
-                PreparedStatement consulta = conexion.prepareStatement(crearTransaccion);
-                consulta.setDouble(1, precio);
-                consulta.setDouble(2, porcentaje);
-                ResultSet resultadoConsulta = consulta.executeQuery();
-                
-                return idTransaccion = resultadoConsulta.getInt("IDTRANSACCION");
-                
-            }catch (SQLException e) {
+        try {
+            Connection conexion = manejadorConexion.crearConexion();
+            PreparedStatement consulta = conexion.prepareStatement(crearTransaccion);
+            consulta.setDouble(1, precio);
+            consulta.setDouble(2, porcentaje);
+            ResultSet resultadoConsulta = consulta.executeQuery();
+
+            return idTransaccion = resultadoConsulta.getInt("IDTRANSACCION");
+
+        } catch (SQLException e) {
             System.err.println("Error al consultar boletos" + e.getMessage());
             return idTransaccion;
-            }
+        }
     }
     /*
     public Transaccion reventaBoleto(Usuario usuario, double precio, double porcentaje, Boleto boleto) throws TransaccionException{
