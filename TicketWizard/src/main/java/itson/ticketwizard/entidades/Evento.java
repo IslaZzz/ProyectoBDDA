@@ -121,13 +121,19 @@ public class Evento {
     public void setRecinto(String recinto) {
         this.recinto = recinto;
     }
-
+/**
+ * Método que genera el toString de la clase
+ * @return 
+ */
     @Override
     public String toString() {
         return "Evento [nombre=" + nombre + ", ciudad=" + ciudad + ", estado=" + estado + ", descripcion=" + descripcion
                 + ", recinto=" + recinto + "]";
     }
-
+/**
+ * Método que genera un hash para la clase
+ * @return 
+ */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -139,7 +145,11 @@ public class Evento {
         result = prime * result + ((recinto == null) ? 0 : recinto.hashCode());
         return result;
     }
-
+/**
+ * Método de comparación de objetos, retorna true si son el mismo, false caso contrario
+ * @param obj
+ * @return 
+ */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

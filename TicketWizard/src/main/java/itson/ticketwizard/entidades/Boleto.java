@@ -44,7 +44,18 @@ public class Boleto {
         this.idEvento = idEvento;
         this.idUsuario = idUsuario;
     }
-
+/**
+ * Método que genera un Boleto a partir de los parámetros recibidos
+ * @param idBoleto
+ * @param numeroSerie
+ * @param precio
+ * @param disponible
+ * @param fila
+ * @param asiento
+ * @param idEvento
+ * @param precioOriginal
+ * @param idUsuario 
+ */
     public Boleto(String idBoleto, String numeroSerie, double precio, boolean disponible, String fila, Integer asiento, Integer idEvento, double precioOriginal, Integer idUsuario) {
         this.idBoleto = idBoleto;
         this.numeroSerie = numeroSerie;
@@ -88,7 +99,14 @@ public class Boleto {
     
     
     
-    //Constructor para instanciar un boleto. Cuando se instancia es por parte de la boletera
+    /**
+     * Constructor para instanciar un boleto. Cuando se instancia es por parte de la boletera
+     * @param idBoleto
+     * @param precio
+     * @param fila
+     * @param asiento
+     * @param idEvento 
+     */
     public Boleto(String idBoleto,double precio, String fila, Integer asiento, Integer idEvento){
         this.idBoleto = idBoleto;
         this.precio = precio;
@@ -100,7 +118,14 @@ public class Boleto {
         this.disponible = true;
         this.numeroSerie = null;
     }
-    
+    /**
+     * Constructor para instanciar un boleto disponible
+     * @param idBoleto
+     * @param precio
+     * @param fila
+     * @param asiento
+     * @param idEvento 
+     */
     public void crearBoletoDisp(String idBoleto,double precio, String fila, Integer asiento,  Integer idEvento){
         this.idBoleto = idBoleto;
         this.precio = precio;

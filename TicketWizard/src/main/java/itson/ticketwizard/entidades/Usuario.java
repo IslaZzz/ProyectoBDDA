@@ -13,7 +13,18 @@ public class Usuario {
     private int idDireccion;
     private String contrasenia;
     private Date fechaNacimiento;
-
+/**
+ * Constructor que establece el valor de los atributos al de los parámetros recibidos
+ * @param id
+ * @param nombres
+ * @param apellidoPaterno
+ * @param apellidoMaterno
+ * @param correoElectronico
+ * @param saldo
+ * @param domicilio
+ * @param contrasenia
+ * @param fechaNacimiento 
+ */
     public Usuario(int id, String nombres, String apellidoPaterno, String apellidoMaterno,
             String correoElectronico, double saldo, int domicilio, String contrasenia, Date fechaNacimiento) {
         this.id = id;
@@ -26,7 +37,17 @@ public class Usuario {
         this.idDireccion = domicilio;
         this.contrasenia = contrasenia;
     }
-
+/**
+ * Constructor que establece el valor de los atributos al de los parámetros recibidos
+ * @param id
+ * @param nombres
+ * @param apellidoPaterno
+ * @param apellidoMaterno
+ * @param correoElectronico
+ * @param fechaNacimiento
+ * @param saldo
+ * @param idDireccion 
+ */
     public Usuario(Integer id, String nombres, String apellidoPaterno, String apellidoMaterno, String correoElectronico,  Date fechaNacimiento, double saldo, int idDireccion) {
         this.id = id;
         this.nombres = nombres;
@@ -113,14 +134,21 @@ public class Usuario {
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
-
+/**
+ * Genera un hashcode para el objeto
+ * @return 
+ */
     @Override
     public int hashCode() {
         int hash = 7;
         hash = 17 * hash + this.id;
         return hash;
     }
-
+/**
+ * Método que compara dos objetos Usuarios, retorna true si son el mismo, false caso contrario
+ * @param obj
+ * @return 
+ */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -135,7 +163,10 @@ public class Usuario {
         final Usuario other = (Usuario) obj;
         return this.id == other.id;
     }
-
+/**
+ * Retorna una cadena que representa al objeto
+ * @return 
+ */
     @Override
     public String toString() {
         return "Usuario{" + "nombres=" + nombres + ", apellidoMaterno=" + apellidoMaterno
