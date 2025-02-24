@@ -128,14 +128,35 @@ END $$
 
 DELIMITER ;
 
+-- CREAR LA TRANSACCION REVENTA
+DELIMITER //
+CREATE PROCEDURE crearTransaccionReventa(
+    IN PRECIO DECIMAL(10,2),
+    IN PORC DECIMAL(5,2),
+    OUT IDTRANSACCION INT
+)
+BEGIN 
+    -- Inserta en la tabla de transacciones
+    INSERT INTO TRANSACCIONES (FECHAHORA, TIPOCOMPRA, MONTO)
+    VALUES (NOW(), 'Reventa', PRECIO * (PORC / 100));
+
+    --  ID de la transacción recién creada
+    SET IDTRANSACCION = LAST_INSERT_ID();
+END //
+DELIMITER ;
+
+
 -- Reventa de boletos por parte del usuario 
+DELIMITER //
+DROP PROCEDURE IF EXISTS revenderBoleto;
+
 CREATE PROCEDURE revenderBoleto(
     IN IDUsuario VARCHAR(20),
     IN precio DECIMAL(10,2),
     IN PORCENTAJE DECIMAL(5,2),
     IN idBoleto VARCHAR(20),
-    IN idTransaccion INT(10),
-    IN FECHA DATE
+    IN idTransaccion INT(10)
+    -- IN FECHA DATE
 )
 BEGIN
 DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -155,10 +176,6 @@ UPDATE BOLETOS
 SET DISPONIBLE = TRUE, PRECIO = PRECIO * (PORCENTAJE / 100)
 WHERE idBoleto = idBoleto;
 
--- Insertar en la tabla de transacciones
-INSERT INTO TRANSACCIONES (FECHAHORA, TIPOCOMPRA, MONTO)
-VALUES (FECHA, 'Reventa', precio * (PORCENTAJE / 100));
-
 -- Insertar en la relación entre usuarios y transacciones
 INSERT INTO USUARIOS_TRANSACCIONES (Rol, idUsuario, idTransaccion)
 VALUES ('Vendedor', IDUsuario, idTransaccion);
@@ -172,52 +189,3 @@ COMMIT;
 END IF;
 END //
 DELIMITER ;
-
--- Reventa de boletos por parte del usuario 
-CREATE PROCEDURE revenderBoleto(
-    IN IDUsuario VARCHAR(20),
-    IN precio DECIMAL(10,2),
-    IN PORCENTAJE DECIMAL(5,2),
-    IN idBoleto VARCHAR(20),
-    IN idTransaccion INT(10),
-    IN FECHA DATE
-)
-BEGIN
-DECLARE EXIT HANDLER FOR SQLEXCEPTION
-BEGIN
-ROLLBACK;
-END;
-START TRANSACTION;
-
--- Validación de porcentaje
-IF PORCENTAJE > 3 OR PORCENTAJE < 0 THEN
-ROLLBACK; -- Revertir si el porcentaje es mayor a 3
-SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Porcentaje inválido'; -- Mensaje de error
-ELSE
-
--- Actualiza el boleto y su precio
-UPDATE BOLETOS
-SET DISPONIBLE = TRUE, PRECIO = PRECIO * (PORCENTAJE / 100)
-WHERE idBoleto = idBoleto;
-
--- Insertar en la tabla de transacciones
-INSERT INTO TRANSACCIONES (FECHAHORA, TIPOCOMPRA, MONTO)
-VALUES (FECHA, 'Reventa', precio * (PORCENTAJE / 100));
-
--- Insertar en la relación entre usuarios y transacciones
-INSERT INTO USUARIOS_TRANSACCIONES (Rol, idUsuario, idTransaccion)
-VALUES ('Vendedor', IDUsuario, idTransaccion);
-
--- Insertar la relación entre transacciones y boletos
-INSERT INTO TRANSACCIONESBOLETOS (idTransaccion, idBoleto)
-VALUES (idTransaccion, idBoleto);
-
--- Confirmar transacción
-COMMIT;
-END IF;
-END //
-DELIMITER ;
-
-
-
-
