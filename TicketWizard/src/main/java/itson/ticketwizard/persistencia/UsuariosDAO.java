@@ -197,5 +197,49 @@ public class UsuariosDAO implements IUsuariosDAO {
         // TEMPORAL, se necesita sacar el ID del artista que registró
         return 0;
     }
-
+    
+    protected Integer crearTransaccion(double precio, double porcentaje){
+        Integer idTransaccion = null;
+        String crearTransaccion = """
+                                CALL crearTransaccionReventa(?,?);
+                                """;
+            try{
+                Connection conexion = manejadorConexion.crearConexion();
+                PreparedStatement consulta = conexion.prepareStatement(crearTransaccion);
+                consulta.setDouble(1, precio);
+                consulta.setDouble(2, porcentaje);
+                ResultSet resultadoConsulta = consulta.executeQuery();
+                
+                return idTransaccion = resultadoConsulta.getInt("IDTRANSACCION");
+                
+            }catch (SQLException e) {
+            System.err.println("Error al consultar boletos" + e.getMessage());
+            return idTransaccion;
+            }
+    }
+    public Transaccion reventaBoleto(Usuario usuario, double precio, double porcentaje, Boleto boleto) throws TransaccionException{
+        Integer idTransaccion = crearTransaccion(precio, porcentaje); 
+        int idUsuario = usuario.getId();
+        double monto=(precio*(porcentaje/100));
+        Date fechaHora = fechaHora.getTime();
+        String idU = String.valueOf(idUsuario);
+        String idBoleto = boleto.getIdBoleto();
+        String spReventa = """
+                            CALL revenderBoleto(?,?,?,?,?)
+                           """;
+        try{
+                Connection conexion = manejadorConexion.crearConexion();
+                PreparedStatement consulta = conexion.prepareStatement(spReventa);
+                consulta.setInt(1, idUsuario);
+                consulta.setDouble(2, precio);
+                consulta.setDouble(3, porcentaje);
+                consulta.setString(4, idBoleto);
+                consulta.setInt(5, idTransaccion);
+               // boolean resultadoConsulta = consulta.execute();
+                
+            }catch (SQLException e) {
+            System.err.println("Error al consultar boletos" + e.getMessage());
+            }
+        return new Transaccion(idTransaccion,fechaHora,"Reventa",monto,"Vendedor",idU);
+    }
 }
