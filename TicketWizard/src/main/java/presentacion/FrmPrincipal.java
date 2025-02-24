@@ -473,7 +473,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     public void mostrarConfirmarCompra(List<Boleto> boletos){
         pnlCardLayout.removeAll();
-        PnlConfirmarCompra pnlConfirmarCompra = new PnlConfirmarCompra(controlBoletos, boletos, this);
+        PnlConfirmarCompra pnlConfirmarCompra = new PnlConfirmarCompra(controlBoletos, boletos, this, controlMovimientos);
         pnlCardLayout.add(pnlConfirmarCompra);
         pnlCardLayout.repaint();
         pnlCardLayout.revalidate();

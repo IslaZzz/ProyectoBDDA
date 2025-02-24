@@ -442,51 +442,57 @@ DELIMITER ;
 
 -- create procedure comprarBoletera()
 DELIMITER //
+
 CREATE PROCEDURE compraBoletera(
-    IN idBoleto VARCHAR(20),
+    IN idBoletoVenta VARCHAR(20),
     IN precio DECIMAL(10,2),
     IN serie VARCHAR(10),
     IN IDU INT(20)
 )
 BEGIN
-    -- Iniciar la transacción
-    START TRANSACTION;
+    DECLARE saldoActual DECIMAL(10,2);
 
-    -- Actualizar el estado del boleto
-    UPDATE BOLETOS
-    SET DISPONIBLE = FALSE, numSerie = serie
-    WHERE idBoleto = idBoleto;
+    -- Obtener el saldo actual del usuario
+    SELECT saldo INTO saldoActual FROM usuarios WHERE idUsuario = IDU;
 
-    -- Actualizar el saldo del usuario
-    UPDATE USUARIOS 
-    SET SALDO = SALDO - precio
-    WHERE IDU = IDU;
-    
+    -- Verificar si el saldo es suficiente
+    IF saldoActual >= precio THEN
+        -- Iniciar la transacción
+        START TRANSACTION;
 
-    -- Insertar una nueva transacción
-    INSERT INTO TRANSACCIONES (FECHAHORA, TIPOCOMPRA, MONTO)
-    VALUES (NOW(), 'Boletera', precio);
+        -- Actualizar el estado del boleto
+        UPDATE BOLETOS
+        SET DISPONIBLE = FALSE, numSerie = serie
+        WHERE idBoleto = idBoletoVenta;
 
-    -- Obtener el ID de la última transacción
-    SET @IDTRANSACCION = LAST_INSERT_ID();
+        -- Actualizar el saldo del usuario
+        UPDATE USUARIOS 
+        SET SALDO = SALDO - precio
+        WHERE IdUsuario = IDU;
 
-    -- Insertar en la tabla de relaciones usuario-transacción
-    INSERT INTO USUARIOS_TRANSACCIONES (ROL, IDUSUARIO, IDTRANSACCION) 
-    VALUES ('Comprador', IDU, @IDTRANSACCION);
+        -- Insertar una nueva transacción
+        INSERT INTO TRANSACCIONES (FECHAHORA, TIPOCOMPRA, MONTO)
+        VALUES (NOW(), 'Boletera', precio);
 
-    -- Insertar en la tabla de transacciones de boletos
-    INSERT INTO TRANSACCIONESBOLETOS (IDTRANSACCION, IDBOLETO) 
-    VALUES (@IDTRANSACCION, idBoleto);
-	-- Confirmar la transacción
-    COMMIT;
-	IF (SELECT saldo FROM usuarios where idUsuario = IDU) < 0 THEN
-		ROLLBACK;
-	ELSE
-		COMMIT;
-	END IF;
-    
+        -- Obtener el ID de la última transacción
+        SET @IDTRANSACCION = LAST_INSERT_ID();
 
+        -- Insertar en la tabla de relaciones usuario-transacción
+        INSERT INTO USUARIOS_TRANSACCIONES (ROL, IDUSUARIO, IDTRANSACCION) 
+        VALUES ('Comprador', IDU, @IDTRANSACCION);
+
+        -- Insertar en la tabla de transacciones de boletos
+        INSERT INTO TRANSACCIONESBOLETOS (IDTRANSACCION, IDBOLETO) 
+        VALUES (@IDTRANSACCION, idBoletoVenta);
+
+        -- Confirmar la transacción
+        COMMIT;
+    ELSE
+        -- Si el saldo es insuficiente, no hacer nada o lanzar un error
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Saldo insuficiente para realizar la compra';
+    END IF;
 END //
+
 DELIMITER ;
 
 -- create procedure ventaBoletera()
@@ -501,21 +507,22 @@ create procedure comprarReventa(
     IN IDUV INT
 )
 BEGIN
- DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
-    BEGIN
-        -- Aquí puedes manejar el error, como hacer un ROLLBACK y un mensaje de error
-        ROLLBACK;
-        SELECT 'Error en la transacción. Los cambios han sido revertidos.' AS error_message;
-    END;
 start transaction;
+
+	
+    -- Actualizar el estado del boleto
+    UPDATE BOLETOS
+    SET DISPONIBLE = FALSE, numSerie = serie, idUsuario = IDUC
+    WHERE idBoleto = idBoletoVenta;
+    
 
 	UPDATE USUARIOS 
     SET SALDO = SALDO - precio
-    WHERE IDUC = IDUC;
+    WHERE idUsuario = IDUC;
     
     UPDATE USUARIOS 
     SET SALDO = SALDO + precio
-    WHERE IDUV = IDUV;
+    WHERE idUsuario = IDUV;
     
 -- Insertar una nueva transacción
     INSERT INTO TRANSACCIONES (FECHAHORA, TIPOCOMPRA, MONTO)
@@ -541,5 +548,4 @@ start transaction;
 DELIMITER ;
 
 
-
-
+SELECT * FROM usuarios;

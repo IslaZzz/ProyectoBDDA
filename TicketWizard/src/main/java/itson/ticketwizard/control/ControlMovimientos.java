@@ -26,4 +26,10 @@ public class ControlMovimientos {
         return this.movimientosDAO.consultarMovimientos(usuario);
     }
     
+    public void comprarBoletera(Usuario usuario, String idBoleto, double precio, String serie) throws TransaccionException{
+        this.movimientosDAO.comprarBoletera(usuario, idBoleto, precio, serie);
+    }
+    public void comprarReventa(Usuario usuario, String idBoleto, double precio, String serie, int usuarioVendedor) throws TransaccionException {
+        this.movimientosDAO.comprarReventa(usuario, idBoleto, precio, serie, usuarioVendedor);
+    }
 }

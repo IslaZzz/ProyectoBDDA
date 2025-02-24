@@ -224,6 +224,12 @@ public class PnlReventaBoletos extends javax.swing.JPanel {
                 java.sql.Date fechaLimite = new java.sql.Date(Seguridad.dateMapper(pnlBoleto.getTxtFechaLimite().getText()).getTime());
                 control.reventaBoleto(parent.getUsuario(),precio, pnlBoleto.getBoleto(), fechaLimite);
             }
+            JOptionPane.showMessageDialog(
+                            this,
+                            "Se han puesto en reventa los boletos",
+                            "Información",
+                            JOptionPane.INFORMATION_MESSAGE);
+                    
             parent.mostrarInicio();
         } catch (NumberFormatException err) {
             JOptionPane.showMessageDialog(

@@ -5,7 +5,10 @@
 package presentacion;
 
 import itson.ticketwizard.control.ControlBoletos;
+import itson.ticketwizard.control.ControlMovimientos;
 import itson.ticketwizard.entidades.Boleto;
+import itson.ticketwizard.entidades.Seguridad;
+import itson.ticketwizard.excepciones.TransaccionException;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -18,15 +21,17 @@ public class PnlConfirmarCompra extends javax.swing.JPanel {
     private ControlBoletos control;
     private List<Boleto> boletos;
     private FrmPrincipal parent;
+    private ControlMovimientos controlMovimientos;
     private double monto;
     
     /**
      * Creates new form NewJPanel
      */
-    public PnlConfirmarCompra(ControlBoletos control, List<Boleto> boletos, FrmPrincipal parent ) {
+    public PnlConfirmarCompra(ControlBoletos control, List<Boleto> boletos, FrmPrincipal parent, ControlMovimientos controlMovimientos ) {
         this.control = control;
         this.boletos = boletos;
         this.parent = parent;
+        this.controlMovimientos = controlMovimientos;
         initComponents();
         cargarPanel();
     }
@@ -50,7 +55,7 @@ public class PnlConfirmarCompra extends javax.swing.JPanel {
         this.monto = monto;
         lblMonto.setText("Monto: $"+String.valueOf(monto)+"MXN");
         lblNombre.setText("* Evento: "+ control.consultaEvento(boleto));
-        lblSaldo.setText("Comprado de: "+String.valueOf(parent.getUsuario().getSaldo()));
+        lblSaldo.setText("Saldo actual: "+String.valueOf(parent.getUsuario().getSaldo()));
         lblAsientos.setText("Asientos: "+asientos);
     }
 
@@ -70,7 +75,7 @@ public class PnlConfirmarCompra extends javax.swing.JPanel {
         lblNombre = new javax.swing.JLabel();
         lblSaldo = new javax.swing.JLabel();
         lblAsientos = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnConfirmarCompra = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(233, 233, 233));
@@ -105,10 +110,16 @@ public class PnlConfirmarCompra extends javax.swing.JPanel {
         lblAsientos.setForeground(new java.awt.Color(130, 130, 130));
         lblAsientos.setText("* Asientos: <Fila Asiento>");
 
-        jButton1.setBackground(new java.awt.Color(0, 0, 0));
-        jButton1.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Completar Compra");
+        btnConfirmarCompra.setBackground(new java.awt.Color(0, 0, 0));
+        btnConfirmarCompra.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        btnConfirmarCompra.setForeground(new java.awt.Color(255, 255, 255));
+        btnConfirmarCompra.setText("Completar Compra");
+        btnConfirmarCompra.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConfirmarCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarCompraActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setBackground(new java.awt.Color(180, 0, 0));
         btnCancelar.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
@@ -135,7 +146,7 @@ public class PnlConfirmarCompra extends javax.swing.JPanel {
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnConfirmarCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblAsientos)
                     .addComponent(lblSaldo)
                     .addComponent(lblNombre))
@@ -155,7 +166,7 @@ public class PnlConfirmarCompra extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblAsientos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnConfirmarCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(9, Short.MAX_VALUE))
@@ -195,10 +206,41 @@ public class PnlConfirmarCompra extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void btnConfirmarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarCompraActionPerformed
+        try{
+            
+            int opcion = JOptionPane.showConfirmDialog(
+                    parent, 
+                    "¿Seguro que desea confirmar la compra?", 
+                    "Confirmar Compra", 
+                    JOptionPane.YES_NO_OPTION);
+            if(opcion == JOptionPane.YES_OPTION){
+                for (Boleto boleto : boletos) {
+                    if(boleto.getIdUsuario() != null){
+                        controlMovimientos.comprarReventa(parent.getUsuario(), boleto.getIdBoleto(), boleto.getPrecio(), Seguridad.generarCodigoAlfanumerico(), boleto.getIdUsuario());
+                    } else {
+                        controlMovimientos.comprarBoletera(parent.getUsuario(), boleto.getIdBoleto(), boleto.getPrecio(), Seguridad.generarCodigoAlfanumerico());
+                    }
+                }
+                JOptionPane.showMessageDialog(
+                    parent, 
+                    "Se ha realizado la compra", 
+                    "Información", 
+                    JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (TransaccionException exx){
+            JOptionPane.showMessageDialog(
+                    parent, 
+                    "Hubo un error al hacer la transaccion: "+exx.getMessage(), 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnConfirmarCompraActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnConfirmarCompra;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblAsientos;

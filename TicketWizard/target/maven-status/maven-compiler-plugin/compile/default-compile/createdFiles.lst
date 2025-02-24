@@ -64,6 +64,7 @@ itson\ticketwizard\entidades\Usuario.class
 presentacion\PnlBoletoReventa.class
 presentacion\FrmRegistroUsuario.class
 presentacion\FrmInicioSesion$3.class
+presentacion\PnlConfirmarCompra$2.class
 itson\ticketwizard\control\ControlInicioSesion.class
 itson\ticketwizard\control\ControlSaldo.class
 itson\ticketwizard\excepciones\TransaccionException.class

@@ -8,6 +8,7 @@ import itson.ticketwizard.dto.MostrarTransaccionDTO;
 import itson.ticketwizard.entidades.Transaccion;
 import itson.ticketwizard.entidades.Usuario;
 import itson.ticketwizard.excepciones.TransaccionException;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -75,14 +76,14 @@ public class TransaccionesDAO {
     try {
         Connection conexion = manejadorConexion.crearConexion();
         
-        PreparedStatement consulta = conexion.prepareStatement(query);
+        CallableStatement consulta = conexion.prepareCall(query);
         
         consulta.setString(1, idBoleto);
         consulta.setDouble(2, precio);
         consulta.setString(3, serie);
         consulta.setInt(4, idUsuario);
-        
-        consulta.executeUpdate();
+       
+        consulta.execute();
         
         conexion.close();
         consulta.close();
@@ -93,10 +94,11 @@ public class TransaccionesDAO {
     }
 
 
-    public void comprarReventa(Usuario usuario, String idBoleto, double precio, String serie) throws TransaccionException {
-    int idUsuario = usuario.getId();
+    public void comprarReventa(Usuario usuarioComprador, String idBoleto, double precio, String serie, int usuarioVendedor) throws TransaccionException {
+    int idUsuarioComprador = usuarioComprador.getId();
+    
     String query = """
-                    CALL comprarReventa(?, ?, ?, ?);
+                    CALL comprarReventa(?, ?, ?, ?, ?);
                     """;
     try {
         Connection conexion = manejadorConexion.crearConexion();
@@ -107,7 +109,8 @@ public class TransaccionesDAO {
         consulta.setString(1, idBoleto);
         consulta.setDouble(2, precio);
         consulta.setString(3, serie);
-        consulta.setInt(4, idUsuario);
+        consulta.setInt(4, idUsuarioComprador);
+        consulta.setInt(5, usuarioVendedor);
         consulta.executeUpdate();
         
         conexion.commit();

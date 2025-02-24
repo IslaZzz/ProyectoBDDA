@@ -4,6 +4,7 @@
  */
 package itson.ticketwizard.entidades;
 
+import java.security.SecureRandom;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
@@ -78,5 +79,17 @@ public class Seguridad {
         Matcher matcher = pattern.matcher(s);
         //Regresa si la cadena se ajusta al patron
         return matcher.matches();
+    }
+    
+    private static final String CARACTERES = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    private static final SecureRandom random = new SecureRandom();
+
+    public static String generarCodigoAlfanumerico() {
+        StringBuilder sb = new StringBuilder(8);
+        for (int i = 0; i < 8; i++) {
+            int indice = random.nextInt(CARACTERES.length());
+            sb.append(CARACTERES.charAt(indice));
+        }
+        return sb.toString();
     }
 }
