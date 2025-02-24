@@ -29,6 +29,15 @@ public class Seguridad {
         return BCrypt.hashpw(psw, BCrypt.gensalt(12));
     }
 
+    /**
+     * Método que compara el hash de contraseña de la DB de un String que
+     * representa la contraseña ingresada Retorna true si la contraseña coincide
+     * con el hash
+     *
+     * @param psw
+     * @param hashAlmacenado
+     * @return
+     */
     public static boolean verificar(String psw, String hashAlmacenado) {
         return BCrypt.checkpw(psw, hashAlmacenado);
     }
@@ -59,6 +68,12 @@ public class Seguridad {
         }
     }
 
+    /**
+     * Método que valida el formato de un correo electrónico
+     *
+     * @param s
+     * @return
+     */
     public static boolean validaEmail(String s) {
         //Define la expresión regular para un email
         String regEx = "^(\\w\\.?){1,20}@(\\w\\.?){1,20}$";
@@ -70,6 +85,12 @@ public class Seguridad {
         return matcher.matches();
     }
 
+    /**
+     * Método que valida un número doble con máximo 2 decimales
+     *
+     * @param s
+     * @return
+     */
     public static boolean validaDoble(String s) {
         //Define la expresión regular para un doble
         String reCadena = "^\\d+(\\.\\d{1,2})?$";
@@ -80,10 +101,15 @@ public class Seguridad {
         //Regresa si la cadena se ajusta al patron
         return matcher.matches();
     }
-    
+
     private static final String CARACTERES = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     private static final SecureRandom random = new SecureRandom();
 
+    /**
+     * Método que genera el código alfanumérico para cada transacción del boleto
+     *
+     * @return
+     */
     public static String generarCodigoAlfanumerico() {
         StringBuilder sb = new StringBuilder(8);
         for (int i = 0; i < 8; i++) {

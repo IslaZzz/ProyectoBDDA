@@ -15,13 +15,22 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class EventosDAO implements IEventosDAO {
-    
+
     private ManejadorConexiones manejadorConexiones;
-    
-    public EventosDAO(ManejadorConexiones manejadorConexiones){
+
+    /**
+     * Método que recibe un manejador de conexiones y lo setea en el atributo
+     *
+     * @param manejadorConexiones
+     */
+    public EventosDAO(ManejadorConexiones manejadorConexiones) {
         this.manejadorConexiones = manejadorConexiones;
     }
 
+    /**
+     *Método que mediante una constulta a la DB retorna una lista con los eventos disponibles
+     * @return
+     */
     @Override
     public List<MostrarEventoDTO> consultarEventos() {
         String consultarEventoSQL = """
@@ -42,11 +51,11 @@ public class EventosDAO implements IEventosDAO {
                 String recinto = resultadoConsulta.getString("recinto");
 
                 //Evento evento = new Evento(idEvento, nombre, fecha, ciudad, estado, descripcion, recinto);
-                MostrarEventoDTO evento = new MostrarEventoDTO(idEvento,nombre, fecha, ciudad, estado);
+                MostrarEventoDTO evento = new MostrarEventoDTO(idEvento, nombre, fecha, ciudad, estado);
                 listaEventos.add(evento);
             }
         } catch (Exception e) {
-            System.err.println("Error al consultar: "+e.getMessage());
+            System.err.println("Error al consultar: " + e.getMessage());
         }
         return listaEventos;
     }

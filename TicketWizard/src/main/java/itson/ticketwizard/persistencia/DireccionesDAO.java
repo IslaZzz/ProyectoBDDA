@@ -21,11 +21,18 @@ import java.util.List;
 public class DireccionesDAO {
     
     private ManejadorConexiones manejadorConexiones;
-
+/**
+ * Constructor que recibe un manejador de conexiones y lo setea en el atributo
+ * @param manejadorConexiones 
+ */
     public DireccionesDAO(ManejadorConexiones manejadorConexiones) {
         this.manejadorConexiones = manejadorConexiones;
     }
-    
+    /**
+     * Método que inserta una dirección en la BD a partir de un objeto DireccionDTO
+     * @param direccionDTO
+     * @return 
+     */
     public Integer insertarDireccion(NuevaDireccionDTO direccionDTO){
         String insertarDireccionSQL = """
                 INSERT INTO Direcciones (calle, colonia, ciudad, estado, codigoPostal)

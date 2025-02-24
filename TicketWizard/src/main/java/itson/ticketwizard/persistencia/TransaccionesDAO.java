@@ -104,7 +104,7 @@ public class TransaccionesDAO {
         Connection conexion = manejadorConexion.crearConexion();
         conexion.setAutoCommit(false);
         
-        PreparedStatement consulta = conexion.prepareStatement(query);
+        CallableStatement consulta = conexion.prepareCall(query);
         
         consulta.setString(1, idBoleto);
         consulta.setDouble(2, precio);
