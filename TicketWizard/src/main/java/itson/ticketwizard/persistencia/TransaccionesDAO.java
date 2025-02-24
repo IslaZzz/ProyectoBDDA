@@ -67,4 +67,66 @@ public class TransaccionesDAO {
         return listaTransacciones;
         }
     
+    public void comprarBoletera(Usuario usuario, String idBoleto, double precio, String serie) throws TransaccionException {
+    int idUsuario = usuario.getId();
+    String query = """
+                    CALL compraBoletera(?, ?, ?, ?);
+                    """;
+    try {
+        Connection conexion = manejadorConexion.crearConexion();
+        
+        PreparedStatement consulta = conexion.prepareStatement(query);
+        
+        consulta.setString(1, idBoleto);
+        consulta.setDouble(2, precio);
+        consulta.setString(3, serie);
+        consulta.setInt(4, idUsuario);
+        
+        consulta.executeUpdate();
+        
+        conexion.close();
+        consulta.close();
+        
+    } catch (SQLException ex) {
+        throw new TransaccionException("Error en la transacción: " + ex.getMessage());
+    }
+    }
+
+
+    public void comprarReventa(Usuario usuario, String idBoleto, double precio, String serie) throws TransaccionException {
+    int idUsuario = usuario.getId();
+    String query = """
+                    CALL comprarReventa(?, ?, ?, ?);
+                    """;
+    try {
+        Connection conexion = manejadorConexion.crearConexion();
+        conexion.setAutoCommit(false);
+        
+        PreparedStatement consulta = conexion.prepareStatement(query);
+        
+        consulta.setString(1, idBoleto);
+        consulta.setDouble(2, precio);
+        consulta.setString(3, serie);
+        consulta.setInt(4, idUsuario);
+        consulta.executeUpdate();
+        
+        conexion.commit();
+        
+        conexion.close();
+        consulta.close();
+        
+    } catch (SQLException ex) {
+        try {
+        Connection conexion = manejadorConexion.crearConexion();
+        conexion.setAutoCommit(false);
+        conexion.rollback();
+        }catch (SQLException exc) {
+            throw new TransaccionException("Error al hacer rollback: " + exc.getMessage());
+            }
+        }
+    }
 }
+
+
+    
+
