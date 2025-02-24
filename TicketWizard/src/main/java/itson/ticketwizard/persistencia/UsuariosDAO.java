@@ -217,11 +217,12 @@ public class UsuariosDAO implements IUsuariosDAO {
             return idTransaccion;
             }
     }
+    /*
     public Transaccion reventaBoleto(Usuario usuario, double precio, double porcentaje, Boleto boleto) throws TransaccionException{
         Integer idTransaccion = crearTransaccion(precio, porcentaje); 
         int idUsuario = usuario.getId();
         double monto=(precio*(porcentaje/100));
-        Date fechaHora = fechaHora.getTime();
+        //Date fechaHora = fechaHora.getTime();
         String idU = String.valueOf(idUsuario);
         String idBoleto = boleto.getIdBoleto();
         String spReventa = """
@@ -241,5 +242,5 @@ public class UsuariosDAO implements IUsuariosDAO {
             System.err.println("Error al consultar boletos" + e.getMessage());
             }
         return new Transaccion(idTransaccion,fechaHora,"Reventa",monto,"Vendedor",idU);
-    }
+    }*/
 }
